@@ -47,6 +47,7 @@ export default function RootLayout() {
         <Stack.Screen name="payment" />
         <Stack.Screen name="confirmation" />
         <Stack.Screen name="analytics" />
+        <Stack.Screen name="service-report/[id]" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
       </Stack>

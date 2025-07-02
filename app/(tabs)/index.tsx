@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Calendar, Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle, Plus, Bell, Settings, Star, MapPin, Navigation } from 'lucide-react-native';
+import { Calendar, Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle, Plus, Bell, Settings, Star, MapPin, Navigation, FileText } from 'lucide-react-native';
 import HomeScore from '@/components/HomeScore';
 import TechnicianTracker from '@/components/TechnicianTracker';
 import LoyaltyScore from '@/components/LoyaltyScore';
@@ -80,11 +80,9 @@ export default function HomeTab() {
     Alert.alert('Notifications', 'No new notifications at this time.');
   };
 
-  const handleLoyaltyDetails = () => {
-    Alert.alert(
-      'Loyalty Program',
-      `You're a ${MOCK_LOYALTY_SCORE.level} member!\n\nEarn points with every service:\n• Pool Maintenance: 50 pts\n• Landscaping: 40 pts\n• Cleaning: 60 pts\n\nRedeem points for discounts and exclusive perks.`
-    );
+
+  const handleViewReport = (appointmentId: string) => {
+    router.push(`/service-report/${appointmentId}`);
   };
 
   const currentAppointments = MOCK_APPOINTMENTS.filter(apt => 
@@ -154,8 +152,7 @@ export default function HomeTab() {
             </View>
             <View style={styles.headerActions}>
               <LoyaltyScore 
-                score={MOCK_LOYALTY_SCORE} 
-                onPress={handleLoyaltyDetails}
+                score={MOCK_LOYALTY_SCORE}
               />
               <TouchableOpacity style={styles.headerButton} onPress={handleNotifications}>
                 <Bell color="#8B9DC3" size={22} />
@@ -308,6 +305,19 @@ export default function HomeTab() {
                     <Text style={styles.appointmentTechnician}>
                       with {appointment.technicianName}
                     </Text>
+
+                    <TouchableOpacity 
+                      style={styles.viewReportButton}
+                      onPress={() => handleViewReport(appointment.id)}
+                    >
+                      <LinearGradient
+                        colors={['rgba(0, 212, 170, 0.1)', 'rgba(0, 212, 170, 0.05)']}
+                        style={styles.viewReportGradient}
+                      >
+                        <FileText color="#00D4AA" size={16} />
+                        <Text style={styles.viewReportText}>View Report</Text>
+                      </LinearGradient>
+                    </TouchableOpacity>
                   </LinearGradient>
                 ))}
 
@@ -545,6 +555,27 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Nunito-Regular',
     color: '#8B9DC3',
+    marginBottom: 12,
+  },
+  viewReportButton: {
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  viewReportGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 212, 170, 0.2)',
+  },
+  viewReportText: {
+    fontSize: 12,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#00D4AA',
+    letterSpacing: -0.1,
   },
   emptyState: {
     alignItems: 'center',

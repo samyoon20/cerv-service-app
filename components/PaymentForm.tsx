@@ -7,7 +7,7 @@ import {
   TouchableOpacity, 
   Alert 
 } from 'react-native';
-import { CreditCard, Smartphone, Apple } from 'lucide-react-native';
+import { CreditCard, Smartphone, Apple, Building2 } from 'lucide-react-native';
 
 interface PaymentFormProps {
   onPaymentSubmit: (paymentData: any) => void;
@@ -15,12 +15,19 @@ interface PaymentFormProps {
 }
 
 export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProps) {
-  const [paymentMethod, setPaymentMethod] = useState<'card' | 'apple_pay' | 'google_pay'>('card');
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'apple_pay' | 'google_pay' | 'ach'>('card');
   const [cardData, setCardData] = useState({
     number: '',
     expiry: '',
     cvv: '',
     name: '',
+  });
+  const [achData, setAchData] = useState({
+    bankName: '',
+    routingNumber: '',
+    accountNumber: '',
+    accountType: 'checking' as 'checking' | 'savings',
+    accountHolderName: '',
   });
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,6 +53,22 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
     setCardData(prev => ({ ...prev, [field]: formattedValue }));
   };
 
+  const handleAchInputChange = (field: string, value: string) => {
+    let formattedValue = value;
+    
+    if (field === 'routingNumber') {
+      // Only allow numbers for routing number, max 9 digits
+      formattedValue = value.replace(/\D/g, '');
+      if (formattedValue.length > 9) return;
+    } else if (field === 'accountNumber') {
+      // Only allow numbers for account number
+      formattedValue = value.replace(/\D/g, '');
+      if (formattedValue.length > 17) return; // Standard max length
+    }
+    
+    setAchData(prev => ({ ...prev, [field]: formattedValue }));
+  };
+
   const handleSubmit = () => {
     if (!fullName.trim() || !email.trim() || !password.trim()) {
       Alert.alert('Missing Information', 'Please fill in your account details.');
@@ -59,6 +82,17 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
       }
     }
 
+    if (paymentMethod === 'ach') {
+      if (!achData.bankName || !achData.routingNumber || !achData.accountNumber || !achData.accountHolderName) {
+        Alert.alert('Missing Information', 'Please fill in all bank details.');
+        return;
+      }
+      if (achData.routingNumber.length !== 9) {
+        Alert.alert('Invalid Routing Number', 'Routing number must be 9 digits.');
+        return;
+      }
+    }
+
     const paymentData = {
       method: paymentMethod,
       amount,
@@ -68,6 +102,7 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
         password,
       },
       ...(paymentMethod === 'card' && { cardData }),
+      ...(paymentMethod === 'ach' && { achData }),
     };
 
     onPaymentSubmit(paymentData);
@@ -129,12 +164,15 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             onPress={() => setPaymentMethod('card')}
           >
             <CreditCard color={paymentMethod === 'card' ? '#00D4AA' : '#64748B'} size={20} />
-            <Text style={[
-              styles.paymentMethodText,
-              paymentMethod === 'card' && styles.paymentMethodTextSelected
-            ]}>
-              Credit/Debit Card
-            </Text>
+            <View style={styles.paymentMethodTextContainer}>
+              <Text style={[
+                styles.paymentMethodText,
+                paymentMethod === 'card' && styles.paymentMethodTextSelected
+              ]}>
+                Credit/Debit Card
+              </Text>
+              <Text style={styles.feeText}>+3.5% processing fee</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -167,6 +205,25 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}>
               Google Pay
             </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.paymentMethod,
+              paymentMethod === 'ach' && styles.paymentMethodSelected
+            ]}
+            onPress={() => setPaymentMethod('ach')}
+          >
+            <Building2 color={paymentMethod === 'ach' ? '#00D4AA' : '#64748B'} size={20} />
+            <View style={styles.paymentMethodTextContainer}>
+              <Text style={[
+                styles.paymentMethodText,
+                paymentMethod === 'ach' && styles.paymentMethodTextSelected
+              ]}>
+                ACH Bank Transfer
+              </Text>
+              <Text style={styles.freeText}>No processing fee</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -223,6 +280,85 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
                 keyboardType="numeric"
               />
             </View>
+          </View>
+        </View>
+      )}
+
+      {/* ACH Bank Details (if ACH payment selected) */}
+      {paymentMethod === 'ach' && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Bank Account Details</Text>
+          
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Account Holder Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Name as it appears on account"
+              placeholderTextColor="#94A3B8"
+              value={achData.accountHolderName}
+              onChangeText={(value) => handleAchInputChange('accountHolderName', value)}
+              autoCapitalize="words"
+            />
+          </View>
+          
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Bank Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your bank name"
+              placeholderTextColor="#94A3B8"
+              value={achData.bankName}
+              onChangeText={(value) => handleAchInputChange('bankName', value)}
+              autoCapitalize="words"
+            />
+          </View>
+          
+          <View style={styles.inputRow}>
+            <View style={[styles.inputGroup, { flex: 1 }]}>
+              <Text style={styles.label}>Routing Number</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="9-digit routing number"
+                placeholderTextColor="#94A3B8"
+                value={achData.routingNumber}
+                onChangeText={(value) => handleAchInputChange('routingNumber', value)}
+                keyboardType="numeric"
+                maxLength={9}
+              />
+            </View>
+            <View style={[styles.inputGroup, { flex: 1 }]}>
+              <Text style={styles.label}>Account Type</Text>
+              <TouchableOpacity
+                style={[styles.input, styles.pickerButton]}
+                onPress={() => {
+                  const newType = achData.accountType === 'checking' ? 'savings' : 'checking';
+                  setAchData(prev => ({ ...prev, accountType: newType }));
+                }}
+              >
+                <Text style={styles.pickerText}>
+                  {achData.accountType === 'checking' ? 'Checking' : 'Savings'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Account Number</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter your account number"
+              placeholderTextColor="#94A3B8"
+              value={achData.accountNumber}
+              onChangeText={(value) => handleAchInputChange('accountNumber', value)}
+              keyboardType="numeric"
+              secureTextEntry
+            />
+          </View>
+          
+          <View style={styles.achNote}>
+            <Text style={styles.achNoteText}>
+              💡 ACH transfers typically take 1-3 business days to process. Your service will be scheduled once payment is confirmed.
+            </Text>
           </View>
         </View>
       )}
@@ -312,6 +448,43 @@ const styles = StyleSheet.create({
   },
   paymentMethodTextSelected: {
     color: '#065F46',
+  },
+  paymentMethodTextContainer: {
+    flex: 1,
+  },
+  feeText: {
+    fontSize: 12,
+    fontFamily: 'Nunito-Medium',
+    color: '#DC2626',
+    marginTop: 2,
+  },
+  freeText: {
+    fontSize: 12,
+    fontFamily: 'Nunito-Medium',
+    color: '#059669',
+    marginTop: 2,
+  },
+  pickerButton: {
+    justifyContent: 'center',
+  },
+  pickerText: {
+    fontSize: 16,
+    fontFamily: 'Nunito-Regular',
+    color: '#0F172A',
+  },
+  achNote: {
+    backgroundColor: 'rgba(59, 130, 246, 0.05)',
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(59, 130, 246, 0.2)',
+    marginTop: 8,
+  },
+  achNoteText: {
+    fontSize: 14,
+    fontFamily: 'Nunito-Regular',
+    color: '#1E40AF',
+    lineHeight: 20,
   },
   submitButton: {
     backgroundColor: '#00D4AA',

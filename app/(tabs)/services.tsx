@@ -5,12 +5,16 @@ import {
   StyleSheet, 
   ScrollView, 
   TouchableOpacity,
-  Alert
+  Alert,
+  Modal,
+  TextInput,
+  Image
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Plus, Settings, Calendar, Pause, Play, CreditCard as Edit3 } from 'lucide-react-native';
+import { Plus, Settings, Calendar, Pause, Play, CreditCard as Edit3, Star, MessageSquare, Camera, X, User } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import type { TechnicianReview, CategoryRatings } from '@/types';
 
 const MOCK_ACTIVE_SERVICES = [
   {
@@ -63,8 +67,81 @@ const AVAILABLE_ADDONS = [
   },
 ];
 
+const MOCK_REVIEWS: TechnicianReview[] = [
+  {
+    id: '1',
+    technicianId: 'tech-001',
+    technicianName: 'Mike Johnson',
+    serviceId: 'pool-maintenance',
+    serviceName: 'Pool Maintenance',
+    appointmentId: 'apt-001',
+    overallRating: 5,
+    categoryRatings: {
+      quality: 5,
+      punctuality: 5,
+      professionalism: 5,
+      communication: 4
+    },
+    reviewText: 'Mike did an excellent job with our pool maintenance. Very thorough and professional. Left the area cleaner than when he arrived!',
+    photos: ['https://images.pexels.com/photos/261187/pexels-photo-261187.jpeg?auto=compress&cs=tinysrgb&w=400'],
+    date: '2024-01-12',
+    verified: true
+  },
+  {
+    id: '2',
+    technicianId: 'tech-002',
+    technicianName: 'Sarah Wilson',
+    serviceId: 'landscaping',
+    serviceName: 'Landscaping',
+    appointmentId: 'apt-002',
+    overallRating: 4,
+    categoryRatings: {
+      quality: 4,
+      punctuality: 4,
+      professionalism: 5,
+      communication: 4
+    },
+    reviewText: 'Great landscaping work! Sarah was very knowledgeable about plant care and gave helpful tips for maintenance.',
+    date: '2024-01-08',
+    verified: true
+  },
+  {
+    id: '3',
+    technicianId: 'tech-003',
+    technicianName: 'David Chen',
+    serviceId: 'exterior-cleaning',
+    serviceName: 'Exterior Cleaning',
+    appointmentId: 'apt-003',
+    overallRating: 5,
+    categoryRatings: {
+      quality: 5,
+      punctuality: 5,
+      professionalism: 5,
+      communication: 5
+    },
+    reviewText: 'Outstanding service! David was punctual, professional, and did an amazing job cleaning our home exterior.',
+    date: '2024-01-05',
+    verified: true
+  }
+];
+
 export default function ServicesTab() {
-  const [activeSection, setActiveSection] = useState<'active' | 'addons'>('active');
+  const [activeSection, setActiveSection] = useState<'active' | 'addons' | 'reviews'>('active');
+  const [showReviewModal, setShowReviewModal] = useState(false);
+  const [newReview, setNewReview] = useState({
+    technicianId: '',
+    technicianName: '',
+    serviceId: '',
+    serviceName: '',
+    overallRating: 0,
+    categoryRatings: {
+      quality: 0,
+      punctuality: 0,
+      professionalism: 0,
+      communication: 0
+    } as CategoryRatings,
+    reviewText: ''
+  });
 
   const handleAddService = () => {
     router.push('/services');
@@ -108,6 +185,70 @@ export default function ServicesTab() {
     );
   };
 
+  const handleAddReview = () => {
+    setNewReview({
+      technicianId: '',
+      technicianName: '',
+      serviceId: '',
+      serviceName: '',
+      overallRating: 0,
+      categoryRatings: {
+        quality: 0,
+        punctuality: 0,
+        professionalism: 0,
+        communication: 0
+      },
+      reviewText: ''
+    });
+    setShowReviewModal(true);
+  };
+
+  const submitReview = () => {
+    if (newReview.overallRating === 0 || !newReview.reviewText.trim()) {
+      Alert.alert('Incomplete Review', 'Please provide a rating and review text.');
+      return;
+    }
+    
+    setShowReviewModal(false);
+    Alert.alert('Review Submitted', 'Thank you for your feedback!');
+  };
+
+  const renderStars = (rating: number, onPress?: (rating: number) => void, size: number = 16) => {
+    return (
+      <View style={styles.starsContainer}>
+        {[1, 2, 3, 4, 5].map((star) => (
+          <TouchableOpacity
+            key={star}
+            onPress={() => onPress?.(star)}
+            disabled={!onPress}
+          >
+            <Star
+              size={size}
+              color={star <= rating ? '#FFB800' : '#8B9DC3'}
+              fill={star <= rating ? '#FFB800' : 'transparent'}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
+    );
+  };
+
+  const setCategoryRating = (category: keyof CategoryRatings, rating: number) => {
+    setNewReview(prev => ({
+      ...prev,
+      categoryRatings: {
+        ...prev.categoryRatings,
+        [category]: rating
+      }
+    }));
+  };
+
+  const getAverageRating = (reviews: TechnicianReview[]) => {
+    if (reviews.length === 0) return '0.0';
+    const sum = reviews.reduce((acc, review) => acc + review.overallRating, 0);
+    return (sum / reviews.length).toFixed(1);
+  };
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -136,7 +277,7 @@ export default function ServicesTab() {
                 styles.tabText,
                 activeSection === 'active' && styles.activeTabText
               ]}>
-                Active Services
+                Services
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -148,6 +289,17 @@ export default function ServicesTab() {
                 activeSection === 'addons' && styles.activeTabText
               ]}>
                 Add-ons
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.tab, activeSection === 'reviews' && styles.activeTab]}
+              onPress={() => setActiveSection('reviews')}
+            >
+              <Text style={[
+                styles.tabText,
+                activeSection === 'reviews' && styles.activeTabText
+              ]}>
+                Reviews
               </Text>
             </TouchableOpacity>
           </View>
@@ -279,9 +431,208 @@ export default function ServicesTab() {
               </View>
             )}
 
+            {activeSection === 'reviews' && (
+              <View style={styles.reviewsSection}>
+                <View style={styles.reviewsHeader}>
+                  <View style={styles.reviewsStats}>
+                    <Text style={styles.sectionSubtitle}>
+                      Rate and review your technicians
+                    </Text>
+                    <View style={styles.statsRow}>
+                      <View style={styles.statItem}>
+                        <Text style={styles.statNumber}>{getAverageRating(MOCK_REVIEWS)}</Text>
+                        {renderStars(parseFloat(getAverageRating(MOCK_REVIEWS)), undefined, 14)}
+                      </View>
+                      <Text style={styles.statLabel}>({MOCK_REVIEWS.length} reviews)</Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity style={styles.addReviewButton} onPress={handleAddReview}>
+                    <LinearGradient
+                      colors={['#00D4AA', '#00B894']}
+                      style={styles.addReviewGradient}
+                    >
+                      <Plus color="#0F1629" size={16} />
+                      <Text style={styles.addReviewText}>Add Review</Text>
+                    </LinearGradient>
+                  </TouchableOpacity>
+                </View>
+
+                {MOCK_REVIEWS.map(review => (
+                  <LinearGradient
+                    key={review.id}
+                    colors={['#1E2A3A', '#243447']}
+                    style={styles.reviewCard}
+                  >
+                    <View style={styles.reviewHeader}>
+                      <View style={styles.reviewerInfo}>
+                        <View style={styles.technicianAvatar}>
+                          <User color="#8B9DC3" size={20} />
+                        </View>
+                        <View style={styles.technicianDetails}>
+                          <Text style={styles.technicianName}>{review.technicianName}</Text>
+                          <Text style={styles.reviewServiceName}>{review.serviceName}</Text>
+                        </View>
+                      </View>
+                      <View style={styles.reviewMeta}>
+                        <View style={styles.ratingRow}>
+                          {renderStars(review.overallRating, undefined, 14)}
+                          <Text style={styles.ratingNumber}>{review.overallRating}.0</Text>
+                        </View>
+                        <Text style={styles.reviewDate}>
+                          {new Date(review.date).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric'
+                          })}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <Text style={styles.reviewText}>{review.reviewText}</Text>
+
+                    <View style={styles.categoryRatings}>
+                      <View style={styles.categoryRating}>
+                        <Text style={styles.categoryLabel}>Quality</Text>
+                        {renderStars(review.categoryRatings.quality, undefined, 12)}
+                      </View>
+                      <View style={styles.categoryRating}>
+                        <Text style={styles.categoryLabel}>Punctuality</Text>
+                        {renderStars(review.categoryRatings.punctuality, undefined, 12)}
+                      </View>
+                      <View style={styles.categoryRating}>
+                        <Text style={styles.categoryLabel}>Professionalism</Text>
+                        {renderStars(review.categoryRatings.professionalism, undefined, 12)}
+                      </View>
+                      <View style={styles.categoryRating}>
+                        <Text style={styles.categoryLabel}>Communication</Text>
+                        {renderStars(review.categoryRatings.communication, undefined, 12)}
+                      </View>
+                    </View>
+
+                    {review.photos && review.photos.length > 0 && (
+                      <View style={styles.reviewPhotos}>
+                        {review.photos.map((photo, index) => (
+                          <Image key={index} source={{ uri: photo }} style={styles.reviewPhoto} />
+                        ))}
+                      </View>
+                    )}
+
+                    {review.verified && (
+                      <View style={styles.verifiedBadge}>
+                        <Text style={styles.verifiedText}>✓ Verified Review</Text>
+                      </View>
+                    )}
+                  </LinearGradient>
+                ))}
+
+                {MOCK_REVIEWS.length === 0 && (
+                  <View style={styles.emptyReviews}>
+                    <MessageSquare color="#8B9DC3" size={48} />
+                    <Text style={styles.emptyReviewsTitle}>No reviews yet</Text>
+                    <Text style={styles.emptyReviewsText}>
+                      Share your experience with our technicians
+                    </Text>
+                    <TouchableOpacity style={styles.firstReviewButton} onPress={handleAddReview}>
+                      <LinearGradient
+                        colors={['#00D4AA', '#00B894']}
+                        style={styles.firstReviewGradient}
+                      >
+                        <Star color="#0F1629" size={16} />
+                        <Text style={styles.firstReviewText}>Write First Review</Text>
+                      </LinearGradient>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </View>
+            )}
+
             <View style={styles.bottomSpacing} />
           </ScrollView>
         </SafeAreaView>
+
+        {/* Add Review Modal */}
+        <Modal
+          visible={showReviewModal}
+          transparent
+          animationType="slide"
+          onRequestClose={() => setShowReviewModal(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Write a Review</Text>
+                <TouchableOpacity onPress={() => setShowReviewModal(false)}>
+                  <X color="#8B9DC3" size={24} />
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView style={styles.modalScroll} showsVerticalScrollIndicator={false}>
+                <View style={styles.ratingSection}>
+                  <Text style={styles.ratingLabel}>Overall Rating</Text>
+                  {renderStars(newReview.overallRating, (rating) => setNewReview({...newReview, overallRating: rating}), 24)}
+                </View>
+
+                <View style={styles.categoryRatingsSection}>
+                  <Text style={styles.categoryRatingsTitle}>Rate by Category</Text>
+                  
+                  <View style={styles.categoryRatingRow}>
+                    <Text style={styles.categoryRatingLabel}>Quality</Text>
+                    {renderStars(newReview.categoryRatings.quality, (rating) => setCategoryRating('quality', rating), 18)}
+                  </View>
+                  
+                  <View style={styles.categoryRatingRow}>
+                    <Text style={styles.categoryRatingLabel}>Punctuality</Text>
+                    {renderStars(newReview.categoryRatings.punctuality, (rating) => setCategoryRating('punctuality', rating), 18)}
+                  </View>
+                  
+                  <View style={styles.categoryRatingRow}>
+                    <Text style={styles.categoryRatingLabel}>Professionalism</Text>
+                    {renderStars(newReview.categoryRatings.professionalism, (rating) => setCategoryRating('professionalism', rating), 18)}
+                  </View>
+                  
+                  <View style={styles.categoryRatingRow}>
+                    <Text style={styles.categoryRatingLabel}>Communication</Text>
+                    {renderStars(newReview.categoryRatings.communication, (rating) => setCategoryRating('communication', rating), 18)}
+                  </View>
+                </View>
+
+                <View style={styles.reviewTextSection}>
+                  <Text style={styles.reviewTextLabel}>Your Review</Text>
+                  <TextInput
+                    style={styles.reviewTextInput}
+                    multiline
+                    numberOfLines={4}
+                    placeholder="Share your experience with the technician..."
+                    placeholderTextColor="#8B9DC3"
+                    value={newReview.reviewText}
+                    onChangeText={(text) => setNewReview({...newReview, reviewText: text})}
+                  />
+                </View>
+
+                <TouchableOpacity style={styles.photoButton}>
+                  <Camera color="#8B9DC3" size={20} />
+                  <Text style={styles.photoButtonText}>Add Photos (Optional)</Text>
+                </TouchableOpacity>
+              </ScrollView>
+
+              <View style={styles.modalActions}>
+                <TouchableOpacity 
+                  style={styles.cancelButton} 
+                  onPress={() => setShowReviewModal(false)}
+                >
+                  <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.submitButton} onPress={submitReview}>
+                  <LinearGradient
+                    colors={['#00D4AA', '#00B894']}
+                    style={styles.submitButtonGradient}
+                  >
+                    <Text style={styles.submitButtonText}>Submit Review</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </LinearGradient>
     </View>
   );
@@ -552,5 +903,345 @@ const styles = StyleSheet.create({
   },
   bottomSpacing: {
     height: 20,
+  },
+  // Reviews Section Styles
+  reviewsSection: {
+    gap: 20,
+  },
+  reviewsHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 4,
+  },
+  reviewsStats: {
+    flex: 1,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    marginTop: 8,
+  },
+  statItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  statNumber: {
+    fontSize: 18,
+    fontFamily: 'Nunito-Bold',
+    color: '#FFFFFF',
+  },
+  statLabel: {
+    fontSize: 14,
+    fontFamily: 'Nunito-Regular',
+    color: '#8B9DC3',
+  },
+  addReviewButton: {
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  addReviewGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    gap: 6,
+  },
+  addReviewText: {
+    fontSize: 14,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#0F1629',
+  },
+  reviewCard: {
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(139, 157, 195, 0.1)',
+  },
+  reviewHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 16,
+  },
+  reviewerInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    gap: 12,
+  },
+  technicianAvatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(139, 157, 195, 0.2)',
+  },
+  technicianDetails: {
+    flex: 1,
+  },
+  technicianName: {
+    fontSize: 16,
+    fontFamily: 'Nunito-Bold',
+    color: '#FFFFFF',
+    marginBottom: 2,
+  },
+  reviewServiceName: {
+    fontSize: 12,
+    fontFamily: 'Nunito-Regular',
+    color: '#8B9DC3',
+  },
+  reviewMeta: {
+    alignItems: 'flex-end',
+    gap: 4,
+  },
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  ratingNumber: {
+    fontSize: 14,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#FFB800',
+  },
+  reviewDate: {
+    fontSize: 12,
+    fontFamily: 'Nunito-Regular',
+    color: '#8B9DC3',
+  },
+  reviewText: {
+    fontSize: 14,
+    fontFamily: 'Nunito-Regular',
+    color: '#FFFFFF',
+    lineHeight: 20,
+    marginBottom: 16,
+  },
+  categoryRatings: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 16,
+    marginBottom: 16,
+  },
+  categoryRating: {
+    alignItems: 'center',
+    gap: 4,
+    minWidth: '22%',
+  },
+  categoryLabel: {
+    fontSize: 10,
+    fontFamily: 'Nunito-Medium',
+    color: '#8B9DC3',
+    textAlign: 'center',
+  },
+  starsContainer: {
+    flexDirection: 'row',
+    gap: 2,
+  },
+  reviewPhotos: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 12,
+  },
+  reviewPhoto: {
+    width: 60,
+    height: 60,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(139, 157, 195, 0.2)',
+  },
+  verifiedBadge: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 212, 170, 0.2)',
+  },
+  verifiedText: {
+    fontSize: 10,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#00D4AA',
+  },
+  emptyReviews: {
+    alignItems: 'center',
+    paddingVertical: 60,
+    gap: 16,
+  },
+  emptyReviewsTitle: {
+    fontSize: 20,
+    fontFamily: 'Nunito-Bold',
+    color: '#FFFFFF',
+    letterSpacing: -0.3,
+  },
+  emptyReviewsText: {
+    fontSize: 16,
+    fontFamily: 'Nunito-Regular',
+    color: '#8B9DC3',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  firstReviewButton: {
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  firstReviewGradient: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  firstReviewText: {
+    fontSize: 16,
+    fontFamily: 'Nunito-Bold',
+    color: '#0F1629',
+  },
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: '#1A2332',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    maxHeight: '90%',
+    paddingTop: 24,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontFamily: 'Nunito-Bold',
+    color: '#FFFFFF',
+  },
+  modalScroll: {
+    paddingHorizontal: 24,
+    paddingTop: 20,
+  },
+  ratingSection: {
+    alignItems: 'center',
+    marginBottom: 32,
+    gap: 12,
+  },
+  ratingLabel: {
+    fontSize: 16,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#FFFFFF',
+  },
+  categoryRatingsSection: {
+    marginBottom: 32,
+  },
+  categoryRatingsTitle: {
+    fontSize: 16,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#FFFFFF',
+    marginBottom: 16,
+  },
+  categoryRatingRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+  },
+  categoryRatingLabel: {
+    fontSize: 14,
+    fontFamily: 'Nunito-Medium',
+    color: '#8B9DC3',
+    flex: 1,
+  },
+  reviewTextSection: {
+    marginBottom: 20,
+  },
+  reviewTextLabel: {
+    fontSize: 16,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#FFFFFF',
+    marginBottom: 12,
+  },
+  reviewTextInput: {
+    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    borderRadius: 12,
+    padding: 16,
+    fontSize: 14,
+    fontFamily: 'Nunito-Regular',
+    color: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: 'rgba(139, 157, 195, 0.2)',
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+  photoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(139, 157, 195, 0.2)',
+    gap: 8,
+    marginBottom: 32,
+  },
+  photoButtonText: {
+    fontSize: 14,
+    fontFamily: 'Nunito-Medium',
+    color: '#8B9DC3',
+  },
+  modalActions: {
+    flexDirection: 'row',
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+    gap: 12,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(139, 157, 195, 0.1)',
+  },
+  cancelButton: {
+    flex: 1,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    borderRadius: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(139, 157, 195, 0.2)',
+  },
+  cancelButtonText: {
+    fontSize: 16,
+    fontFamily: 'Nunito-SemiBold',
+    color: '#8B9DC3',
+  },
+  submitButton: {
+    flex: 2,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  submitButtonGradient: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+  },
+  submitButtonText: {
+    fontSize: 16,
+    fontFamily: 'Nunito-Bold',
+    color: '#0F1629',
   },
 });

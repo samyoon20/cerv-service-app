@@ -121,4 +121,75 @@ export interface HomeScoreAnalytics {
     requiredMonthlyImprovement: number;
   };
 }
-EOF < /dev/null
+
+export interface WorkItem {
+  id: string;
+  task: string;
+  completed: boolean;
+  timeSpent: number; // in minutes
+  notes?: string;
+}
+
+export interface RecommendationItem {
+  id: string;
+  task: string;
+  priority: 'high' | 'medium' | 'low';
+  estimatedTime: string;
+  description: string;
+}
+
+export interface ServiceReport {
+  id: string;
+  serviceId: string;
+  appointmentId: string;
+  beforePhotos: string[];
+  afterPhotos: string[];
+  workCompleted: WorkItem[];
+  nextServicePlan: RecommendationItem[];
+  technicianNotes: string;
+  serviceDate: string;
+  duration: number; // in minutes
+  rating?: number;
+  userReview?: string;
+}
+
+export interface CategoryRatings {
+  quality: number;
+  punctuality: number;
+  professionalism: number;
+  communication: number;
+}
+
+export interface TechnicianReview {
+  id: string;
+  technicianId: string;
+  technicianName: string;
+  serviceId: string;
+  serviceName: string;
+  appointmentId: string;
+  overallRating: number;
+  categoryRatings: CategoryRatings;
+  reviewText: string;
+  photos?: string[];
+  date: string;
+  verified: boolean;
+}
+
+export interface ReferralItem {
+  id: string;
+  referredUserName: string;
+  referredUserEmail: string;
+  status: 'pending' | 'completed' | 'expired';
+  rewardEarned: number;
+  dateReferred: string;
+  dateCompleted?: string;
+}
+
+export interface ReferralData {
+  referralCode: string;
+  totalReferrals: number;
+  totalRewardsEarned: number;
+  pendingRewards: number;
+  completedReferrals: ReferralItem[];
+  referralLink: string;
+}
