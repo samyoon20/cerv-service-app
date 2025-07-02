@@ -8,6 +8,7 @@ import {
   Alert 
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 import { Calendar, Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle, Plus, Bell, Settings, Star, MapPin, Navigation } from 'lucide-react-native';
 import HomeScore from '@/components/HomeScore';
 import TechnicianTracker from '@/components/TechnicianTracker';
@@ -72,10 +73,7 @@ export default function HomeTab() {
   const [activeSection, setActiveSection] = useState<'current' | 'history'>('current');
 
   const handleScoreDetails = () => {
-    Alert.alert(
-      'Home Score Details',
-      'Your Home Score is calculated based on:\n\n• Maintenance: Regular service completion and property upkeep\n• Cleanliness: Interior and exterior cleaning standards\n• Landscaping: Garden, lawn, and outdoor space condition\n\nScores are updated after each service completion.'
-    );
+    router.push('/analytics');
   };
 
   const handleNotifications = () => {

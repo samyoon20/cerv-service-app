@@ -66,3 +66,59 @@ export interface PaymentMethod {
   brand?: string;
   isDefault: boolean;
 }
+export interface CategoryDetails {
+  id: string;
+  name: string;
+  description: string;
+  currentScore: number;
+  targetScore: number;
+  explanation: string;
+  factorsAffecting: string[];
+  improvementTips: string[];
+  icon: string;
+  color: string;
+}
+
+export interface ScoreRecommendation {
+  id: string;
+  categoryId: string;
+  title: string;
+  description: string;
+  impact: number; // Expected score improvement
+  priority: 'high' | 'medium' | 'low';
+  estimatedCost?: number;
+  timeToComplete?: string;
+  serviceRequired?: boolean;
+  serviceId?: string;
+  actionType: 'diy' | 'professional' | 'seasonal';
+}
+
+export interface ScoreHistoryEntry {
+  date: string;
+  overall: number;
+  maintenance: number;
+  cleanliness: number;
+  landscaping: number;
+  notes?: string;
+}
+
+export interface HomeScoreAnalytics {
+  current: HomeScore;
+  categories: CategoryDetails[];
+  recommendations: ScoreRecommendation[];
+  history: ScoreHistoryEntry[];
+  trends: {
+    period: '30d' | '90d' | '1y';
+    overallTrend: 'improving' | 'declining' | 'stable';
+    bestPerformingCategory: string;
+    needsAttentionCategory: string;
+    averageMonthlyImprovement: number;
+  };
+  goals: {
+    targetOverallScore: number;
+    targetDate: string;
+    onTrack: boolean;
+    requiredMonthlyImprovement: number;
+  };
+}
+EOF < /dev/null
