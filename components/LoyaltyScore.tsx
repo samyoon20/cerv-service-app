@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Share, Clipboard, Alert } from 'react-native';
 import { Star, Gift, Users, Copy, X, MessageCircle } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import type { ReferralData, ReferralItem } from '@/types';
+import type { ReferralData } from '@/types';
+import { CervColors, CervSpacing, CervBorderRadius, CervTypography } from '@/themes/appleDesignSystem';
 
 interface LoyaltyScoreProps {
   score: {
@@ -74,7 +74,7 @@ export default function LoyaltyScore({ score, onPress }: LoyaltyScoreProps) {
         message: `Join me on Cerv and get $50 off your first service! Use my referral link: ${MOCK_REFERRAL_DATA.referralLink}`,
         url: MOCK_REFERRAL_DATA.referralLink,
       });
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Unable to share referral link');
     }
   };
@@ -90,17 +90,14 @@ export default function LoyaltyScore({ score, onPress }: LoyaltyScoreProps) {
       case 'platinum':
         return '#E5E4E2';
       default:
-        return '#00D4AA';
+        return CervColors.systemGreen;
     }
   };
 
   return (
     <>
     <TouchableOpacity style={styles.container} onPress={handlePress}>
-      <LinearGradient
-        colors={['rgba(0, 212, 170, 0.15)', 'rgba(0, 212, 170, 0.05)']}
-        style={styles.gradient}
-      >
+      <View style={styles.cardBackground}>
         <View style={styles.header}>
           <View style={[styles.starContainer, { backgroundColor: `${getLevelColor(score.level)}20` }]}>
             <Star color={getLevelColor(score.level)} size={14} fill={getLevelColor(score.level)} />
@@ -127,7 +124,7 @@ export default function LoyaltyScore({ score, onPress }: LoyaltyScoreProps) {
             {score.pointsToNext} to {score.nextLevel}
           </Text>
         </View>
-      </LinearGradient>
+      </View>
     </TouchableOpacity>
 
     {/* Referral Modal */}
@@ -147,13 +144,10 @@ export default function LoyaltyScore({ score, onPress }: LoyaltyScoreProps) {
           </View>
 
           <View style={styles.referralStats}>
-            <LinearGradient
-              colors={['rgba(0, 212, 170, 0.15)', 'rgba(0, 212, 170, 0.05)']}
-              style={styles.statsCard}
-            >
+            <View style={styles.statsCardBackground}>
               <View style={styles.statsRow}>
                 <View style={styles.statItem}>
-                  <Gift color="#00D4AA" size={24} />
+                  <Gift color={CervColors.systemGreen} size={24} />
                   <Text style={styles.statValue}>${MOCK_REFERRAL_DATA.totalRewardsEarned}</Text>
                   <Text style={styles.statLabel}>Total Earned</Text>
                 </View>
@@ -163,21 +157,18 @@ export default function LoyaltyScore({ score, onPress }: LoyaltyScoreProps) {
                   <Text style={styles.statLabel}>Referrals</Text>
                 </View>
               </View>
-            </LinearGradient>
+            </View>
           </View>
 
           <View style={styles.referralSection}>
             <Text style={styles.sectionTitle}>Your Referral Code</Text>
             <View style={styles.codeContainer}>
-              <LinearGradient
-                colors={['#1E2A3A', '#243447']}
-                style={styles.codeCard}
-              >
+              <View style={styles.codeCardBackground}>
                 <Text style={styles.referralCode}>{MOCK_REFERRAL_DATA.referralCode}</Text>
                 <TouchableOpacity style={styles.copyButton} onPress={copyReferralCode}>
-                  <Copy color="#00D4AA" size={16} />
+                  <Copy color={CervColors.systemGreen} size={16} />
                 </TouchableOpacity>
-              </LinearGradient>
+              </View>
             </View>
             
             <Text style={styles.referralDescription}>
@@ -187,13 +178,10 @@ export default function LoyaltyScore({ score, onPress }: LoyaltyScoreProps) {
 
           <View style={styles.actionButtons}>
             <TouchableOpacity style={styles.shareButton} onPress={shareReferral}>
-              <LinearGradient
-                colors={['#00D4AA', '#00B894']}
-                style={styles.shareButtonGradient}
-              >
+              <View style={styles.shareButtonBackground}>
                 <MessageCircle color="#0F1629" size={18} />
                 <Text style={styles.shareButtonText}>Share Referral</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
           </View>
 
@@ -262,16 +250,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   points: {
-    fontSize: 13,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.footnote,
+    fontWeight: 700,
     color: '#FFFFFF',
     letterSpacing: -0.3,
     lineHeight: 15,
   },
   level: {
-    fontSize: 9,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    ...CervTypography.caption2,
+    fontWeight: 600,
+    color: CervColors.systemGreen,
     letterSpacing: 0.5,
     textTransform: 'uppercase',
   },
@@ -289,8 +277,9 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
+    ...CervTypography.caption2,
     fontSize: 8,
-    fontFamily: 'Nunito-Medium',
+    fontWeight: 500,
     color: '#8B9DC3',
     letterSpacing: -0.1,
   },
@@ -302,7 +291,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   modalContent: {
-    backgroundColor: '#1A2332',
+    backgroundColor: CervColors.background,
     borderRadius: 24,
     maxHeight: '80%',
     paddingVertical: 24,
@@ -315,8 +304,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   modalTitle: {
-    fontSize: 20,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.title3,
     color: '#FFFFFF',
   },
   referralStats: {
@@ -338,13 +326,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   statValue: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.title2,
+    fontWeight: 700,
     color: '#FFFFFF',
   },
   statLabel: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Medium',
+    ...CervTypography.caption1,
+    fontWeight: 500,
     color: '#8B9DC3',
   },
   referralSection: {
@@ -352,8 +340,8 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.callout,
+    fontWeight: 700,
     color: '#FFFFFF',
     marginBottom: 12,
   },
@@ -370,9 +358,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(139, 157, 195, 0.2)',
   },
   referralCode: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    ...CervTypography.headline,
+    fontWeight: 700,
+    color: CervColors.systemGreen,
     letterSpacing: 2,
   },
   copyButton: {
@@ -381,8 +369,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   referralDescription: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.footnote,
     color: '#8B9DC3',
     lineHeight: 20,
     textAlign: 'center',
@@ -403,9 +390,9 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   shareButtonText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
-    color: '#0F1629',
+    ...CervTypography.callout,
+    fontWeight: 700,
+    color: CervColors.white,
   },
   referralsHistory: {
     paddingHorizontal: 24,
@@ -422,14 +409,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   referralName: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.footnote,
+    fontWeight: 600,
     color: '#FFFFFF',
     marginBottom: 2,
   },
   referralDate: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.caption1,
     color: '#8B9DC3',
   },
   referralStatus: {
@@ -447,13 +433,52 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 184, 0, 0.2)',
   },
   statusText: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption1,
+    fontWeight: 600,
   },
   completedText: {
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
   },
   pendingText: {
     color: '#FFB800',
+  },
+  
+  // Cerv dark theme styles
+  cardBackground: {
+    backgroundColor: CervColors.systemGreenLight,
+    borderRadius: CervBorderRadius.medium,
+    padding: CervSpacing.md,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+  },
+  
+  statsCardBackground: {
+    backgroundColor: CervColors.cardBackground,
+    padding: CervSpacing.lg,
+    borderRadius: CervBorderRadius.medium,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+  },
+  
+  codeCardBackground: {
+    backgroundColor: CervColors.cardBackground,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: CervSpacing.md,
+    borderRadius: CervBorderRadius.small,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+  },
+  
+  shareButtonBackground: {
+    backgroundColor: CervColors.systemGreen,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: CervSpacing.md,
+    paddingHorizontal: CervSpacing.lg,
+    borderRadius: CervBorderRadius.medium,
+    gap: CervSpacing.sm,
   },
 });

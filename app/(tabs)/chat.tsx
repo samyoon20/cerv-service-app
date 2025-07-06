@@ -13,11 +13,9 @@ import {
   MessageCircle, 
   Send, 
   Phone, 
-  User,
   Wrench,
-  Calendar
 } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { CervColors, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 const MOCK_CONVERSATIONS = [
   {
@@ -111,10 +109,7 @@ export default function ChatTab() {
   if (selectedConversation && selectedConv) {
     return (
       <View style={styles.container}>
-        <LinearGradient
-          colors={['#0F1629', '#1A2332']}
-          style={styles.backgroundGradient}
-        >
+        <View style={styles.backgroundContainer}>
           <SafeAreaView style={styles.safeArea}>
             <View style={styles.chatHeader}>
               <TouchableOpacity style={styles.backButton} onPress={handleBackToList}>
@@ -125,7 +120,7 @@ export default function ChatTab() {
                 <Text style={styles.chatHeaderService}>{selectedConv.service}</Text>
               </View>
               <TouchableOpacity style={styles.callButton} onPress={handleCallTechnician}>
-                <Phone color="#00D4AA" size={20} />
+                <Phone color={CervColors.systemGreen} size={20} />
               </TouchableOpacity>
             </View>
 
@@ -173,21 +168,18 @@ export default function ChatTab() {
                 onPress={handleSendMessage}
                 disabled={!messageText.trim()}
               >
-                <Send color={messageText.trim() ? '#0F1629' : '#8B9DC3'} size={18} />
+                <Send color={messageText.trim() ? CervColors.white : CervColors.systemGray} size={18} />
               </TouchableOpacity>
             </View>
           </SafeAreaView>
-        </LinearGradient>
+        </View>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#0F1629', '#1A2332']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundContainer}>
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Messages</Text>
@@ -201,10 +193,7 @@ export default function ChatTab() {
                   style={styles.conversationCard}
                   onPress={() => handleConversationSelect(conversation.id)}
                 >
-                  <LinearGradient
-                    colors={['#1E2A3A', '#243447']}
-                    style={styles.conversationGradient}
-                  >
+                  <View style={styles.conversationBackground}>
                     <View style={styles.avatarContainer}>
                       <Text style={styles.avatar}>{conversation.avatar}</Text>
                       {conversation.unread && <View style={styles.unreadIndicator} />}
@@ -236,7 +225,7 @@ export default function ChatTab() {
                         <MessageCircle color="#8B9DC3" size={16} />
                       )}
                     </View>
-                  </LinearGradient>
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
@@ -251,30 +240,24 @@ export default function ChatTab() {
               </View>
             )}
 
-            <LinearGradient
-              colors={['#1E2A3A', '#243447']}
-              style={styles.helpSection}
-            >
+            <View style={styles.helpSection}>
               <Text style={styles.helpTitle}>Need help?</Text>
               <Text style={styles.helpText}>
                 Chat with our support team for questions about services, billing, or scheduling.
               </Text>
               
               <TouchableOpacity style={styles.contactSupportButton}>
-                <LinearGradient
-                  colors={['rgba(0, 212, 170, 0.1)', 'rgba(0, 212, 170, 0.05)']}
-                  style={styles.supportButtonGradient}
-                >
-                  <MessageCircle color="#00D4AA" size={20} />
+                <View style={styles.supportButtonBackground}>
+                  <MessageCircle color={CervColors.systemBlue} size={20} />
                   <Text style={styles.contactSupportText}>Contact Support</Text>
-                </LinearGradient>
+                </View>
               </TouchableOpacity>
-            </LinearGradient>
+            </View>
 
             <View style={styles.bottomSpacing} />
           </ScrollView>
         </SafeAreaView>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -283,8 +266,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backgroundGradient: {
+  backgroundContainer: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
   safeArea: {
     flex: 1,
@@ -314,13 +298,15 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
   },
-  conversationGradient: {
+  conversationBackground: {
+    backgroundColor: CervColors.cardBackground,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    padding: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
-    gap: 12,
+    padding: CervSpacing.lg,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+    gap: CervSpacing.md,
+    borderRadius: CervBorderRadius.large,
   },
   avatarContainer: {
     position: 'relative',
@@ -341,7 +327,7 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#00D4AA',
+    backgroundColor: CervColors.systemGreen,
     borderWidth: 2,
     borderColor: '#1E2A3A',
   },
@@ -368,7 +354,7 @@ const styles = StyleSheet.create({
   conversationService: {
     fontSize: 12,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
     marginBottom: 6,
   },
   lastMessage: {
@@ -406,10 +392,11 @@ const styles = StyleSheet.create({
     maxWidth: 280,
   },
   helpSection: {
-    borderRadius: 16,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.cardBackground,
+    borderRadius: CervBorderRadius.large,
+    padding: CervSpacing.xl,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   helpTitle: {
     fontSize: 18,
@@ -429,20 +416,22 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
   },
-  supportButtonGradient: {
+  supportButtonBackground: {
+    backgroundColor: CervColors.systemBlueLight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
-    gap: 8,
+    paddingVertical: CervSpacing.md,
+    paddingHorizontal: CervSpacing.xl,
+    borderWidth: 0.5,
+    borderColor: CervColors.systemBlue,
+    gap: CervSpacing.sm,
+    borderRadius: CervBorderRadius.medium,
   },
   contactSupportText: {
-    fontSize: 14,
+    ...CervTypography.subheadline,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: CervColors.systemBlue,
   },
   chatHeader: {
     flexDirection: 'row',
@@ -460,7 +449,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 16,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
   },
   chatHeaderInfo: {
     flex: 1,
@@ -508,7 +497,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   userMessage: {
-    backgroundColor: '#00D4AA',
+    backgroundColor: CervColors.systemGreen,
     borderBottomRightRadius: 4,
   },
   techMessage: {
@@ -558,8 +547,8 @@ const styles = StyleSheet.create({
   sendButton: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: '#00D4AA',
+    borderRadius: CervBorderRadius.round,
+    backgroundColor: CervColors.systemBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },

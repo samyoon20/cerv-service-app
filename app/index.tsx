@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Chrome as Home, Shield, Clock, Star } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 export default function OnboardingScreen() {
   const handleSkip = () => {
@@ -34,7 +35,7 @@ export default function OnboardingScreen() {
           </View>
 
           <View style={styles.heroSection}>
-            <Text style={styles.title}>Your Home's Best Friend</Text>
+            <Text style={styles.title}>Your Home&apos;s Best Friend</Text>
             <Text style={styles.subtitle}>
               Book, track, and manage all your home maintenance services through one beautiful app
             </Text>
@@ -42,15 +43,15 @@ export default function OnboardingScreen() {
 
           <View style={styles.featuresContainer}>
             <View style={styles.feature}>
-              <Shield color="#00D4AA" size={24} />
+              <Shield color={CervColors.systemGreen} size={24} />
               <Text style={styles.featureText}>Verified Professionals</Text>
             </View>
             <View style={styles.feature}>
-              <Clock color="#00D4AA" size={24} />
+              <Clock color={CervColors.systemGreen} size={24} />
               <Text style={styles.featureText}>Flexible Scheduling</Text>
             </View>
             <View style={styles.feature}>
-              <Star color="#00D4AA" size={24} />
+              <Star color={CervColors.systemGreen} size={24} />
               <Text style={styles.featureText}>Premium Service</Text>
             </View>
           </View>
@@ -58,7 +59,7 @@ export default function OnboardingScreen() {
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
               <LinearGradient
-                colors={['#00D4AA', '#00B894']}
+                colors={[CervColors.systemGreen, CervColors.systemGreen]}
                 style={styles.gradientButton}
               >
                 <Text style={styles.continueButtonText}>Get Started</Text>
@@ -105,9 +106,9 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: 'rgba(0, 212, 170, 0.2)',
+    backgroundColor: CervColors.systemGreenLight,
     borderWidth: 2,
-    borderColor: '#00D4AA',
+    borderColor: CervColors.systemGreen,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.3)',
+    borderColor: CervColors.systemGreenLight,
   },
   featureText: {
     fontSize: 16,

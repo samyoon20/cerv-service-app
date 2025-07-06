@@ -6,7 +6,6 @@ import {
   ScrollView, 
   TouchableOpacity,
   Modal,
-  Dimensions
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
@@ -30,51 +29,51 @@ import {
   BookOpen
 } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import Svg, { Circle, Path, Text as SvgText, Line, Polyline } from 'react-native-svg';
-import type { HomeScoreAnalytics, CategoryDetails, ScoreRecommendation } from '@/types';
+import Svg, { Circle, Path, Line, Polyline } from 'react-native-svg';
+import type { HomeScoreAnalytics } from '@/types';
+import { CervColors } from '@/themes/appleDesignSystem';
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 // Mock data for analytics
 const MOCK_ANALYTICS: HomeScoreAnalytics = {
   current: {
     overall: 87,
-    maintenance: 92,
-    cleanliness: 85,
+    poolMaintenance: 92,
     landscaping: 84,
+    exteriorCleaning: 85,
     lastUpdated: new Date().toISOString(),
   },
   categories: [
     {
-      id: 'maintenance',
-      name: 'Maintenance',
-      description: 'Regular upkeep and system maintenance',
+      id: 'poolMaintenance',
+      name: 'Pool Maintenance',
+      description: 'Pool cleaning, chemical balancing, and equipment care',
       currentScore: 92,
       targetScore: 95,
-      explanation: 'Your maintenance score reflects the condition and regular upkeep of your home\'s essential systems including HVAC, plumbing, electrical, and structural elements.',
+      explanation: 'Your pool maintenance score reflects the condition and regular upkeep of your pool systems including filtration, chemical balance, cleaning, and equipment functionality.',
       factorsAffecting: [
-        'HVAC system efficiency and maintenance',
-        'Plumbing system condition',
-        'Electrical safety and updates',
-        'Structural integrity',
-        'Regular preventive maintenance'
+        'Water chemistry balance',
+        'Filter and pump efficiency',
+        'Pool surface cleanliness',
+        'Equipment maintenance',
+        'Regular debris removal'
       ],
       improvementTips: [
-        'Schedule quarterly HVAC filter changes',
-        'Annual plumbing inspection',
-        'Electrical safety audit',
-        'Regular gutter cleaning'
+        'Weekly chemical testing and balancing',
+        'Bi-weekly filter cleaning',
+        'Monthly equipment inspection',
+        'Seasonal deep cleaning'
       ],
-      icon: 'wrench',
-      color: '#00D4AA'
+      icon: 'droplets',
+      color: '#e39ac4'
     },
     {
-      id: 'cleanliness',
-      name: 'Exterior Care',
-      description: 'External appearance and cleanliness',
+      id: 'exteriorCleaning',
+      name: 'Exterior Cleaning',
+      description: 'External surface cleaning and maintenance',
       currentScore: 85,
       targetScore: 90,
-      explanation: 'Exterior care encompasses the cleanliness and appearance of your home\'s exterior surfaces, including siding, windows, driveways, and outdoor areas.',
+      explanation: 'Exterior cleaning encompasses the cleanliness and appearance of your home\'s exterior surfaces, including siding, windows, driveways, and outdoor areas.',
       factorsAffecting: [
         'Exterior surface cleanliness',
         'Window condition and cleanliness',
@@ -83,13 +82,13 @@ const MOCK_ANALYTICS: HomeScoreAnalytics = {
         'General curb appeal'
       ],
       improvementTips: [
-        'Bi-annual pressure washing',
+        'Bi-annual exterior cleaning',
         'Regular window cleaning',
         'Seasonal deep cleaning',
         'Maintain outdoor spaces'
       ],
       icon: 'sparkles',
-      color: '#FFB800'
+      color: '#633737'
     },
     {
       id: 'landscaping',
@@ -112,14 +111,14 @@ const MOCK_ANALYTICS: HomeScoreAnalytics = {
         'Weed control program'
       ],
       icon: 'tree-pine',
-      color: '#00B894'
+      color: '#196f62'
     }
   ],
   recommendations: [
     {
       id: '1',
-      categoryId: 'cleanliness',
-      title: 'Pressure Wash Exterior Surfaces',
+      categoryId: 'exteriorCleaning',
+      title: 'Exterior Cleaning Service',
       description: 'Deep clean exterior walls, driveway, and walkways to improve overall appearance',
       impact: 8,
       priority: 'high',
@@ -130,20 +129,20 @@ const MOCK_ANALYTICS: HomeScoreAnalytics = {
     },
     {
       id: '2',
-      categoryId: 'maintenance',
-      title: 'HVAC Filter Replacement',
-      description: 'Replace air filters to improve system efficiency and air quality',
-      impact: 3,
-      priority: 'medium',
-      estimatedCost: 25,
-      timeToComplete: '30 minutes',
-      serviceRequired: false,
-      actionType: 'diy'
+      categoryId: 'poolMaintenance',
+      title: 'Pool Chemical Balancing',
+      description: 'Test and adjust pool chemistry for optimal water quality and equipment protection',
+      impact: 6,
+      priority: 'high',
+      estimatedCost: 45,
+      timeToComplete: '1 hour',
+      serviceRequired: true,
+      actionType: 'professional'
     },
     {
       id: '3',
       categoryId: 'landscaping',
-      title: 'Seasonal Garden Cleanup',
+      title: 'Seasonal Landscaping Cleanup',
       description: 'Prune overgrown plants, remove weeds, and refresh mulch beds',
       impact: 5,
       priority: 'medium',
@@ -154,17 +153,17 @@ const MOCK_ANALYTICS: HomeScoreAnalytics = {
     }
   ],
   history: [
-    { date: '2024-12-01', overall: 87, maintenance: 92, cleanliness: 85, landscaping: 84 },
-    { date: '2024-11-01', overall: 85, maintenance: 90, cleanliness: 82, landscaping: 83 },
-    { date: '2024-10-01', overall: 83, maintenance: 88, cleanliness: 80, landscaping: 81 },
-    { date: '2024-09-01', overall: 81, maintenance: 86, cleanliness: 78, landscaping: 79 },
-    { date: '2024-08-01', overall: 79, maintenance: 84, cleanliness: 76, landscaping: 77 },
-    { date: '2024-07-01', overall: 77, maintenance: 82, cleanliness: 74, landscaping: 75 }
+    { date: '2024-12-01', overall: 87, poolMaintenance: 92, exteriorCleaning: 85, landscaping: 84 },
+    { date: '2024-11-01', overall: 85, poolMaintenance: 90, exteriorCleaning: 82, landscaping: 83 },
+    { date: '2024-10-01', overall: 83, poolMaintenance: 88, exteriorCleaning: 80, landscaping: 81 },
+    { date: '2024-09-01', overall: 81, poolMaintenance: 86, exteriorCleaning: 78, landscaping: 79 },
+    { date: '2024-08-01', overall: 79, poolMaintenance: 84, exteriorCleaning: 76, landscaping: 77 },
+    { date: '2024-07-01', overall: 77, poolMaintenance: 82, exteriorCleaning: 74, landscaping: 75 }
   ],
   trends: {
     period: '90d',
     overallTrend: 'improving',
-    bestPerformingCategory: 'maintenance',
+    bestPerformingCategory: 'poolMaintenance',
     needsAttentionCategory: 'landscaping',
     averageMonthlyImprovement: 2.5
   },
@@ -255,7 +254,7 @@ const CustomLineChart = ({ data, width = 300, height = 200 }: { data: any[], wid
       <Polyline
         points={points}
         fill="none"
-        stroke="#00D4AA"
+        stroke={CervColors.systemGreen}
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -271,7 +270,7 @@ const CustomLineChart = ({ data, width = 300, height = 200 }: { data: any[], wid
             cx={x}
             cy={y}
             r="4"
-            fill="#00D4AA"
+            fill={CervColors.systemGreen}
           />
         );
       })}
@@ -280,14 +279,13 @@ const CustomLineChart = ({ data, width = 300, height = 200 }: { data: any[], wid
 };
 
 export default function AnalyticsScreen() {
-  const [selectedPeriod, setSelectedPeriod] = useState<'30d' | '90d' | '1y'>('90d');
   const [showBreakdownChart, setShowBreakdownChart] = useState(false);
   const [showTrendsChart, setShowTrendsChart] = useState(false);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [modalContent, setModalContent] = useState({ title: '', content: '' });
 
   const getScoreColor = (value: number) => {
-    if (value >= 80) return '#00D4AA';
+    if (value >= 80) return CervColors.systemGreen;
     if (value >= 60) return '#FFB800';
     return '#FF6B6B';
   };
@@ -301,7 +299,7 @@ export default function AnalyticsScreen() {
   const getTrendIcon = (trend: string) => {
     switch (trend) {
       case 'improving':
-        return <TrendingUp color="#00D4AA" size={16} />;
+        return <TrendingUp color={CervColors.systemGreen} size={16} />;
       case 'declining':
         return <TrendingDown color="#FF6B6B" size={16} />;
       default:
@@ -312,11 +310,11 @@ export default function AnalyticsScreen() {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
       case 'wrench':
-        return <Wrench color="#00D4AA" size={20} />;
+        return <Wrench color={CervColors.systemGreen} size={20} />;
       case 'sparkles':
         return <Sparkles color="#FFB800" size={20} />;
       case 'tree-pine':
-        return <TreePine color="#00B894" size={20} />;
+        return <TreePine color="#28B946" size={20} />;
       default:
         return <Wrench color="#8B9DC3" size={20} />;
     }
@@ -329,7 +327,7 @@ export default function AnalyticsScreen() {
       case 'medium':
         return '#FFB800';
       case 'low':
-        return '#00D4AA';
+        return CervColors.systemGreen;
       default:
         return '#8B9DC3';
     }
@@ -419,7 +417,7 @@ export default function AnalyticsScreen() {
                 
                 <TouchableOpacity style={styles.chartItem} onPress={() => setShowTrendsChart(true)}>
                   <View style={styles.chartIcon}>
-                    <BarChart3 color="#00D4AA" size={20} />
+                    <BarChart3 color={CervColors.systemGreen} size={20} />
                   </View>
                   <Text style={styles.chartLabel}>Trends</Text>
                 </TouchableOpacity>
@@ -428,17 +426,17 @@ export default function AnalyticsScreen() {
               <View style={styles.ctaContainer}>
                 <CTAChip 
                   title="Learn More" 
-                  icon={<BookOpen color="#00D4AA" size={14} />}
+                  icon={<BookOpen color={CervColors.systemGreen} size={14} />}
                   onPress={() => showInfoPopup(
                     'Home Score Explained',
-                    'Your Home Score is calculated based on three key areas:\n\n• Maintenance (40%): System upkeep and repairs\n• Exterior Care (30%): Cleanliness and appearance\n• Landscaping (30%): Outdoor space condition\n\nScores are updated after each service and range from 0-100. Higher scores indicate better home health and can increase property value.'
+                    'Your Home Score is calculated based on three key areas:\n\n• Pool Maintenance (40%): Pool chemistry, equipment, and cleanliness\n• Exterior Cleaning (30%): Surface cleaning and appearance\n• Landscaping (30%): Outdoor space and garden condition\n\nScores are updated after each service and range from 0-100. Higher scores indicate better home health and can increase property value.'
                   )}
                 />
               </View>
 
               <View style={styles.goalSection}>
                 <View style={styles.goalItem}>
-                  <Target color="#00D4AA" size={16} />
+                  <Target color={CervColors.systemGreen} size={16} />
                   <Text style={styles.goalLabel}>Target: {MOCK_ANALYTICS.goals.targetOverallScore}/100</Text>
                 </View>
                 <View style={styles.goalItem}>
@@ -501,7 +499,7 @@ export default function AnalyticsScreen() {
                   <View style={styles.ctaContainer}>
                     <CTAChip 
                       title="How to Improve" 
-                      icon={<HelpCircle color="#00D4AA" size={14} />}
+                      icon={<HelpCircle color={CervColors.systemGreen} size={14} />}
                       onPress={() => showInfoPopup(
                         `Improve ${category.name}`,
                         `To boost your ${category.name.toLowerCase()} score:\n\n${category.improvementTips.map(tip => `• ${tip}`).join('\n')}\n\nFocus on the factors that most impact your score:\n${category.factorsAffecting.slice(0, 3).map(factor => `• ${factor}`).join('\n')}`
@@ -565,7 +563,7 @@ export default function AnalyticsScreen() {
                     
                     <CTAChip 
                       title="Learn More" 
-                      icon={<BookOpen color="#00D4AA" size={12} />}
+                      icon={<BookOpen color={CervColors.systemGreen} size={12} />}
                       onPress={() => showInfoPopup(
                         rec.title,
                         `${rec.description}\n\n• Impact: +${rec.impact} points to your score\n• Time needed: ${rec.timeToComplete}\n• Estimated cost: $${rec.estimatedCost}\n• Type: ${rec.actionType}\n\nThis ${rec.priority} priority task will help improve your ${rec.categoryId} score significantly.`
@@ -706,7 +704,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: -0.3,
   },
@@ -733,7 +732,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: -0.3,
   },
@@ -744,7 +744,8 @@ const styles = StyleSheet.create({
   },
   trendText: {
     fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     textTransform: 'capitalize',
   },
   scoreDisplay: {
@@ -756,7 +757,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 60,
     marginBottom: 12,
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 12,
@@ -771,21 +772,24 @@ const styles = StyleSheet.create({
   },
   scoreValue: {
     fontSize: 32,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     lineHeight: 36,
     letterSpacing: -1,
   },
   scoreOutOf: {
     fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#FFFFFF',
     opacity: 0.8,
     marginTop: -4,
   },
   scoreGrade: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     letterSpacing: -0.3,
   },
   chartsPreview: {
@@ -809,7 +813,8 @@ const styles = StyleSheet.create({
   },
   chartLabel: {
     fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#8B9DC3',
   },
   ctaContainer: {
@@ -833,8 +838,9 @@ const styles = StyleSheet.create({
   },
   ctaChipText: {
     fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    fontFamily: 'System',
+    fontWeight: '600',
+    color: CervColors.systemGreen,
   },
   goalSection: {
     flexDirection: 'row',
@@ -850,7 +856,8 @@ const styles = StyleSheet.create({
   },
   goalLabel: {
     fontSize: 14,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#8B9DC3',
   },
   section: {
@@ -888,18 +895,21 @@ const styles = StyleSheet.create({
   },
   categoryName: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#FFFFFF',
     marginBottom: 2,
   },
   categoryDescription: {
     fontSize: 12,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#8B9DC3',
   },
   categoryScore: {
     fontSize: 18,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     letterSpacing: -0.3,
   },
   progressBar: {
@@ -915,7 +925,8 @@ const styles = StyleSheet.create({
   },
   categoryExplanation: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#8B9DC3',
     lineHeight: 20,
     marginBottom: 16,
@@ -925,7 +936,8 @@ const styles = StyleSheet.create({
   },
   tipsTitle: {
     fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#FFFFFF',
     marginBottom: 8,
   },
@@ -937,7 +949,8 @@ const styles = StyleSheet.create({
   },
   tipText: {
     fontSize: 12,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#8B9DC3',
     flex: 1,
   },
@@ -960,7 +973,8 @@ const styles = StyleSheet.create({
   },
   recommendationTitle: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#FFFFFF',
     marginBottom: 6,
   },
@@ -976,17 +990,20 @@ const styles = StyleSheet.create({
   },
   priorityText: {
     fontSize: 10,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     letterSpacing: 0.5,
   },
   impactText: {
     fontSize: 14,
-    fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    fontFamily: 'System',
+    fontWeight: '700',
+    color: CervColors.systemGreen,
   },
   recommendationDescription: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#8B9DC3',
     lineHeight: 20,
     marginBottom: 16,
@@ -1003,7 +1020,8 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 12,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#8B9DC3',
   },
   recommendationActions: {
@@ -1025,8 +1043,9 @@ const styles = StyleSheet.create({
   },
   actionButtonText: {
     fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    fontFamily: 'System',
+    fontWeight: '600',
+    color: CervColors.systemGreen,
     letterSpacing: -0.2,
   },
   bottomSpacing: {
@@ -1065,7 +1084,8 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 18,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
   },
   chartContainer: {
@@ -1087,12 +1107,14 @@ const styles = StyleSheet.create({
   },
   legendText: {
     fontSize: 14,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#8B9DC3',
   },
   chartSubtitle: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#8B9DC3',
     textAlign: 'center',
   },
@@ -1101,7 +1123,8 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#8B9DC3',
     lineHeight: 20,
   },

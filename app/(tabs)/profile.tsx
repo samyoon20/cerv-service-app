@@ -9,8 +9,8 @@ import {
   Switch
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, Settings, CreditCard, MapPin, Bell, CircleHelp as HelpCircle, Shield, LogOut, ChevronRight, CreditCard as Edit3 } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { User, CreditCard, MapPin, Bell, CircleHelp as HelpCircle, Shield, LogOut, ChevronRight, CreditCard as Edit3 } from 'lucide-react-native';
+import { CervColors, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 export default function ProfileTab() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -51,10 +51,7 @@ export default function ProfileTab() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#0F1629', '#1A2332']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundContainer}>
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Profile</Text>
@@ -65,13 +62,10 @@ export default function ProfileTab() {
 
           <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
             {/* Profile Card */}
-            <LinearGradient
-              colors={['#1E2A3A', '#243447']}
-              style={styles.profileCard}
-            >
+            <View style={styles.profileCard}>
               <View style={styles.avatarContainer}>
                 <View style={styles.avatar}>
-                  <User color="#00D4AA" size={32} />
+                  <User color={CervColors.systemBlue} size={32} />
                 </View>
               </View>
               <View style={styles.profileInfo}>
@@ -79,17 +73,14 @@ export default function ProfileTab() {
                 <Text style={styles.profileEmail}>john.doe@example.com</Text>
                 <Text style={styles.profileAddress}>123 Main Street, Beverly Hills, CA 90210</Text>
               </View>
-            </LinearGradient>
+            </View>
 
             {/* Account Section */}
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Account</Text>
               
               <TouchableOpacity style={styles.menuItem} onPress={handlePaymentMethods}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.menuItemGradient}
-                >
+                <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
                       <CreditCard color="#8B9DC3" size={20} />
@@ -100,14 +91,11 @@ export default function ProfileTab() {
                     </View>
                   </View>
                   <ChevronRight color="#8B9DC3" size={20} />
-                </LinearGradient>
+                </View>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.menuItem} onPress={handleAddresses}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.menuItemGradient}
-                >
+                <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
                       <MapPin color="#8B9DC3" size={20} />
@@ -118,7 +106,7 @@ export default function ProfileTab() {
                     </View>
                   </View>
                   <ChevronRight color="#8B9DC3" size={20} />
-                </LinearGradient>
+                </View>
               </TouchableOpacity>
             </View>
 
@@ -127,10 +115,7 @@ export default function ProfileTab() {
               <Text style={styles.sectionTitle}>Preferences</Text>
               
               <View style={styles.menuItem}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.menuItemGradient}
-                >
+                <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
                       <Bell color="#8B9DC3" size={20} />
@@ -144,16 +129,13 @@ export default function ProfileTab() {
                     value={notificationsEnabled}
                     onValueChange={setNotificationsEnabled}
                     trackColor={{ false: 'rgba(139, 157, 195, 0.2)', true: 'rgba(0, 212, 170, 0.3)' }}
-                    thumbColor={notificationsEnabled ? '#00D4AA' : '#8B9DC3'}
+                    thumbColor={notificationsEnabled ? CervColors.systemGreen : '#8B9DC3'}
                   />
-                </LinearGradient>
+                </View>
               </View>
 
               <View style={styles.menuItem}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.menuItemGradient}
-                >
+                <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
                       <MapPin color="#8B9DC3" size={20} />
@@ -167,9 +149,9 @@ export default function ProfileTab() {
                     value={locationEnabled}
                     onValueChange={setLocationEnabled}
                     trackColor={{ false: 'rgba(139, 157, 195, 0.2)', true: 'rgba(0, 212, 170, 0.3)' }}
-                    thumbColor={locationEnabled ? '#00D4AA' : '#8B9DC3'}
+                    thumbColor={locationEnabled ? CervColors.systemGreen : '#8B9DC3'}
                   />
-                </LinearGradient>
+                </View>
               </View>
             </View>
 
@@ -178,10 +160,7 @@ export default function ProfileTab() {
               <Text style={styles.sectionTitle}>Support</Text>
               
               <TouchableOpacity style={styles.menuItem} onPress={handleSupport}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.menuItemGradient}
-                >
+                <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
                       <HelpCircle color="#8B9DC3" size={20} />
@@ -192,14 +171,11 @@ export default function ProfileTab() {
                     </View>
                   </View>
                   <ChevronRight color="#8B9DC3" size={20} />
-                </LinearGradient>
+                </View>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.menuItem} onPress={handlePrivacy}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.menuItemGradient}
-                >
+                <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
                       <Shield color="#8B9DC3" size={20} />
@@ -210,7 +186,7 @@ export default function ProfileTab() {
                     </View>
                   </View>
                   <ChevronRight color="#8B9DC3" size={20} />
-                </LinearGradient>
+                </View>
               </TouchableOpacity>
             </View>
 
@@ -219,55 +195,40 @@ export default function ProfileTab() {
               <Text style={styles.sectionTitle}>Account Stats</Text>
               
               <View style={styles.statsGrid}>
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.statCard}
-                >
+                <View style={styles.statCard}>
                   <Text style={styles.statValue}>12</Text>
                   <Text style={styles.statLabel}>Services Completed</Text>
-                </LinearGradient>
+                </View>
                 
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.statCard}
-                >
+                <View style={styles.statCard}>
                   <Text style={styles.statValue}>3</Text>
                   <Text style={styles.statLabel}>Active Services</Text>
-                </LinearGradient>
+                </View>
                 
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.statCard}
-                >
+                <View style={styles.statCard}>
                   <Text style={styles.statValue}>8.7</Text>
                   <Text style={styles.statLabel}>Home Score</Text>
-                </LinearGradient>
+                </View>
                 
-                <LinearGradient
-                  colors={['#1E2A3A', '#243447']}
-                  style={styles.statCard}
-                >
+                <View style={styles.statCard}>
                   <Text style={styles.statValue}>6mo</Text>
                   <Text style={styles.statLabel}>Member Since</Text>
-                </LinearGradient>
+                </View>
               </View>
             </View>
 
             {/* Sign Out */}
             <TouchableOpacity style={styles.signOutButton} onPress={handleLogout}>
-              <LinearGradient
-                colors={['rgba(255, 107, 107, 0.1)', 'rgba(255, 107, 107, 0.05)']}
-                style={styles.signOutGradient}
-              >
+              <View style={styles.signOutBackground}>
                 <LogOut color="#FF6B6B" size={20} />
                 <Text style={styles.signOutText}>Sign Out</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
 
             <View style={styles.bottomSpacing} />
           </ScrollView>
         </SafeAreaView>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -276,8 +237,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backgroundGradient: {
+  backgroundContainer: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
   safeArea: {
     flex: 1,
@@ -313,11 +275,12 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   profileCard: {
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.cardBackground,
+    borderRadius: CervBorderRadius.extraLarge,
+    padding: CervSpacing.xxl,
+    marginBottom: CervSpacing.xxl,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   avatarContainer: {
     alignItems: 'center',
@@ -371,13 +334,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     overflow: 'hidden',
   },
-  menuItemGradient: {
+  menuItemBackground: {
+    backgroundColor: CervColors.cardBackground,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    padding: CervSpacing.lg,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+    borderRadius: CervBorderRadius.large,
   },
   menuItemLeft: {
     flexDirection: 'row',
@@ -417,18 +382,19 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   statCard: {
+    backgroundColor: CervColors.cardBackground,
     flex: 1,
     minWidth: '45%',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: CervBorderRadius.large,
+    padding: CervSpacing.xl,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   statValue: {
     fontSize: 24,
     fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
     marginBottom: 4,
     letterSpacing: -0.5,
   },
@@ -443,21 +409,22 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     overflow: 'hidden',
   },
-  signOutGradient: {
+  signOutBackground: {
+    backgroundColor: CervColors.systemRedLight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 107, 107, 0.2)',
-    gap: 8,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xxl,
+    borderWidth: 0.5,
+    borderColor: CervColors.systemRedLight,
+    gap: CervSpacing.sm,
+    borderRadius: CervBorderRadius.large,
   },
   signOutText: {
-    fontSize: 16,
+    ...CervTypography.callout,
     fontFamily: 'Nunito-Bold',
-    color: '#FF6B6B',
-    letterSpacing: -0.2,
+    color: CervColors.systemRed,
   },
   bottomSpacing: {
     height: 20,

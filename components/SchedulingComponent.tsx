@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Calendar, Clock, Repeat } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 interface SchedulingComponentProps {
   onDateTimeSelect: (date: string, time: string, frequency: string) => void;
@@ -73,7 +74,7 @@ export default function SchedulingComponent({
       {/* Frequency Selection */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Repeat color="#00D4AA" size={20} />
+          <Repeat color={CervColors.systemGreen} size={20} />
           <Text style={styles.sectionTitle}>How often?</Text>
         </View>
         <View style={styles.frequencyGrid}>
@@ -106,7 +107,7 @@ export default function SchedulingComponent({
       {/* Date Selection */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Calendar color="#00D4AA" size={20} />
+          <Calendar color={CervColors.systemGreen} size={20} />
           <Text style={styles.sectionTitle}>Choose a date</Text>
         </View>
         <ScrollView 
@@ -143,7 +144,7 @@ export default function SchedulingComponent({
       {/* Time Selection */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Clock color="#00D4AA" size={20} />
+          <Clock color={CervColors.systemGreen} size={20} />
           <Text style={styles.sectionTitle}>Select time</Text>
         </View>
         <View style={styles.timeGrid}>
@@ -189,7 +190,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     letterSpacing: -0.3,
   },
@@ -208,12 +210,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   frequencyOptionSelected: {
-    borderColor: '#00D4AA',
+    borderColor: CervColors.systemGreen,
     backgroundColor: 'rgba(0, 212, 170, 0.05)',
   },
   frequencyLabel: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     marginBottom: 4,
     letterSpacing: -0.2,
@@ -223,7 +226,8 @@ const styles = StyleSheet.create({
   },
   frequencyDescription: {
     fontSize: 12,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
   },
   frequencyDescriptionSelected: {
@@ -244,12 +248,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dateOptionSelected: {
-    borderColor: '#00D4AA',
+    borderColor: CervColors.systemGreen,
     backgroundColor: 'rgba(0, 212, 170, 0.05)',
   },
   dateText: {
     fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     marginBottom: 4,
     letterSpacing: -0.1,
@@ -259,7 +264,8 @@ const styles = StyleSheet.create({
   },
   dayText: {
     fontSize: 12,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
   },
   dayTextSelected: {
@@ -279,12 +285,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   timeOptionSelected: {
-    borderColor: '#00D4AA',
+    borderColor: CervColors.systemGreen,
     backgroundColor: 'rgba(0, 212, 170, 0.05)',
   },
   timeText: {
     fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     letterSpacing: -0.1,
   },

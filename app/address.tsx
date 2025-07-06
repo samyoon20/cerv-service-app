@@ -13,6 +13,7 @@ import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, MapPin, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 export default function AddressScreen() {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ export default function AddressScreen() {
         router.push('/services');
       }, 1500);
       
-    } catch (error) {
+    } catch {
       Alert.alert('Verification Failed', 'Unable to verify address. Please check and try again.');
     } finally {
       setIsLoading(false);
@@ -78,11 +79,11 @@ export default function AddressScreen() {
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <MapPin color="#00D4AA" size={32} />
+              <MapPin color={CervColors.systemGreen} size={32} />
             </View>
-            <Text style={styles.title}>What's your property address?</Text>
+            <Text style={styles.title}>What&apos;s your property address?</Text>
             <Text style={styles.subtitle}>
-              We'll use this to recommend the best services for your home and verify your property details
+              We&apos;ll use this to recommend the best services for your home and verify your property details
             </Text>
           </View>
 
@@ -141,7 +142,7 @@ export default function AddressScreen() {
 
           {isVerified && (
             <View style={styles.verificationSuccess}>
-              <CheckCircle color="#00D4AA" size={24} />
+              <CheckCircle color={CervColors.systemGreen} size={24} />
               <Text style={styles.verificationText}>Address verified successfully!</Text>
             </View>
           )}
@@ -164,7 +165,7 @@ export default function AddressScreen() {
             disabled={isLoading || isVerified}
           >
             <LinearGradient
-              colors={isVerified ? ['#00D4AA', '#00D4AA'] : ['#00D4AA', '#00B894']}
+              colors={isVerified ? [CervColors.systemGreen, CervColors.systemGreen] : [CervColors.systemGreen, '#28B946']}
               style={styles.gradientButton}
             >
               {isLoading ? (
@@ -211,7 +212,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     letterSpacing: -0.3,
   },
@@ -235,7 +237,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -246,7 +248,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#0F172A',
     textAlign: 'center',
     marginBottom: 12,
@@ -254,7 +257,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
     textAlign: 'center',
     lineHeight: 24,
@@ -272,7 +276,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 15,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#334155',
     marginBottom: 8,
     letterSpacing: -0.2,
@@ -284,7 +289,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     backgroundColor: '#FFFFFF',
     color: '#0F172A',
     shadowColor: '#000',
@@ -311,7 +317,8 @@ const styles = StyleSheet.create({
   },
   verificationText: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#065F46',
     letterSpacing: -0.2,
   },
@@ -324,14 +331,16 @@ const styles = StyleSheet.create({
   },
   infoTitle: {
     fontSize: 17,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#334155',
     marginBottom: 12,
     letterSpacing: -0.3,
   },
   infoText: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
     lineHeight: 20,
   },
@@ -344,7 +353,7 @@ const styles = StyleSheet.create({
   verifyButton: {
     borderRadius: 16,
     overflow: 'hidden',
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -365,7 +374,8 @@ const styles = StyleSheet.create({
   },
   verifyButtonText: {
     fontSize: 18,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: -0.3,
   },

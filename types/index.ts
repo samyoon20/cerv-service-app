@@ -13,6 +13,39 @@ export interface Property {
   hasPool?: boolean;
   hasGarden?: boolean;
   hasDriveway?: boolean;
+  // New v2 fields for enhanced property management
+  nickname?: string;
+  primaryPhoto?: string;
+  photos?: string[];
+  gateCode?: string;
+  specialInstructions?: string;
+  amenities?: string[];
+  maintenanceHistory?: MaintenanceHistoryItem[];
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MaintenanceHistoryItem {
+  id: string;
+  date: string;
+  type: string;
+  description: string;
+  cost?: number;
+  provider?: string;
+  notes?: string;
+}
+
+export interface PropertyPortfolio {
+  id: string;
+  userId: string;
+  properties: Property[];
+  activePropertyId: string;
+  totalProperties: number;
+  averageCervScore: number;
+  totalOpenIssues: number;
+  monthlySpend: number;
+  lastUpdated: string;
 }
 
 export interface Service {
@@ -49,12 +82,74 @@ export interface User {
   phone?: string;
   propertyId?: string;
   createdAt: string;
+  // New v2 fields for multi-user support
+  role: UserRole;
+  permissions: UserPermission[];
+  portfolioId?: string;
+  invitedBy?: string;
+  invitedAt?: string;
+  lastActiveAt?: string;
+  profilePhoto?: string;
+  preferences?: UserPreferences;
 }
 
+export type UserRole = 'owner' | 'household_member' | 'viewer';
+
+export interface UserPermission {
+  resource: string;
+  actions: string[];
+}
+
+export interface UserPreferences {
+  hasPets?: boolean;
+  petTypes?: string[];
+  hasKids?: boolean;
+  kidAges?: number[];
+  preferredVisitWindow?: {
+    startTime: string;
+    endTime: string;
+    daysOfWeek: string[];
+  };
+  communicationPreferences?: {
+    email: boolean;
+    sms: boolean;
+    push: boolean;
+  };
+  specialRequests?: string;
+}
+
+export interface UserInvitation {
+  id: string;
+  email: string;
+  role: UserRole;
+  portfolioId: string;
+  propertyIds: string[];
+  invitedBy: string;
+  invitedAt: string;
+  status: 'pending' | 'accepted' | 'declined' | 'expired';
+  token: string;
+  expiresAt: string;
+  message?: string;
+}
+
+export interface CervScore {
+  overall: number;
+  poolMaintenance: number;
+  exteriorCleaning: number;
+  landscaping: number;
+  loyalty: number;
+  engagement: number;
+  lastUpdated: string;
+  propertyId: string;
+  trend: 'improving' | 'declining' | 'stable';
+  monthlyDelta: number;
+}
+
+// Keep HomeScore for backward compatibility
 export interface HomeScore {
   overall: number;
-  maintenance: number;
-  cleanliness: number;
+  poolMaintenance: number;
+  exteriorCleaning: number;
   landscaping: number;
   lastUpdated: string;
 }
@@ -93,15 +188,50 @@ export interface ScoreRecommendation {
   actionType: 'diy' | 'professional' | 'seasonal';
 }
 
+export interface CervScoreHistoryEntry {
+  date: string;
+  overall: number;
+  poolMaintenance: number;
+  exteriorCleaning: number;
+  landscaping: number;
+  loyalty: number;
+  engagement: number;
+  notes?: string;
+  propertyId: string;
+}
+
+// Keep ScoreHistoryEntry for backward compatibility
 export interface ScoreHistoryEntry {
   date: string;
   overall: number;
-  maintenance: number;
-  cleanliness: number;
+  poolMaintenance: number;
+  exteriorCleaning: number;
   landscaping: number;
   notes?: string;
 }
 
+export interface CervScoreAnalytics {
+  current: CervScore;
+  categories: CategoryDetails[];
+  recommendations: ScoreRecommendation[];
+  history: CervScoreHistoryEntry[];
+  trends: {
+    period: '30d' | '90d' | '1y';
+    overallTrend: 'improving' | 'declining' | 'stable';
+    bestPerformingCategory: string;
+    needsAttentionCategory: string;
+    averageMonthlyImprovement: number;
+  };
+  goals: {
+    targetOverallScore: number;
+    targetDate: string;
+    onTrack: boolean;
+    requiredMonthlyImprovement: number;
+  };
+  propertyId: string;
+}
+
+// Keep HomeScoreAnalytics for backward compatibility
 export interface HomeScoreAnalytics {
   current: HomeScore;
   categories: CategoryDetails[];
@@ -147,6 +277,7 @@ export interface ServiceReport {
   workCompleted: WorkItem[];
   nextServicePlan: RecommendationItem[];
   technicianNotes: string;
+  technicianName: string;
   serviceDate: string;
   duration: number; // in minutes
   rating?: number;
@@ -192,4 +323,61 @@ export interface ReferralData {
   pendingRewards: number;
   completedReferrals: ReferralItem[];
   referralLink: string;
+}
+
+// New v2 interfaces for campaigns and promotions
+export interface Campaign {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  deepLink?: string;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+  targetAudience?: {
+    userRoles?: UserRole[];
+    propertyTypes?: string[];
+    cervScoreRange?: { min: number; max: number };
+  };
+  displayConfig: {
+    showOnHomeScreen: boolean;
+    showInServices: boolean;
+    showInProfile: boolean;
+    priority: number;
+  };
+  analytics: {
+    impressions: number;
+    clicks: number;
+    conversions: number;
+  };
+}
+
+export interface Promotion {
+  id: string;
+  campaignId?: string;
+  title: string;
+  description: string;
+  discountType: 'percentage' | 'fixed' | 'free_service';
+  discountValue: number;
+  serviceIds?: string[];
+  minSpend?: number;
+  maxDiscount?: number;
+  usageLimit?: number;
+  usageCount: number;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+  code?: string;
+}
+
+export interface CustomerTier {
+  id: string;
+  name: string;
+  minCervScore: number;
+  minMonthlySpend: number;
+  benefits: string[];
+  discountPercentage: number;
+  prioritySupport: boolean;
+  freeAddOns: string[];
 }

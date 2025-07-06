@@ -1,34 +1,30 @@
 import { Tabs } from 'expo-router';
 import { Chrome as Home, Wrench, MessageCircle, User } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { View } from 'react-native';
+import { CervColors, CervTypography } from '@/themes/appleDesignSystem';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#00D4AA',
-        tabBarInactiveTintColor: '#8B9DC3',
+        tabBarActiveTintColor: CervColors.systemGreen,
+        tabBarInactiveTintColor: CervColors.systemGray,
         tabBarStyle: {
-          backgroundColor: '#1A2332',
-          borderTopWidth: 1,
-          borderTopColor: 'rgba(139, 157, 195, 0.1)',
-          paddingTop: 8,
-          paddingBottom: 8,
-          height: 60,
+          backgroundColor: CervColors.cardBackground,
+          borderTopWidth: 0.5,
+          borderTopColor: CervColors.separator,
+          paddingTop: 6,
+          paddingBottom: 34, // Account for safe area
+          height: 83,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: 'Nunito-SemiBold',
-          marginTop: 4,
+          ...CervTypography.caption2,
+          fontWeight: 500,
+          marginTop: 2,
         },
-        tabBarBackground: () => (
-          <LinearGradient
-            colors={['#1A2332', '#0F1629']}
-            style={{ flex: 1 }}
-          />
-        ),
+        tabBarItemStyle: {
+          paddingTop: 6,
+        },
       }}
     >
       <Tabs.Screen

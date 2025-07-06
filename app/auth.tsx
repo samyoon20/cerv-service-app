@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, Chrome as Home } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 export default function AuthScreen() {
   const [selectedMode, setSelectedMode] = useState<'signup' | 'login' | null>(null);
@@ -45,7 +46,7 @@ export default function AuthScreen() {
             <View style={styles.titleSection}>
               <Text style={styles.title}>Welcome to Cerv</Text>
               <Text style={styles.subtitle}>
-                Let's get your home maintenance journey started
+                Let&apos;s get your home maintenance journey started
               </Text>
             </View>
 
@@ -89,7 +90,7 @@ export default function AuthScreen() {
 
             <TouchableOpacity style={styles.primaryButton} onPress={handleSignUp}>
               <LinearGradient
-                colors={['#00D4AA', '#00B894']}
+                colors={[CervColors.systemGreen, CervColors.systemGreen]}
                 style={styles.gradientButton}
               >
                 <Text style={styles.primaryButtonText}>Continue</Text>
@@ -130,13 +131,13 @@ export default function AuthScreen() {
 
             <View style={styles.loginPrompt}>
               <Text style={styles.loginPromptText}>
-                For this demo, we'll take you directly to your dashboard
+                For this demo, we&apos;ll take you directly to your dashboard
               </Text>
             </View>
 
             <TouchableOpacity style={styles.primaryButton} onPress={handleLogin}>
               <LinearGradient
-                colors={['#00D4AA', '#00B894']}
+                colors={[CervColors.systemGreen, CervColors.systemGreen]}
                 style={styles.gradientButton}
               >
                 <Text style={styles.primaryButtonText}>Continue to Dashboard</Text>
@@ -159,7 +160,7 @@ export default function AuthScreen() {
             <ArrowLeft color="#475569" size={24} />
           </TouchableOpacity>
           <View style={styles.logoContainer}>
-            <Home color="#00D4AA" size={24} />
+            <Home color={CervColors.systemGreen} size={24} />
             <Text style={styles.logoText}>Cerv</Text>
           </View>
           <View style={styles.placeholder} />
@@ -167,9 +168,9 @@ export default function AuthScreen() {
 
         <View style={styles.content}>
           <View style={styles.titleSection}>
-            <Text style={styles.title}>Let's get started</Text>
+            <Text style={styles.title}>Let&apos;s get started</Text>
             <Text style={styles.subtitle}>
-              Choose how you'd like to continue with Cerv
+              Choose how you&apos;d like to continue with Cerv
             </Text>
           </View>
 
@@ -179,7 +180,7 @@ export default function AuthScreen() {
               onPress={() => setSelectedMode('signup')}
             >
               <LinearGradient
-                colors={['#00D4AA', '#00B894']}
+                colors={[CervColors.systemGreen, CervColors.systemGreen]}
                 style={styles.gradientButton}
               >
                 <Text style={styles.primaryButtonText}>Create Account</Text>
@@ -310,7 +311,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -343,12 +344,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   loginPrompt: {
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemGreenLight,
     padding: 20,
     borderRadius: 12,
     marginBottom: 40,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: CervColors.systemGreenLight,
   },
   loginPromptText: {
     fontSize: 14,

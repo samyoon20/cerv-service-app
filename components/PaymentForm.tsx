@@ -7,7 +7,8 @@ import {
   TouchableOpacity, 
   Alert 
 } from 'react-native';
-import { CreditCard, Smartphone, Apple, Building2 } from 'lucide-react-native';
+import { CreditCard, Smartphone, Wallet, Building2 } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 interface PaymentFormProps {
   onPaymentSubmit: (paymentData: any) => void;
@@ -163,7 +164,7 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('card')}
           >
-            <CreditCard color={paymentMethod === 'card' ? '#00D4AA' : '#64748B'} size={20} />
+            <CreditCard color={paymentMethod === 'card' ? CervColors.systemGreen : '#64748B'} size={20} />
             <View style={styles.paymentMethodTextContainer}>
               <Text style={[
                 styles.paymentMethodText,
@@ -182,12 +183,12 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('apple_pay')}
           >
-            <Apple color={paymentMethod === 'apple_pay' ? '#00D4AA' : '#64748B'} size={20} />
+            <Wallet color={paymentMethod === 'apple_pay' ? CervColors.systemGreen : '#64748B'} size={20} />
             <Text style={[
               styles.paymentMethodText,
               paymentMethod === 'apple_pay' && styles.paymentMethodTextSelected
             ]}>
-              Apple Pay
+              Cerv Pay
             </Text>
           </TouchableOpacity>
 
@@ -198,7 +199,7 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('google_pay')}
           >
-            <Smartphone color={paymentMethod === 'google_pay' ? '#00D4AA' : '#64748B'} size={20} />
+            <Smartphone color={paymentMethod === 'google_pay' ? CervColors.systemGreen : '#64748B'} size={20} />
             <Text style={[
               styles.paymentMethodText,
               paymentMethod === 'google_pay' && styles.paymentMethodTextSelected
@@ -214,7 +215,7 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('ach')}
           >
-            <Building2 color={paymentMethod === 'ach' ? '#00D4AA' : '#64748B'} size={20} />
+            <Building2 color={paymentMethod === 'ach' ? CervColors.systemGreen : '#64748B'} size={20} />
             <View style={styles.paymentMethodTextContainer}>
               <Text style={[
                 styles.paymentMethodText,
@@ -393,7 +394,8 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 19,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#0F172A',
     marginBottom: 20,
     letterSpacing: -0.4,
@@ -407,7 +409,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 15,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#334155',
     marginBottom: 8,
     letterSpacing: -0.2,
@@ -419,7 +422,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     backgroundColor: '#FFFFFF',
     color: '#0F172A',
   },
@@ -437,12 +441,13 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   paymentMethodSelected: {
-    borderColor: '#00D4AA',
+    borderColor: CervColors.systemGreen,
     backgroundColor: 'rgba(0, 212, 170, 0.05)',
   },
   paymentMethodText: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#64748B',
     letterSpacing: -0.2,
   },
@@ -454,13 +459,15 @@ const styles = StyleSheet.create({
   },
   feeText: {
     fontSize: 12,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#DC2626',
     marginTop: 2,
   },
   freeText: {
     fontSize: 12,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#059669',
     marginTop: 2,
   },
@@ -469,7 +476,8 @@ const styles = StyleSheet.create({
   },
   pickerText: {
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#0F172A',
   },
   achNote: {
@@ -482,17 +490,18 @@ const styles = StyleSheet.create({
   },
   achNoteText: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#1E40AF',
     lineHeight: 20,
   },
   submitButton: {
-    backgroundColor: '#00D4AA',
+    backgroundColor: CervColors.systemGreen,
     paddingVertical: 18,
     borderRadius: 16,
     alignItems: 'center',
     marginTop: 8,
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -503,7 +512,8 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     fontSize: 18,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: -0.3,
   },

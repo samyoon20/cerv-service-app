@@ -12,8 +12,14 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Plus, Settings, Calendar, Pause, Play, CreditCard as Edit3, Star, MessageSquare, Camera, X, User } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Plus, Calendar, Pause, Play, CreditCard as Edit3, Star, MessageSquare, Camera, X, User } from 'lucide-react-native';
+import { 
+  CervColors, 
+  CervShadows, 
+  CervSpacing, 
+  CervTypography, 
+  CervBorderRadius 
+} from '@/themes/appleDesignSystem';
 import type { TechnicianReview, CategoryRatings } from '@/types';
 
 const MOCK_ACTIVE_SERVICES = [
@@ -49,20 +55,20 @@ const MOCK_ACTIVE_SERVICES = [
 const AVAILABLE_ADDONS = [
   {
     id: '1',
-    name: 'Window Cleaning',
-    description: 'Interior and exterior window cleaning',
+    name: 'Pool Equipment Maintenance',
+    description: 'Additional pool equipment care and repairs',
     price: 75,
   },
   {
     id: '2',
-    name: 'Gutter Cleaning',
-    description: 'Gutter cleaning and inspection',
+    name: 'Tree Pruning Service',
+    description: 'Professional tree trimming and care',
     price: 120,
   },
   {
     id: '3',
-    name: 'Deck Staining',
-    description: 'Deck cleaning and protective staining',
+    name: 'Deep Exterior Cleaning',
+    description: 'Comprehensive exterior surface cleaning',
     price: 200,
   },
 ];
@@ -251,20 +257,14 @@ export default function ServicesTab() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#0F1629', '#1A2332']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundContainer}>
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>My Services</Text>
             <TouchableOpacity style={styles.addButton} onPress={handleAddService}>
-              <LinearGradient
-                colors={['#00D4AA', '#00B894']}
-                style={styles.addButtonGradient}
-              >
-                <Plus color="#0F1629" size={20} />
-              </LinearGradient>
+              <View style={styles.addButtonBackground}>
+                <Plus color={CervColors.darkGray} size={20} />
+              </View>
             </TouchableOpacity>
           </View>
 
@@ -308,9 +308,8 @@ export default function ServicesTab() {
             {activeSection === 'active' && (
               <View style={styles.activeServices}>
                 {MOCK_ACTIVE_SERVICES.map(service => (
-                  <LinearGradient
+                  <View
                     key={service.id}
-                    colors={['#1E2A3A', '#243447']}
                     style={styles.serviceCard}
                   >
                     <View style={styles.serviceHeader}>
@@ -368,7 +367,7 @@ export default function ServicesTab() {
                         {service.status === 'active' ? (
                           <Pause color="#8B9DC3" size={16} />
                         ) : (
-                          <Play color="#00D4AA" size={16} />
+                          <Play color={CervColors.systemGreen} size={16} />
                         )}
                         <Text style={[
                           styles.actionButtonText,
@@ -378,7 +377,7 @@ export default function ServicesTab() {
                         </Text>
                       </TouchableOpacity>
                     </View>
-                  </LinearGradient>
+                  </View>
                 ))}
 
                 {MOCK_ACTIVE_SERVICES.length === 0 && (
@@ -388,13 +387,10 @@ export default function ServicesTab() {
                       Add your first service to get started
                     </Text>
                     <TouchableOpacity style={styles.addFirstServiceButton} onPress={handleAddService}>
-                      <LinearGradient
-                        colors={['#00D4AA', '#00B894']}
-                        style={styles.gradientButton}
-                      >
-                        <Plus color="#0F1629" size={20} />
+                      <View style={styles.gradientButton}>
+                        <Plus color={CervColors.white} size={20} />
                         <Text style={styles.addFirstServiceButtonText}>Add Service</Text>
-                      </LinearGradient>
+                      </View>
                     </TouchableOpacity>
                   </View>
                 )}
@@ -408,9 +404,8 @@ export default function ServicesTab() {
                 </Text>
                 
                 {AVAILABLE_ADDONS.map(addon => (
-                  <LinearGradient
+                  <View
                     key={addon.id}
-                    colors={['#1E2A3A', '#243447']}
                     style={styles.addonCard}
                   >
                     <View style={styles.addonInfo}>
@@ -423,10 +418,10 @@ export default function ServicesTab() {
                       style={styles.addonButton}
                       onPress={() => handleAddonSelect(addon)}
                     >
-                      <Plus color="#00D4AA" size={20} />
+                      <Plus color={CervColors.systemBlue} size={20} />
                       <Text style={styles.addonButtonText}>Add</Text>
                     </TouchableOpacity>
-                  </LinearGradient>
+                  </View>
                 ))}
               </View>
             )}
@@ -447,20 +442,16 @@ export default function ServicesTab() {
                     </View>
                   </View>
                   <TouchableOpacity style={styles.addReviewButton} onPress={handleAddReview}>
-                    <LinearGradient
-                      colors={['#00D4AA', '#00B894']}
-                      style={styles.addReviewGradient}
-                    >
-                      <Plus color="#0F1629" size={16} />
+                    <View style={styles.addReviewBackground}>
+                      <Plus color={CervColors.white} size={16} />
                       <Text style={styles.addReviewText}>Add Review</Text>
-                    </LinearGradient>
+                    </View>
                   </TouchableOpacity>
                 </View>
 
                 {MOCK_REVIEWS.map(review => (
-                  <LinearGradient
+                  <View
                     key={review.id}
-                    colors={['#1E2A3A', '#243447']}
                     style={styles.reviewCard}
                   >
                     <View style={styles.reviewHeader}>
@@ -521,7 +512,7 @@ export default function ServicesTab() {
                         <Text style={styles.verifiedText}>✓ Verified Review</Text>
                       </View>
                     )}
-                  </LinearGradient>
+                  </View>
                 ))}
 
                 {MOCK_REVIEWS.length === 0 && (
@@ -532,13 +523,10 @@ export default function ServicesTab() {
                       Share your experience with our technicians
                     </Text>
                     <TouchableOpacity style={styles.firstReviewButton} onPress={handleAddReview}>
-                      <LinearGradient
-                        colors={['#00D4AA', '#00B894']}
-                        style={styles.firstReviewGradient}
-                      >
-                        <Star color="#0F1629" size={16} />
+                      <View style={styles.firstReviewBackground}>
+                        <Star color={CervColors.white} size={16} />
                         <Text style={styles.firstReviewText}>Write First Review</Text>
-                      </LinearGradient>
+                      </View>
                     </TouchableOpacity>
                   </View>
                 )}
@@ -622,18 +610,15 @@ export default function ServicesTab() {
                   <Text style={styles.cancelButtonText}>Cancel</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.submitButton} onPress={submitReview}>
-                  <LinearGradient
-                    colors={['#00D4AA', '#00B894']}
-                    style={styles.submitButtonGradient}
-                  >
+                  <View style={styles.submitButtonBackground}>
                     <Text style={styles.submitButtonText}>Submit Review</Text>
-                  </LinearGradient>
+                  </View>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
         </Modal>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -642,8 +627,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  backgroundGradient: {
+  backgroundContainer: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
   safeArea: {
     flex: 1,
@@ -667,11 +653,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
   },
-  addButtonGradient: {
+  addButtonBackground: {
     width: 40,
     height: 40,
+    backgroundColor: CervColors.accentBackground,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: CervBorderRadius.large,
   },
   tabBar: {
     flexDirection: 'row',
@@ -690,7 +678,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeTab: {
-    backgroundColor: 'rgba(0, 212, 170, 0.2)',
+    backgroundColor: CervColors.accentBackgroundLight,
   },
   tabText: {
     fontSize: 14,
@@ -699,7 +687,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.1,
   },
   activeTabText: {
-    color: '#00D4AA',
+    color: CervColors.cervDarkGray,
   },
   content: {
     flex: 1,
@@ -709,10 +697,11 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   serviceCard: {
-    borderRadius: 20,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.cardBackground,
+    borderRadius: CervBorderRadius.extraLarge,
+    padding: CervSpacing.xl,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   serviceHeader: {
     flexDirection: 'row',
@@ -751,7 +740,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-SemiBold',
   },
   activeStatusText: {
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
   },
   pausedStatusText: {
     color: '#FFB800',
@@ -773,7 +762,7 @@ const styles = StyleSheet.create({
   priceText: {
     fontSize: 16,
     fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
     letterSpacing: -0.2,
   },
   technicianText: {
@@ -806,7 +795,7 @@ const styles = StyleSheet.create({
     color: '#8B9DC3',
   },
   resumeButtonText: {
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
   },
   emptyState: {
     alignItems: 'center',
@@ -831,17 +820,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   gradientButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
+    backgroundColor: CervColors.systemBlue,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xxl,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: CervSpacing.sm,
+    borderRadius: CervBorderRadius.large,
   },
   addFirstServiceButtonText: {
-    fontSize: 16,
+    ...CervTypography.callout,
     fontFamily: 'Nunito-Bold',
-    color: '#0F1629',
-    letterSpacing: -0.2,
+    color: CervColors.white,
   },
   addonsSection: {
     gap: 16,
@@ -854,12 +844,13 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   addonCard: {
+    backgroundColor: CervColors.cardBackground,
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 16,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    borderRadius: CervBorderRadius.large,
+    padding: CervSpacing.xl,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   addonInfo: {
     flex: 1,
@@ -882,7 +873,7 @@ const styles = StyleSheet.create({
   addonPrice: {
     fontSize: 16,
     fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
     letterSpacing: -0.2,
   },
   addonButton: {
@@ -891,15 +882,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 12,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemBlueLight,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: CervColors.systemBlue,
     gap: 6,
   },
   addonButtonText: {
     fontSize: 14,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: CervColors.systemBlue,
   },
   bottomSpacing: {
     height: 20,
@@ -942,23 +933,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
   },
-  addReviewGradient: {
+  addReviewBackground: {
+    backgroundColor: CervColors.systemBlue,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    gap: 6,
+    paddingVertical: CervSpacing.sm,
+    paddingHorizontal: CervSpacing.lg,
+    gap: CervSpacing.xs,
+    borderRadius: CervBorderRadius.medium,
   },
   addReviewText: {
-    fontSize: 14,
+    ...CervTypography.subheadline,
     fontFamily: 'Nunito-SemiBold',
-    color: '#0F1629',
+    color: CervColors.white,
   },
   reviewCard: {
-    borderRadius: 20,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.cardBackground,
+    borderRadius: CervBorderRadius.extraLarge,
+    padding: CervSpacing.xl,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   reviewHeader: {
     flexDirection: 'row',
@@ -1067,7 +1061,7 @@ const styles = StyleSheet.create({
   verifiedText: {
     fontSize: 10,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
   },
   emptyReviews: {
     alignItems: 'center',
@@ -1091,17 +1085,19 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
   },
-  firstReviewGradient: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
+  firstReviewBackground: {
+    backgroundColor: CervColors.systemBlue,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xxl,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: CervSpacing.sm,
+    borderRadius: CervBorderRadius.large,
   },
   firstReviewText: {
-    fontSize: 16,
+    ...CervTypography.callout,
     fontFamily: 'Nunito-Bold',
-    color: '#0F1629',
+    color: CervColors.white,
   },
   // Modal Styles
   modalOverlay: {
@@ -1110,11 +1106,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: '#1A2332',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    backgroundColor: CervColors.background,
+    borderTopLeftRadius: CervBorderRadius.extraLarge,
+    borderTopRightRadius: CervBorderRadius.extraLarge,
     maxHeight: '90%',
-    paddingTop: 24,
+    paddingTop: CervSpacing.xxl,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -1234,14 +1230,16 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
   },
-  submitButtonGradient: {
-    paddingVertical: 14,
-    paddingHorizontal: 20,
+  submitButtonBackground: {
+    backgroundColor: CervColors.systemBlue,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xl,
     alignItems: 'center',
+    borderRadius: CervBorderRadius.medium,
   },
   submitButtonText: {
-    fontSize: 16,
+    ...CervTypography.callout,
     fontFamily: 'Nunito-Bold',
-    color: '#0F1629',
+    color: CervColors.white,
   },
 });

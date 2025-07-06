@@ -7,12 +7,12 @@ import {
   Paintbrush, 
   Wrench, 
   Zap, 
-  Wind,
   Car,
   Hammer,
   Bug,
   Clock
 } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 interface ServiceCardProps {
   service: {
@@ -37,10 +37,12 @@ const iconMap = {
   painting: Paintbrush,
   handyman: Wrench,
   electrical: Zap,
-  hvac: Wind,
   driveway: Car,
   construction: Hammer,
   pest: Bug,
+  tree: Trees,
+  janitorial: Paintbrush,
+  waste: Wrench,
 };
 
 export default function ServiceCard({ service, onSelect }: ServiceCardProps) {
@@ -63,7 +65,7 @@ export default function ServiceCard({ service, onSelect }: ServiceCardProps) {
       {service.comingSoon && (
         <View style={styles.comingSoonBadge}>
           <LinearGradient
-            colors={['#00D4AA', '#00B894']}
+            colors={[CervColors.systemGreen, '#28B946']}
             style={styles.badgeGradient}
           >
             <Clock color="#FFFFFF" size={12} />
@@ -75,7 +77,7 @@ export default function ServiceCard({ service, onSelect }: ServiceCardProps) {
       <View style={styles.header}>
         <View style={[styles.iconContainer, isDisabled && styles.disabledIconContainer]}>
           <IconComponent 
-            color={isDisabled ? '#94A3B8' : '#00D4AA'} 
+            color={isDisabled ? '#94A3B8' : CervColors.systemGreen} 
             size={24} 
           />
         </View>
@@ -123,7 +125,7 @@ export default function ServiceCard({ service, onSelect }: ServiceCardProps) {
           </View>
         ) : (
           <LinearGradient
-            colors={['#00D4AA', '#00B894']}
+            colors={[CervColors.systemGreen, '#28B946']}
             style={styles.gradientButton}
           >
             <Text style={styles.selectButtonText}>Select Service</Text>
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
     zIndex: 1,
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -197,13 +199,15 @@ const styles = StyleSheet.create({
   },
   recommendedText: {
     fontSize: 12,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: 0.5,
   },
   comingSoonText: {
     fontSize: 11,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: 0.3,
   },
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -238,14 +242,16 @@ const styles = StyleSheet.create({
   },
   serviceName: {
     fontSize: 19,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#0F172A',
     marginBottom: 6,
     letterSpacing: -0.4,
   },
   serviceDescription: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
     lineHeight: 20,
   },
@@ -269,12 +275,14 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 14,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#64748B',
   },
   detailValue: {
     fontSize: 15,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#0F172A',
     letterSpacing: -0.2,
   },
@@ -298,13 +306,15 @@ const styles = StyleSheet.create({
   },
   selectButtonText: {
     fontSize: 16,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: 'System',
+    fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: -0.2,
   },
   disabledButtonText: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#94A3B8',
     letterSpacing: -0.2,
   },

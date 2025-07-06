@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { MapPin, Phone, Navigation, Clock } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { CervColors, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 interface TechnicianTrackerProps {
   status: {
@@ -39,13 +39,13 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
       case 'preparing':
         return '#FFB800';
       case 'en_route':
-        return '#00D4AA';
+        return 'CervColors.systemGreen';
       case 'arrived':
-        return '#00D4AA';
+        return 'CervColors.systemGreen';
       case 'working':
-        return '#00D4AA';
+        return 'CervColors.systemGreen';
       case 'completed':
-        return '#00D4AA';
+        return 'CervColors.systemGreen';
       default:
         return '#8B9DC3';
     }
@@ -72,10 +72,7 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#1E2A3A', '#243447']}
-        style={styles.gradient}
-      >
+      <View style={styles.cardBackground}>
         <View style={styles.header}>
           <View style={styles.titleSection}>
             <View style={styles.statusIndicator}>
@@ -87,10 +84,10 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
           
           <View style={styles.actions}>
             <TouchableOpacity style={styles.actionButton} onPress={handleTrackLocation}>
-              <Navigation color="#00D4AA" size={18} />
+              <Navigation color="CervColors.systemGreen" size={18} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionButton} onPress={handleCallTechnician}>
-              <Phone color="#00D4AA" size={18} />
+              <Phone color="CervColors.systemGreen" size={18} />
             </TouchableOpacity>
           </View>
         </View>
@@ -118,12 +115,12 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
             </View>
             
             <View style={styles.etaInfo}>
-              <Clock color="#00D4AA" size={14} />
+              <Clock color="CervColors.systemGreen" size={14} />
               <Text style={styles.etaText}>ETA {status.eta}</Text>
             </View>
           </View>
         </View>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -162,7 +159,7 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 14,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: 'CervColors.systemGreen',
     letterSpacing: -0.1,
   },
   serviceName: {
@@ -179,11 +176,11 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: 'CervColors.systemGreenLight',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: 'CervColors.systemGreenLight',
   },
   progressSection: {
     gap: 8,
@@ -227,7 +224,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(0, 212, 170, 0.12)',
+    backgroundColor: 'CervColors.systemGreenLight',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 10,
@@ -235,7 +232,16 @@ const styles = StyleSheet.create({
   etaText: {
     fontSize: 11,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: 'CervColors.systemGreen',
     letterSpacing: -0.1,
+  },
+  
+  // Cerv dark theme style
+  cardBackground: {
+    backgroundColor: CervColors.cardBackground,
+    padding: 20,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+    borderRadius: CervBorderRadius.large,
   },
 });

@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { TrendingUp, Info, ChartBar as BarChart3, ChartPie as PieChart } from 'lucide-react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { CervColors, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 interface HomeScoreProps {
   score: {
     overall: number;
-    maintenance: number;
-    cleanliness: number;
+    poolMaintenance: number;
+    exteriorCleaning: number;
     landscaping: number;
     lastUpdated: string;
   };
@@ -20,7 +20,7 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
   
   const getScoreColor = (value: number) => {
     const tenScaleValue = convertToTenScale(value);
-    if (tenScaleValue >= 8) return '#00D4AA'; // Excellent (8-10)
+    if (tenScaleValue >= 8) return CervColors.systemGreen; // Excellent (8-10)
     if (tenScaleValue >= 6) return '#FFB800'; // Good (6-7.9)
     return '#FF6B6B'; // Needs Attention (0-5.9)
   };
@@ -33,16 +33,13 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
   };
 
   const overallTenScale = convertToTenScale(score.overall);
-  const maintenanceTenScale = convertToTenScale(score.maintenance);
-  const cleanlinessTenScale = convertToTenScale(score.cleanliness);
+  const poolMaintenanceTenScale = convertToTenScale(score.poolMaintenance);
+  const exteriorCleaningTenScale = convertToTenScale(score.exteriorCleaning);
   const landscapingTenScale = convertToTenScale(score.landscaping);
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={['#1E2A3A', '#243447']}
-        style={styles.gradient}
-      >
+      <View style={styles.cardBackground}>
         <View style={styles.header}>
           <View style={styles.titleSection}>
             <Text style={styles.title}>Home Score</Text>
@@ -61,15 +58,12 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
         <View style={styles.scoreSection}>
           <View style={styles.overallScore}>
             <View style={styles.scoreCircle}>
-              <LinearGradient
-                colors={[getScoreColor(score.overall), `${getScoreColor(score.overall)}80`]}
-                style={styles.scoreGradient}
-              >
+              <View style={[styles.scoreCircleBackground, { backgroundColor: getScoreColor(score.overall) }]}>
                 <Text style={styles.scoreValue}>
                   {overallTenScale}.{Math.round((score.overall % 10))}
                 </Text>
                 <Text style={styles.scoreOutOf}>/ 10</Text>
-              </LinearGradient>
+              </View>
             </View>
             <Text style={[styles.scoreGrade, { color: getScoreColor(score.overall) }]}>
               {getScoreGrade(score.overall)}
@@ -79,7 +73,7 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
           <View style={styles.chartsPreview}>
             <TouchableOpacity style={styles.chartItem} onPress={onViewDetails}>
               <View style={styles.chartIcon}>
-                <BarChart3 color="#00D4AA" size={20} />
+                <BarChart3 color={CervColors.systemGreen} size={20} />
               </View>
               <Text style={styles.chartLabel}>Trends</Text>
             </TouchableOpacity>
@@ -96,9 +90,9 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
         <View style={styles.breakdown}>
           <View style={styles.breakdownItem}>
             <View style={styles.categoryInfo}>
-              <Text style={styles.breakdownLabel}>Maintenance</Text>
-              <Text style={[styles.breakdownValue, { color: getScoreColor(score.maintenance) }]}>
-                {maintenanceTenScale}.{Math.round((score.maintenance % 10))}
+              <Text style={styles.breakdownLabel}>Pool Maintenance</Text>
+              <Text style={[styles.breakdownValue, { color: getScoreColor(score.poolMaintenance) }]}>
+                {poolMaintenanceTenScale}.{Math.round((score.poolMaintenance % 10))}
               </Text>
             </View>
             <View style={styles.scoreBar}>
@@ -106,8 +100,8 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
                 style={[
                   styles.scoreBarFill, 
                   { 
-                    width: `${score.maintenance}%`,
-                    backgroundColor: getScoreColor(score.maintenance)
+                    width: `${score.poolMaintenance}%`,
+                    backgroundColor: getScoreColor(score.poolMaintenance)
                   }
                 ]} 
               />
@@ -116,9 +110,9 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
 
           <View style={styles.breakdownItem}>
             <View style={styles.categoryInfo}>
-              <Text style={styles.breakdownLabel}>Exterior Care</Text>
-              <Text style={[styles.breakdownValue, { color: getScoreColor(score.cleanliness) }]}>
-                {cleanlinessTenScale}.{Math.round((score.cleanliness % 10))}
+              <Text style={styles.breakdownLabel}>Exterior Cleaning</Text>
+              <Text style={[styles.breakdownValue, { color: getScoreColor(score.exteriorCleaning) }]}>
+                {exteriorCleaningTenScale}.{Math.round((score.exteriorCleaning % 10))}
               </Text>
             </View>
             <View style={styles.scoreBar}>
@@ -126,8 +120,8 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
                 style={[
                   styles.scoreBarFill, 
                   { 
-                    width: `${score.cleanliness}%`,
-                    backgroundColor: getScoreColor(score.cleanliness)
+                    width: `${score.exteriorCleaning}%`,
+                    backgroundColor: getScoreColor(score.exteriorCleaning)
                   }
                 ]} 
               />
@@ -156,15 +150,12 @@ export default function HomeScore({ score, onViewDetails }: HomeScoreProps) {
         </View>
 
         <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails}>
-          <LinearGradient
-            colors={['rgba(0, 212, 170, 0.1)', 'rgba(0, 212, 170, 0.05)']}
-            style={styles.detailsGradient}
-          >
-            <TrendingUp color="#00D4AA" size={16} />
+          <View style={styles.detailsButtonBackground}>
+            <TrendingUp color={CervColors.systemBlue} size={16} />
             <Text style={styles.viewDetailsText}>View Detailed Analytics</Text>
-          </LinearGradient>
+          </View>
         </TouchableOpacity>
-      </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -183,10 +174,12 @@ const styles = StyleSheet.create({
     shadowRadius: 16,
     elevation: 8,
   },
-  gradient: {
-    padding: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+  cardBackground: {
+    backgroundColor: CervColors.cardBackground,
+    padding: CervSpacing.xxl,
+    borderRadius: CervBorderRadius.large,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
   },
   header: {
     marginBottom: 28,
@@ -198,10 +191,8 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   title: {
-    fontSize: 22,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
+    ...CervTypography.title2,
+    color: CervColors.label,
   },
   infoButton: {
     width: 32,
@@ -214,9 +205,8 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(139, 157, 195, 0.2)',
   },
   lastUpdated: {
-    fontSize: 13,
-    fontFamily: 'Nunito-Medium',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.secondaryLabel,
   },
   scoreSection: {
     flexDirection: 'row',
@@ -232,7 +222,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     marginBottom: 12,
-    shadowColor: '#00D4AA',
+    shadowColor: CervColors.systemGreen,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -241,7 +231,7 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 6,
   },
-  scoreGradient: {
+  scoreCircleBackground: {
     width: '100%',
     height: '100%',
     borderRadius: 50,
@@ -249,22 +239,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scoreValue: {
-    fontSize: 28,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.title1,
     color: '#FFFFFF',
-    lineHeight: 32,
     letterSpacing: -1,
   },
   scoreOutOf: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption1,
+    fontWeight: 600,
     color: '#FFFFFF',
     opacity: 0.8,
     marginTop: -4,
   },
   scoreGrade: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.callout,
+    fontWeight: 600,
     letterSpacing: -0.3,
   },
   chartsPreview: {
@@ -285,8 +273,8 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(139, 157, 195, 0.2)',
   },
   chartLabel: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption1,
+    fontWeight: 600,
     color: '#8B9DC3',
   },
   breakdown: {
@@ -300,12 +288,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: 4,
   },
   breakdownLabel: {
-    fontSize: 15,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.subheadline,
+    fontWeight: 600,
     color: '#FFFFFF',
     letterSpacing: -0.2,
+    flex: 1,
+    marginRight: 8,
   },
   scoreBar: {
     height: 6,
@@ -318,28 +309,32 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   breakdownValue: {
-    fontSize: 15,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.subheadline,
+    fontWeight: 700,
     letterSpacing: -0.3,
+    width: 40,
+    textAlign: 'right',
+    flexShrink: 0,
   },
   viewDetailsButton: {
     borderRadius: 12,
     overflow: 'hidden',
   },
-  detailsGradient: {
+  detailsButtonBackground: {
+    backgroundColor: CervColors.systemBlueLight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    paddingVertical: CervSpacing.md,
+    paddingHorizontal: CervSpacing.lg,
+    gap: CervSpacing.sm,
+    borderRadius: CervBorderRadius.medium,
+    borderWidth: 0.5,
+    borderColor: CervColors.systemBlue,
   },
   viewDetailsText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
-    letterSpacing: -0.2,
+    ...CervTypography.subheadline,
+    fontWeight: 600,
+    color: CervColors.systemBlue,
   },
 });

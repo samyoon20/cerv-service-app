@@ -9,14 +9,17 @@ import {
 import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, DollarSign, Check, Zap, Calendar } from 'lucide-react-native';
+import { ArrowLeft, DollarSign, Check, Zap } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 const MOCK_SERVICES = {
   '1': { name: 'Pool Maintenance', duration: 60, basePrice: 120, subscriptionPrice: 89 },
   '2': { name: 'Landscaping', duration: 90, basePrice: 85, subscriptionPrice: 65 },
   '3': { name: 'Exterior Cleaning', duration: 120, basePrice: 150, subscriptionPrice: 110 },
-  '4': { name: 'Handyman Services', duration: 75, basePrice: 95, subscriptionPrice: 75 },
-  '5': { name: 'HVAC Maintenance', duration: 90, basePrice: 180, subscriptionPrice: 140 },
+  '4': { name: 'Pest Control', duration: 60, basePrice: 120, subscriptionPrice: 95 },
+  '5': { name: 'Tree Services', duration: 180, basePrice: 200, subscriptionPrice: 150 },
+  '6': { name: 'Janitorial Services', duration: 120, basePrice: 100, subscriptionPrice: 80 },
+  '7': { name: 'Waste Management', duration: 45, basePrice: 80, subscriptionPrice: 65 },
 };
 
 export default function PricingScreen() {
@@ -80,7 +83,7 @@ export default function PricingScreen() {
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <DollarSign color="#00D4AA" size={32} />
+              <DollarSign color={CervColors.systemGreen} size={32} />
             </View>
             <Text style={styles.title}>Select payment model</Text>
             <Text style={styles.subtitle}>
@@ -125,19 +128,19 @@ export default function PricingScreen() {
 
               <View style={styles.features}>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>Priority scheduling</Text>
                 </View>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>Consistent service team</Text>
                 </View>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>24/7 customer support</Text>
                 </View>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>Cancel anytime</Text>
                 </View>
               </View>
@@ -168,15 +171,15 @@ export default function PricingScreen() {
 
               <View style={styles.features}>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>No commitment</Text>
                 </View>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>Flexible scheduling</Text>
                 </View>
                 <View style={styles.feature}>
-                  <Check color="#00D4AA" size={18} />
+                  <Check color={CervColors.systemGreen} size={18} />
                   <Text style={styles.featureText}>Standard support</Text>
                 </View>
               </View>
@@ -199,7 +202,7 @@ export default function PricingScreen() {
             disabled={!selectedModel}
           >
             <LinearGradient
-              colors={selectedModel ? ['#00D4AA', '#00B894'] : ['#9CA3AF', '#9CA3AF']}
+              colors={selectedModel ? [CervColors.systemGreen, CervColors.systemGreen] : ['#9CA3AF', '#9CA3AF']}
               style={styles.gradientButton}
             >
               <Text style={styles.continueButtonText}>
@@ -258,7 +261,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -311,8 +314,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   pricingCardSelected: {
-    borderColor: '#00D4AA',
-    backgroundColor: 'rgba(0, 212, 170, 0.02)',
+    borderColor: CervColors.systemGreen,
+    backgroundColor: CervColors.systemGreenLight,
   },
   recommendedCard: {
     borderColor: '#FFB800',
@@ -367,7 +370,7 @@ const styles = StyleSheet.create({
   savings: {
     fontSize: 14,
     fontFamily: 'Nunito-SemiBold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
   },
   priceNote: {
     fontSize: 14,
@@ -394,7 +397,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#00D4AA',
+    backgroundColor: CervColors.systemGreen,
     justifyContent: 'center',
     alignItems: 'center',
   },

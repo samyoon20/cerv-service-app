@@ -12,13 +12,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, CreditCard } from 'lucide-react-native';
 import PaymentForm from '@/components/PaymentForm';
 import { LinearGradient } from 'expo-linear-gradient';
+import { CervColors, CervTypography } from '@/themes/appleDesignSystem';
 
 const MOCK_SERVICES = {
   '1': { name: 'Pool Maintenance', duration: 60, basePrice: 120, subscriptionPrice: 89 },
   '2': { name: 'Landscaping', duration: 90, basePrice: 85, subscriptionPrice: 65 },
   '3': { name: 'Exterior Cleaning', duration: 120, basePrice: 150, subscriptionPrice: 110 },
-  '4': { name: 'Handyman Services', duration: 75, basePrice: 95, subscriptionPrice: 75 },
-  '5': { name: 'HVAC Maintenance', duration: 90, basePrice: 180, subscriptionPrice: 140 },
+  '4': { name: 'Pest Control', duration: 60, basePrice: 120, subscriptionPrice: 95 },
+  '5': { name: 'Tree Services', duration: 180, basePrice: 200, subscriptionPrice: 150 },
+  '6': { name: 'Janitorial Services', duration: 120, basePrice: 100, subscriptionPrice: 80 },
+  '7': { name: 'Waste Management', duration: 45, basePrice: 80, subscriptionPrice: 65 },
 };
 
 export default function PaymentScreen() {
@@ -80,7 +83,7 @@ export default function PaymentScreen() {
           style={styles.backgroundGradient}
         >
           <View style={styles.processingContainer}>
-            <ActivityIndicator size="large" color="#00D4AA" />
+            <ActivityIndicator size="large" color={CervColors.systemGreen} />
             <Text style={styles.processingTitle}>Processing Payment</Text>
             <Text style={styles.processingText}>Please wait while we process your payment...</Text>
           </View>
@@ -106,7 +109,7 @@ export default function PaymentScreen() {
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <CreditCard color="#00D4AA" size={32} />
+              <CreditCard color={CervColors.systemGreen} size={32} />
             </View>
             <Text style={styles.title}>Complete your booking</Text>
             <Text style={styles.subtitle}>
@@ -188,7 +191,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: CervTypography.headline.fontFamily,
+    fontWeight: CervTypography.headline.fontWeight,
     color: '#0F172A',
   },
   placeholder: {
@@ -214,7 +218,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: CervTypography.title1.fontFamily,
+    fontWeight: CervTypography.title1.fontWeight,
     color: '#0F172A',
     textAlign: 'center',
     marginBottom: 8,
@@ -222,7 +227,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: CervTypography.body.fontFamily,
+    fontWeight: CervTypography.body.fontWeight,
     color: '#64748B',
     textAlign: 'center',
     lineHeight: 24,
@@ -237,7 +243,8 @@ const styles = StyleSheet.create({
   },
   orderTitle: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     marginBottom: 16,
     letterSpacing: -0.3,
@@ -250,12 +257,14 @@ const styles = StyleSheet.create({
   },
   orderLabel: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
   },
   orderValue: {
     fontSize: 14,
-    fontFamily: 'Nunito-Medium',
+    fontFamily: 'System',
+    fontWeight: '500',
     color: '#0F172A',
   },
   totalRow: {
@@ -266,13 +275,15 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
   },
   totalValue: {
     fontSize: 20,
-    fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    fontFamily: 'System',
+    fontWeight: '700',
+    color: CervColors.systemGreen,
     letterSpacing: -0.3,
   },
   securityNote: {
@@ -285,7 +296,8 @@ const styles = StyleSheet.create({
   },
   securityText: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#0369A1',
     textAlign: 'center',
     lineHeight: 20,
@@ -298,7 +310,8 @@ const styles = StyleSheet.create({
   },
   processingTitle: {
     fontSize: 24,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     marginTop: 24,
     marginBottom: 8,
@@ -306,7 +319,8 @@ const styles = StyleSheet.create({
   },
   processingText: {
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
     textAlign: 'center',
     lineHeight: 24,

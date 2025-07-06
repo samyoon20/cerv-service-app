@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   View, 
   Text, 
   StyleSheet, 
   ScrollView, 
   TouchableOpacity,
-  ActivityIndicator 
 } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, Chrome as Home, Sparkles, Bug } from 'lucide-react-native';
-import ServiceCard from '@/components/ServiceCard';
-import { LinearGradient } from 'expo-linear-gradient';
+import { ArrowLeft, Chrome as Home, Sparkles } from 'lucide-react-native';
+import CervServiceCard from '@/components/CervServiceCard';
+import CervLogo from '@/components/CervLogo';
+import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 const MOCK_SERVICES = [
   {
@@ -25,6 +25,7 @@ const MOCK_SERVICES = [
     duration: 60,
     isRecommended: true,
     isAvailable: true,
+    serviceKey: 'pool',
   },
   {
     id: '2',
@@ -37,6 +38,7 @@ const MOCK_SERVICES = [
     duration: 90,
     isRecommended: true,
     isAvailable: true,
+    serviceKey: 'landscape',
   },
   {
     id: '3',
@@ -49,20 +51,10 @@ const MOCK_SERVICES = [
     duration: 120,
     isRecommended: true,
     isAvailable: true,
+    serviceKey: 'exterior',
   },
   {
     id: '4',
-    name: 'Handyman Services',
-    description: 'General repairs, maintenance, and small improvements',
-    category: 'Maintenance',
-    basePrice: 95,
-    subscriptionPrice: 75,
-    icon: 'handyman',
-    duration: 75,
-    isAvailable: true,
-  },
-  {
-    id: '5',
     name: 'Pest Control',
     description: 'Comprehensive pest prevention and treatment services',
     category: 'Protection',
@@ -72,12 +64,50 @@ const MOCK_SERVICES = [
     duration: 60,
     isAvailable: false,
     comingSoon: true,
+    serviceKey: 'pest',
+  },
+  {
+    id: '5',
+    name: 'Tree Services',
+    description: 'Tree trimming, removal, and arborist consultations',
+    category: 'Landscaping',
+    basePrice: 200,
+    subscriptionPrice: 150,
+    icon: 'tree',
+    duration: 180,
+    isAvailable: false,
+    comingSoon: true,
+    serviceKey: 'tree',
+  },
+  {
+    id: '6',
+    name: 'Janitorial Services',
+    description: 'Interior deep cleaning and maintenance services',
+    category: 'Cleaning',
+    basePrice: 100,
+    subscriptionPrice: 80,
+    icon: 'janitorial',
+    duration: 120,
+    isAvailable: false,
+    comingSoon: true,
+    serviceKey: 'janitorial',
+  },
+  {
+    id: '7',
+    name: 'Waste Management',
+    description: 'Garbage collection and recycling services',
+    category: 'Utilities',
+    basePrice: 75,
+    subscriptionPrice: 60,
+    icon: 'waste',
+    duration: 30,
+    isAvailable: false,
+    comingSoon: true,
+    serviceKey: 'waste',
   },
 ];
 
 export default function ServicesScreen() {
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleBack = () => {
     router.back();
@@ -89,22 +119,19 @@ export default function ServicesScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#F8FAFC', '#F1F5F9']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundView}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <ArrowLeft color="#475569" size={24} />
+            <ArrowLeft color={CervColors.label} size={24} />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Recommended Services</Text>
+          <CervLogo variant="horizontal" size="small" />
           <View style={styles.placeholder} />
         </View>
 
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <Sparkles color="#00D4AA" size={32} />
+              <Sparkles color={CervColors.systemBlue} size={32} />
             </View>
             <Text style={styles.title}>Perfect for your home</Text>
             <Text style={styles.subtitle}>
@@ -114,7 +141,7 @@ export default function ServicesScreen() {
 
           <View style={styles.propertyInfo}>
             <View style={styles.propertyIcon}>
-              <Home color="#64748B" size={20} />
+              <Home color={CervColors.secondaryLabel} size={20} />
             </View>
             <View style={styles.propertyDetails}>
               <Text style={styles.propertyAddress}>123 Main Street, Beverly Hills, CA 90210</Text>
@@ -125,7 +152,7 @@ export default function ServicesScreen() {
           <View style={styles.servicesList}>
             <Text style={styles.sectionTitle}>Recommended Services</Text>
             {MOCK_SERVICES.filter(service => service.isRecommended).map(service => (
-              <ServiceCard
+              <CervServiceCard
                 key={service.id}
                 service={service}
                 onSelect={handleServiceSelect}
@@ -136,7 +163,7 @@ export default function ServicesScreen() {
           <View style={styles.servicesList}>
             <Text style={styles.sectionTitle}>Additional Services</Text>
             {MOCK_SERVICES.filter(service => !service.isRecommended).map(service => (
-              <ServiceCard
+              <CervServiceCard
                 key={service.id}
                 service={service}
                 onSelect={handleServiceSelect}
@@ -146,7 +173,7 @@ export default function ServicesScreen() {
 
           <View style={styles.bottomSpacing} />
         </ScrollView>
-      </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 }
@@ -154,131 +181,112 @@ export default function ServicesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
-  backgroundGradient: {
+  backgroundView: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.lg,
+    borderBottomWidth: 0.5,
+    borderBottomColor: CervColors.separator,
+    backgroundColor: CervColors.background,
   },
   backButton: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    borderRadius: CervBorderRadius.round,
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#0F172A',
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   placeholder: {
     width: 40,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: CervSpacing.xxl,
+    backgroundColor: CervColors.background,
   },
   titleSection: {
     alignItems: 'center',
-    marginTop: 32,
-    marginBottom: 32,
+    marginTop: CervSpacing.xxxl,
+    marginBottom: CervSpacing.xxxl,
   },
   iconContainer: {
     width: 64,
     height: 64,
-    borderRadius: 32,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    borderRadius: CervBorderRadius.round,
+    backgroundColor: CervColors.systemBlueLight,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
-    shadowColor: '#00D4AA',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 3,
+    marginBottom: CervSpacing.xl,
+    ...CervShadows.card,
   },
   title: {
-    fontSize: 28,
-    fontFamily: 'Nunito-Bold',
-    color: '#0F172A',
+    ...CervTypography.title1,
+    color: CervColors.label,
     textAlign: 'center',
-    marginBottom: 8,
-    letterSpacing: -0.8,
+    marginBottom: CervSpacing.sm,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#64748B',
+    ...CervTypography.callout,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 300,
   },
   propertyInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 16,
-    marginBottom: 32,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
+    backgroundColor: CervColors.cardBackground,
+    padding: CervSpacing.xl,
+    borderRadius: CervBorderRadius.large,
+    marginBottom: CervSpacing.xxxl,
+    borderWidth: 0.5,
+    borderColor: CervColors.separator,
+    ...CervShadows.card,
   },
   propertyIcon: {
     width: 44,
     height: 44,
-    borderRadius: 12,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    borderRadius: CervBorderRadius.medium,
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: CervSpacing.lg,
   },
   propertyDetails: {
     flex: 1,
   },
   propertyAddress: {
-    fontSize: 15,
+    ...CervTypography.subheadline,
     fontFamily: 'Nunito-SemiBold',
-    color: '#0F172A',
-    marginBottom: 4,
-    letterSpacing: -0.2,
+    color: CervColors.label,
+    marginBottom: CervSpacing.xs,
   },
   propertyFeatures: {
-    fontSize: 13,
+    ...CervTypography.footnote,
     fontFamily: 'Nunito-Medium',
-    color: '#64748B',
+    color: CervColors.secondaryLabel,
   },
   servicesList: {
-    marginBottom: 32,
+    marginBottom: CervSpacing.xxxl,
   },
   sectionTitle: {
-    fontSize: 22,
-    fontFamily: 'Nunito-Bold',
-    color: '#0F172A',
-    marginBottom: 20,
-    letterSpacing: -0.5,
+    ...CervTypography.title2,
+    color: CervColors.label,
+    marginBottom: CervSpacing.xl,
   },
   bottomSpacing: {
-    height: 20,
+    height: CervSpacing.xl,
   },
 });

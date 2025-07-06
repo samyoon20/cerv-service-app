@@ -12,13 +12,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, Calendar } from 'lucide-react-native';
 import SchedulingComponent from '@/components/SchedulingComponent';
+import { CervColors, CervTypography } from '@/themes/appleDesignSystem';
 
 const MOCK_SERVICES = {
   '1': { name: 'Pool Maintenance', duration: 60, basePrice: 120 },
   '2': { name: 'Landscaping', duration: 90, basePrice: 85 },
   '3': { name: 'Exterior Cleaning', duration: 120, basePrice: 150 },
-  '4': { name: 'Handyman Services', duration: 75, basePrice: 95 },
-  '5': { name: 'HVAC Maintenance', duration: 90, basePrice: 180 },
+  '4': { name: 'Pest Control', duration: 60, basePrice: 120 },
+  '5': { name: 'Tree Services', duration: 180, basePrice: 200 },
+  '6': { name: 'Janitorial Services', duration: 120, basePrice: 100 },
+  '7': { name: 'Waste Management', duration: 45, basePrice: 80 },
 };
 
 export default function ScheduleScreen() {
@@ -83,11 +86,11 @@ export default function ScheduleScreen() {
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <Calendar color="#00D4AA" size={32} />
+              <Calendar color={CervColors.systemGreen} size={32} />
             </View>
             <Text style={styles.title}>Schedule your {service.name}</Text>
             <Text style={styles.subtitle}>
-              Choose when you'd like your service to begin
+              Choose when you&apos;d like your service to begin
             </Text>
           </View>
 
@@ -147,7 +150,7 @@ export default function ScheduleScreen() {
             disabled={!isComplete}
           >
             <LinearGradient
-              colors={isComplete ? ['#00D4AA', '#00B894'] : ['#9CA3AF', '#9CA3AF']}
+              colors={isComplete ? [CervColors.systemGreen, '#28B946'] : ['#9CA3AF', '#9CA3AF']}
               style={styles.gradientButton}
             >
               <Text style={styles.continueButtonText}>Continue to Pricing</Text>
@@ -185,7 +188,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: CervTypography.headline.fontFamily,
+    fontWeight: CervTypography.headline.fontWeight,
     color: '#0F172A',
   },
   placeholder: {
@@ -211,7 +215,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: CervTypography.title1.fontFamily,
+    fontWeight: CervTypography.title1.fontWeight,
     color: '#0F172A',
     textAlign: 'center',
     marginBottom: 8,
@@ -219,7 +224,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: CervTypography.body.fontFamily,
+    fontWeight: CervTypography.body.fontWeight,
     color: '#64748B',
     textAlign: 'center',
     lineHeight: 24,
@@ -235,14 +241,16 @@ const styles = StyleSheet.create({
   },
   serviceName: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#0F172A',
     marginBottom: 4,
     letterSpacing: -0.3,
   },
   serviceDetails: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#64748B',
   },
   summary: {
@@ -255,7 +263,8 @@ const styles = StyleSheet.create({
   },
   summaryTitle: {
     fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#065F46',
     marginBottom: 12,
   },
@@ -267,12 +276,14 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    fontFamily: 'System',
+    fontWeight: '400',
     color: '#047857',
   },
   summaryValue: {
     fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#065F46',
   },
   bottomSpacing: {
@@ -298,7 +309,8 @@ const styles = StyleSheet.create({
   },
   continueButtonText: {
     fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    fontFamily: 'System',
+    fontWeight: '600',
     color: '#ffffff',
     letterSpacing: -0.3,
   },

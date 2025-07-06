@@ -10,13 +10,16 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CircleCheck as CheckCircle, Calendar, CreditCard, Chrome as Home } from 'lucide-react-native';
+import { CervColors } from '@/themes/appleDesignSystem';
 
 const MOCK_SERVICES = {
   '1': { name: 'Pool Maintenance', duration: 60 },
   '2': { name: 'Landscaping', duration: 90 },
   '3': { name: 'Exterior Cleaning', duration: 120 },
-  '4': { name: 'Handyman Services', duration: 75 },
-  '5': { name: 'HVAC Maintenance', duration: 90 },
+  '4': { name: 'Pest Control', duration: 60 },
+  '5': { name: 'Tree Services', duration: 180 },
+  '6': { name: 'Janitorial Services', duration: 120 },
+  '7': { name: 'Waste Management', duration: 45 },
 };
 
 export default function ConfirmationScreen() {
@@ -42,7 +45,7 @@ export default function ConfirmationScreen() {
 
   const modelDisplay = model === 'subscription' ? 'Subscription Plan' : 'One-time Payment';
 
-  const paymentDisplay = paymentMethod === 'apple_pay' ? 'Apple Pay' :
+  const paymentDisplay = paymentMethod === 'apple_pay' ? 'Cerv Pay' :
                         paymentMethod === 'google_pay' ? 'Google Pay' :
                         'Credit/Debit Card';
 
@@ -69,7 +72,7 @@ export default function ConfirmationScreen() {
 
           <View style={styles.bookingCard}>
             <View style={styles.cardHeader}>
-              <Calendar color="#00D4AA" size={24} />
+              <Calendar color={CervColors.systemGreen} size={24} />
               <Text style={styles.cardTitle}>Booking Details</Text>
             </View>
 
@@ -104,7 +107,7 @@ export default function ConfirmationScreen() {
 
           <View style={styles.paymentCard}>
             <View style={styles.cardHeader}>
-              <CreditCard color="#00D4AA" size={24} />
+              <CreditCard color={CervColors.systemGreen} size={24} />
               <Text style={styles.cardTitle}>Payment Summary</Text>
             </View>
 
@@ -134,7 +137,7 @@ export default function ConfirmationScreen() {
                   <Text style={styles.stepNumberText}>1</Text>
                 </View>
                 <Text style={styles.stepText}>
-                  You'll receive a confirmation email with your booking details
+                  You&apos;ll receive a confirmation email with your booking details
                 </Text>
               </View>
               
@@ -164,7 +167,7 @@ export default function ConfirmationScreen() {
         <View style={styles.bottomSection}>
           <TouchableOpacity style={styles.dashboardButton} onPress={handleGoToDashboard}>
             <LinearGradient
-              colors={['#00D4AA', '#00B894']}
+              colors={[CervColors.systemGreen, CervColors.systemGreen]}
               style={styles.gradientButton}
             >
               <Home color="#ffffff" size={20} />
@@ -201,7 +204,7 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 48,
-    backgroundColor: '#00D4AA',
+    backgroundColor: CervColors.systemGreen,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 2,
@@ -212,7 +215,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 60,
     borderWidth: 3,
-    borderColor: 'rgba(0, 212, 170, 0.3)',
+    borderColor: CervColors.systemGreenLight,
     top: -12,
     left: -12,
     zIndex: 1,
@@ -313,7 +316,7 @@ const styles = StyleSheet.create({
   totalValue: {
     fontSize: 18,
     fontFamily: 'Nunito-Bold',
-    color: '#00D4AA',
+    color: CervColors.systemGreen,
     flex: 2,
     textAlign: 'right',
     letterSpacing: -0.3,
@@ -345,7 +348,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: '#00D4AA',
+    backgroundColor: CervColors.systemGreen,
     justifyContent: 'center',
     alignItems: 'center',
   },
