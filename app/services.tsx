@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, Home, Sparkles } from 'lucide-react-native';
+import { ArrowLeft, Chrome as Home, Sparkles } from 'lucide-react-native';
 import CervServiceCard from '@/components/CervServiceCard';
 import CervLogo from '@/components/CervLogo';
 import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
