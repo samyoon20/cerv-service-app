@@ -157,7 +157,7 @@ export default function ChatTab() {
               <TextInput
                 style={styles.textInput}
                 placeholder="Type a message..."
-                placeholderTextColor="#8B9DC3"
+                placeholderTextColor={CervColors.tertiaryLabel}
                 value={messageText}
                 onChangeText={setMessageText}
                 multiline
@@ -220,9 +220,9 @@ export default function ChatTab() {
 
                     <View style={styles.conversationMeta}>
                       {conversation.type === 'technician' ? (
-                        <Wrench color="#8B9DC3" size={16} />
+                        <Wrench color={CervColors.tertiaryLabel} size={16} />
                       ) : (
-                        <MessageCircle color="#8B9DC3" size={16} />
+                        <MessageCircle color={CervColors.tertiaryLabel} size={16} />
                       )}
                     </View>
                   </View>
@@ -232,7 +232,7 @@ export default function ChatTab() {
 
             {MOCK_CONVERSATIONS.length === 0 && (
               <View style={styles.emptyState}>
-                <MessageCircle color="#8B9DC3" size={48} />
+                <MessageCircle color={CervColors.tertiaryLabel} size={48} />
                 <Text style={styles.emptyStateTitle}>No messages yet</Text>
                 <Text style={styles.emptyStateText}>
                   Your conversations with technicians and support will appear here
@@ -274,28 +274,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.xl,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   headerTitle: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
+    ...CervTypography.title2,
+    color: CervColors.label,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingTop: CervSpacing.xl,
   },
   conversationsList: {
-    gap: 12,
-    marginBottom: 32,
+    gap: CervSpacing.md,
+    marginBottom: CervSpacing.xxxl,
   },
   conversationCard: {
-    borderRadius: 16,
+    borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
   conversationBackground: {
@@ -317,7 +315,7 @@ const styles = StyleSheet.create({
     height: 48,
     textAlign: 'center',
     lineHeight: 48,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     borderRadius: 24,
   },
   unreadIndicator: {
@@ -327,9 +325,9 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: CervColors.systemGreen,
+    backgroundColor: CervColors.systemRed,
     borderWidth: 2,
-    borderColor: '#1E2A3A',
+    borderColor: CervColors.background,
   },
   conversationInfo: {
     flex: 1,
@@ -341,31 +339,26 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   conversationName: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.2,
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   conversationTimestamp: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.tertiaryLabel,
   },
   conversationService: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption1,
+    fontWeight: '600',
     color: CervColors.systemGreen,
     marginBottom: 6,
   },
   lastMessage: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
-    lineHeight: 18,
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   unreadMessage: {
-    fontFamily: 'Nunito-SemiBold',
-    color: '#FFFFFF',
+    fontWeight: '600',
+    color: CervColors.label,
   },
   conversationMeta: {
     alignItems: 'center',
@@ -376,19 +369,15 @@ const styles = StyleSheet.create({
     paddingVertical: 60,
   },
   emptyStateTitle: {
-    fontSize: 20,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    marginTop: 16,
-    marginBottom: 8,
-    letterSpacing: -0.3,
+    ...CervTypography.title3,
+    color: CervColors.label,
+    marginTop: CervSpacing.lg,
+    marginBottom: CervSpacing.sm,
   },
   emptyStateText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 280,
   },
   helpSection: {
@@ -399,21 +388,17 @@ const styles = StyleSheet.create({
     borderColor: CervColors.separator,
   },
   helpTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    marginBottom: 8,
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.sm,
   },
   helpText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
-    lineHeight: 20,
-    marginBottom: 16,
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
+    marginBottom: CervSpacing.lg,
   },
   contactSupportButton: {
-    borderRadius: 12,
+    borderRadius: CervBorderRadius.medium,
     overflow: 'hidden',
   },
   supportButtonBackground: {
@@ -430,58 +415,54 @@ const styles = StyleSheet.create({
   },
   contactSupportText: {
     ...CervTypography.subheadline,
-    fontFamily: 'Nunito-SemiBold',
+    fontWeight: '600',
     color: CervColors.systemBlue,
   },
   chatHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.lg,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
-    gap: 16,
+    borderBottomColor: CervColors.separator,
+    gap: CervSpacing.lg,
   },
   backButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
+    paddingVertical: CervSpacing.sm,
+    paddingHorizontal: CervSpacing.md,
   },
   backButtonText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: CervColors.systemGreen,
   },
   chatHeaderInfo: {
     flex: 1,
   },
   chatHeaderName: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   chatHeaderService: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   callButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: CervColors.systemGreen,
   },
   messagesContainer: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.lg,
   },
   messageWrapper: {
-    marginBottom: 16,
+    marginBottom: CervSpacing.lg,
   },
   userMessageWrapper: {
     alignItems: 'flex-end',
@@ -491,58 +472,54 @@ const styles = StyleSheet.create({
   },
   messageBubble: {
     maxWidth: '80%',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 16,
+    paddingHorizontal: CervSpacing.lg,
+    paddingVertical: CervSpacing.md,
+    borderRadius: CervBorderRadius.large,
     marginBottom: 4,
   },
   userMessage: {
-    backgroundColor: CervColors.systemGreen,
+    backgroundColor: CervColors.systemBlue,
     borderBottomRightRadius: 4,
   },
   techMessage: {
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.cardBackground,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
     borderBottomLeftRadius: 4,
   },
   messageText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    lineHeight: 20,
+    ...CervTypography.subheadline,
   },
   userMessageText: {
-    color: '#0F1629',
+    color: CervColors.white,
   },
   techMessageText: {
-    color: '#FFFFFF',
+    color: CervColors.label,
   },
   messageTimestamp: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.tertiaryLabel,
   },
   messageInput: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.lg,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(139, 157, 195, 0.1)',
-    gap: 12,
+    borderTopColor: CervColors.separator,
+    gap: CervSpacing.md,
   },
   textInput: {
     flex: 1,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
     borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    paddingHorizontal: CervSpacing.lg,
+    paddingVertical: CervSpacing.md,
+    ...CervTypography.body,
     maxHeight: 100,
-    backgroundColor: 'rgba(139, 157, 195, 0.05)',
-    color: '#FFFFFF',
+    backgroundColor: CervColors.cardBackground,
+    color: CervColors.label,
   },
   sendButton: {
     width: 40,
@@ -553,9 +530,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sendButtonDisabled: {
-    backgroundColor: 'rgba(139, 157, 195, 0.2)',
+    backgroundColor: CervColors.systemGray4,
   },
   bottomSpacing: {
-    height: 20,
+    height: CervSpacing.xl,
   },
 });

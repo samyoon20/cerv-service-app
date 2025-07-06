@@ -10,10 +10,9 @@ import {
   ActivityIndicator 
 } from 'react-native';
 import { router } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, MapPin, CircleCheck as CheckCircle } from 'lucide-react-native';
-import { CervColors } from '@/themes/appleDesignSystem';
+import { CervColors, CervTypography, CervBorderRadius, CervSpacing } from '@/themes/appleDesignSystem';
 
 export default function AddressScreen() {
   const [formData, setFormData] = useState({
@@ -64,13 +63,10 @@ export default function AddressScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#F8FAFC', '#F1F5F9']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundContainer}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <ArrowLeft color="#475569" size={24} />
+            <ArrowLeft color={CervColors.label} size={24} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Property Address</Text>
           <View style={styles.placeholder} />
@@ -81,9 +77,9 @@ export default function AddressScreen() {
             <View style={styles.iconContainer}>
               <MapPin color={CervColors.systemGreen} size={32} />
             </View>
-            <Text style={styles.title}>What&apos;s your property address?</Text>
+            <Text style={styles.title}>What's your property address?</Text>
             <Text style={styles.subtitle}>
-              We&apos;ll use this to recommend the best services for your home and verify your property details
+              We'll use this to recommend the best services for your home and verify your property details
             </Text>
           </View>
 
@@ -93,7 +89,7 @@ export default function AddressScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="Enter your street address"
-                placeholderTextColor="#94A3B8"
+                placeholderTextColor={CervColors.tertiaryLabel}
                 value={formData.street}
                 onChangeText={(value) => handleInputChange('street', value)}
                 autoCapitalize="words"
@@ -106,7 +102,7 @@ export default function AddressScreen() {
                 <TextInput
                   style={styles.input}
                   placeholder="City name"
-                  placeholderTextColor="#94A3B8"
+                  placeholderTextColor={CervColors.tertiaryLabel}
                   value={formData.city}
                   onChangeText={(value) => handleInputChange('city', value)}
                   autoCapitalize="words"
@@ -117,7 +113,7 @@ export default function AddressScreen() {
                 <TextInput
                   style={styles.input}
                   placeholder="CA"
-                  placeholderTextColor="#94A3B8"
+                  placeholderTextColor={CervColors.tertiaryLabel}
                   value={formData.state}
                   onChangeText={(value) => handleInputChange('state', value.toUpperCase())}
                   autoCapitalize="characters"
@@ -131,7 +127,7 @@ export default function AddressScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="Enter ZIP code"
-                placeholderTextColor="#94A3B8"
+                placeholderTextColor={CervColors.tertiaryLabel}
                 value={formData.zipCode}
                 onChangeText={(value) => handleInputChange('zipCode', value)}
                 keyboardType="numeric"
@@ -164,24 +160,24 @@ export default function AddressScreen() {
             onPress={handleVerifyAddress}
             disabled={isLoading || isVerified}
           >
-            <LinearGradient
-              colors={isVerified ? [CervColors.systemGreen, CervColors.systemGreen] : [CervColors.systemGreen, '#28B946']}
-              style={styles.gradientButton}
-            >
+            <View style={[
+              styles.verifyButtonBackground,
+              isVerified && { backgroundColor: CervColors.systemGreen }
+            ]}>
               {isLoading ? (
-                <ActivityIndicator color="#ffffff" size="small" />
+                <ActivityIndicator color={CervColors.white} size="small" />
               ) : isVerified ? (
                 <>
-                  <CheckCircle color="#ffffff" size={20} />
+                  <CheckCircle color={CervColors.white} size={20} />
                   <Text style={styles.verifyButtonText}>Verified</Text>
                 </>
               ) : (
                 <Text style={styles.verifyButtonText}>Verify Address</Text>
               )}
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
         </View>
-      </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 }
@@ -189,194 +185,147 @@ export default function AddressScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
-  backgroundGradient: {
+  backgroundContainer: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.lg,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   backButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 18,
-    fontFamily: 'System',
-    fontWeight: '600',
-    color: '#0F172A',
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   placeholder: {
     width: 40,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: CervSpacing.xxl,
   },
   titleSection: {
     alignItems: 'center',
-    marginTop: 32,
+    marginTop: CervSpacing.xxxl,
     marginBottom: 40,
   },
   iconContainer: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 24,
-    shadowColor: CervColors.systemGreen,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 3,
+    marginBottom: CervSpacing.xxl,
   },
   title: {
-    fontSize: 28,
-    fontFamily: 'System',
-    fontWeight: '700',
-    color: '#0F172A',
+    ...CervTypography.title1,
+    color: CervColors.label,
     textAlign: 'center',
-    marginBottom: 12,
-    letterSpacing: -0.8,
+    marginBottom: CervSpacing.md,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#64748B',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 320,
   },
   form: {
-    marginBottom: 32,
+    marginBottom: CervSpacing.xxxl,
   },
   inputGroup: {
-    marginBottom: 24,
+    marginBottom: CervSpacing.xxl,
   },
   inputRow: {
     flexDirection: 'row',
-    gap: 16,
+    gap: CervSpacing.lg,
   },
   label: {
-    fontSize: 15,
-    fontFamily: 'System',
-    fontWeight: '600',
-    color: '#334155',
-    marginBottom: 8,
-    letterSpacing: -0.2,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.sm,
   },
   input: {
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.3)',
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    fontSize: 16,
-    fontFamily: 'System',
-    fontWeight: '400',
-    backgroundColor: '#FFFFFF',
-    color: '#0F172A',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.02,
-    shadowRadius: 4,
-    elevation: 1,
+    borderColor: CervColors.separator,
+    borderRadius: CervBorderRadius.large,
+    paddingHorizontal: CervSpacing.lg,
+    paddingVertical: CervSpacing.lg,
+    ...CervTypography.body,
+    backgroundColor: CervColors.cardBackground,
+    color: CervColors.label,
   },
   verificationSuccess: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderRadius: 16,
-    marginBottom: 24,
-    gap: 8,
+    backgroundColor: CervColors.systemGreenLight,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xl,
+    borderRadius: CervBorderRadius.large,
+    marginBottom: CervSpacing.xxl,
+    gap: CervSpacing.sm,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.3)',
+    borderColor: CervColors.systemGreen,
   },
   verificationText: {
-    fontSize: 16,
-    fontFamily: 'System',
-    fontWeight: '600',
-    color: '#065F46',
-    letterSpacing: -0.2,
+    ...CervTypography.headline,
+    color: CervColors.systemGreen,
   },
   infoCard: {
-    backgroundColor: 'rgba(139, 157, 195, 0.05)',
-    padding: 24,
-    borderRadius: 16,
+    backgroundColor: CervColors.cardBackground,
+    padding: CervSpacing.xxl,
+    borderRadius: CervBorderRadius.large,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    borderColor: CervColors.separator,
   },
   infoTitle: {
-    fontSize: 17,
-    fontFamily: 'System',
-    fontWeight: '600',
-    color: '#334155',
-    marginBottom: 12,
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.md,
   },
   infoText: {
-    fontSize: 14,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#64748B',
-    lineHeight: 20,
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   bottomSection: {
-    paddingHorizontal: 24,
-    paddingVertical: 24,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.xxl,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(139, 157, 195, 0.1)',
+    borderTopColor: CervColors.separator,
   },
   verifyButton: {
-    borderRadius: 16,
+    borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
-    shadowColor: CervColors.systemGreen,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
   },
   disabledButton: {
     opacity: 0.7,
   },
-  gradientButton: {
-    paddingVertical: 18,
+  verifyButtonBackground: {
+    backgroundColor: CervColors.systemGreen,
+    paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    gap: 8,
+    gap: CervSpacing.sm,
   },
   verifyButtonText: {
-    fontSize: 18,
-    fontFamily: 'System',
-    fontWeight: '700',
-    color: '#FFFFFF',
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.white,
   },
 });

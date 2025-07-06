@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { router } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, Chrome as Home } from 'lucide-react-native';
-import { CervColors } from '@/themes/appleDesignSystem';
+import { CervColors, CervTypography, CervBorderRadius, CervSpacing } from '@/themes/appleDesignSystem';
 
 export default function AuthScreen() {
   const [selectedMode, setSelectedMode] = useState<'signup' | 'login' | null>(null);
@@ -30,13 +29,10 @@ export default function AuthScreen() {
   if (selectedMode === 'signup') {
     return (
       <SafeAreaView style={styles.container}>
-        <LinearGradient
-          colors={['#F8FAFC', '#F1F5F9']}
-          style={styles.backgroundGradient}
-        >
+        <View style={styles.backgroundContainer}>
           <View style={styles.header}>
             <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-              <ArrowLeft color="#475569" size={24} />
+              <ArrowLeft color={CervColors.label} size={24} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>Create Account</Text>
             <View style={styles.placeholder} />
@@ -46,7 +42,7 @@ export default function AuthScreen() {
             <View style={styles.titleSection}>
               <Text style={styles.title}>Welcome to Cerv</Text>
               <Text style={styles.subtitle}>
-                Let&apos;s get your home maintenance journey started
+                Let's get your home maintenance journey started
               </Text>
             </View>
 
@@ -89,19 +85,16 @@ export default function AuthScreen() {
             </View>
 
             <TouchableOpacity style={styles.primaryButton} onPress={handleSignUp}>
-              <LinearGradient
-                colors={[CervColors.systemGreen, CervColors.systemGreen]}
-                style={styles.gradientButton}
-              >
+              <View style={styles.primaryButtonBackground}>
                 <Text style={styles.primaryButtonText}>Continue</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
 
             <Text style={styles.termsText}>
               By continuing, you agree to our Terms of Service and Privacy Policy
             </Text>
           </ScrollView>
-        </LinearGradient>
+        </View>
       </SafeAreaView>
     );
   }
@@ -109,13 +102,10 @@ export default function AuthScreen() {
   if (selectedMode === 'login') {
     return (
       <SafeAreaView style={styles.container}>
-        <LinearGradient
-          colors={['#F8FAFC', '#F1F5F9']}
-          style={styles.backgroundGradient}
-        >
+        <View style={styles.backgroundContainer}>
           <View style={styles.header}>
             <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-              <ArrowLeft color="#475569" size={24} />
+              <ArrowLeft color={CervColors.label} size={24} />
             </TouchableOpacity>
             <Text style={styles.headerTitle}>Welcome Back</Text>
             <View style={styles.placeholder} />
@@ -131,33 +121,27 @@ export default function AuthScreen() {
 
             <View style={styles.loginPrompt}>
               <Text style={styles.loginPromptText}>
-                For this demo, we&apos;ll take you directly to your dashboard
+                For this demo, we'll take you directly to your dashboard
               </Text>
             </View>
 
             <TouchableOpacity style={styles.primaryButton} onPress={handleLogin}>
-              <LinearGradient
-                colors={[CervColors.systemGreen, CervColors.systemGreen]}
-                style={styles.gradientButton}
-              >
+              <View style={styles.primaryButtonBackground}>
                 <Text style={styles.primaryButtonText}>Continue to Dashboard</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
           </ScrollView>
-        </LinearGradient>
+        </View>
       </SafeAreaView>
     );
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#F8FAFC', '#F1F5F9']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundContainer}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <ArrowLeft color="#475569" size={24} />
+            <ArrowLeft color={CervColors.label} size={24} />
           </TouchableOpacity>
           <View style={styles.logoContainer}>
             <Home color={CervColors.systemGreen} size={24} />
@@ -168,9 +152,9 @@ export default function AuthScreen() {
 
         <View style={styles.content}>
           <View style={styles.titleSection}>
-            <Text style={styles.title}>Let&apos;s get started</Text>
+            <Text style={styles.title}>Let's get started</Text>
             <Text style={styles.subtitle}>
-              Choose how you&apos;d like to continue with Cerv
+              Choose how you'd like to continue with Cerv
             </Text>
           </View>
 
@@ -179,12 +163,9 @@ export default function AuthScreen() {
               style={styles.primaryButton} 
               onPress={() => setSelectedMode('signup')}
             >
-              <LinearGradient
-                colors={[CervColors.systemGreen, CervColors.systemGreen]}
-                style={styles.gradientButton}
-              >
+              <View style={styles.primaryButtonBackground}>
                 <Text style={styles.primaryButtonText}>Create Account</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -195,7 +176,7 @@ export default function AuthScreen() {
             </TouchableOpacity>
           </View>
         </View>
-      </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 }
@@ -203,31 +184,32 @@ export default function AuthScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
-  backgroundGradient: {
+  backgroundContainer: {
     flex: 1,
+    backgroundColor: CervColors.background,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.lg,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   backButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#0F172A',
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   placeholder: {
     width: 40,
@@ -235,16 +217,15 @@ const styles = StyleSheet.create({
   logoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: CervSpacing.sm,
   },
   logoText: {
-    fontSize: 20,
-    fontFamily: 'Nunito-Bold',
-    color: '#0F172A',
+    ...CervTypography.title3,
+    color: CervColors.label,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: CervSpacing.xxl,
     paddingTop: 40,
   },
   titleSection: {
@@ -252,52 +233,47 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 28,
-    fontFamily: 'Nunito-Bold',
-    color: '#0F172A',
+    ...CervTypography.title1,
+    color: CervColors.label,
     textAlign: 'center',
-    marginBottom: 12,
-    letterSpacing: -0.5,
+    marginBottom: CervSpacing.md,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#64748B',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 280,
   },
   buttonGroup: {
-    gap: 16,
+    gap: CervSpacing.lg,
     marginTop: 'auto',
     marginBottom: 40,
   },
   primaryButton: {
-    borderRadius: 16,
+    borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
-  gradientButton: {
-    paddingVertical: 18,
+  primaryButtonBackground: {
+    backgroundColor: CervColors.systemGreen,
+    paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
   },
   primaryButtonText: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#ffffff',
+    ...CervTypography.headline,
+    color: CervColors.white,
   },
   secondaryButton: {
-    paddingVertical: 18,
+    paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
-    borderRadius: 16,
+    borderColor: CervColors.separator,
+    borderRadius: CervBorderRadius.large,
   },
   secondaryButtonText: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#475569',
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   benefitsList: {
     marginBottom: 40,
@@ -305,7 +281,7 @@ const styles = StyleSheet.create({
   benefit: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: 24,
+    marginBottom: CervSpacing.xxl,
   },
   benefitIcon: {
     width: 48,
@@ -314,7 +290,7 @@ const styles = StyleSheet.create({
     backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: CervSpacing.lg,
   },
   benefitEmoji: {
     fontSize: 20,
@@ -323,39 +299,33 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   benefitTitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#0F172A',
-    marginBottom: 4,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.xs,
   },
   benefitText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#64748B',
-    lineHeight: 20,
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   termsText: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Regular',
-    color: '#94A3B8',
+    ...CervTypography.caption1,
+    color: CervColors.tertiaryLabel,
     textAlign: 'center',
-    lineHeight: 16,
-    marginTop: 16,
-    paddingHorizontal: 20,
+    marginTop: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xl,
   },
   loginPrompt: {
     backgroundColor: CervColors.systemGreenLight,
-    padding: 20,
-    borderRadius: 12,
+    padding: CervSpacing.xl,
+    borderRadius: CervBorderRadius.medium,
     marginBottom: 40,
     borderWidth: 1,
-    borderColor: CervColors.systemGreenLight,
+    borderColor: CervColors.systemGreen,
   },
   loginPromptText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Medium',
-    color: '#065F46',
+    ...CervTypography.subheadline,
+    fontWeight: '500',
+    color: CervColors.systemGreen,
     textAlign: 'center',
-    lineHeight: 20,
   },
 });

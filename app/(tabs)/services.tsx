@@ -230,7 +230,7 @@ export default function ServicesTab() {
           >
             <Star
               size={size}
-              color={star <= rating ? '#FFB800' : '#8B9DC3'}
+              color={star <= rating ? '#FFB800' : CervColors.systemGray}
               fill={star <= rating ? '#FFB800' : 'transparent'}
             />
           </TouchableOpacity>
@@ -263,7 +263,7 @@ export default function ServicesTab() {
             <Text style={styles.headerTitle}>My Services</Text>
             <TouchableOpacity style={styles.addButton} onPress={handleAddService}>
               <View style={styles.addButtonBackground}>
-                <Plus color={CervColors.darkGray} size={20} />
+                <Plus color={CervColors.white} size={20} />
               </View>
             </TouchableOpacity>
           </View>
@@ -332,7 +332,7 @@ export default function ServicesTab() {
 
                     <View style={styles.serviceDetails}>
                       <View style={styles.detailRow}>
-                        <Calendar color="#8B9DC3" size={16} />
+                        <Calendar color={CervColors.secondaryLabel} size={16} />
                         <Text style={styles.detailText}>
                           Next: {new Date(service.nextDate).toLocaleDateString('en-US', {
                             month: 'short',
@@ -353,7 +353,7 @@ export default function ServicesTab() {
                         style={styles.actionButton}
                         onPress={() => handleServiceAction(service.id, 'edit')}
                       >
-                        <Edit3 color="#8B9DC3" size={16} />
+                        <Edit3 color={CervColors.secondaryLabel} size={16} />
                         <Text style={styles.actionButtonText}>Edit</Text>
                       </TouchableOpacity>
 
@@ -365,7 +365,7 @@ export default function ServicesTab() {
                         )}
                       >
                         {service.status === 'active' ? (
-                          <Pause color="#8B9DC3" size={16} />
+                          <Pause color={CervColors.secondaryLabel} size={16} />
                         ) : (
                           <Play color={CervColors.systemGreen} size={16} />
                         )}
@@ -457,7 +457,7 @@ export default function ServicesTab() {
                     <View style={styles.reviewHeader}>
                       <View style={styles.reviewerInfo}>
                         <View style={styles.technicianAvatar}>
-                          <User color="#8B9DC3" size={20} />
+                          <User color={CervColors.secondaryLabel} size={20} />
                         </View>
                         <View style={styles.technicianDetails}>
                           <Text style={styles.technicianName}>{review.technicianName}</Text>
@@ -517,7 +517,7 @@ export default function ServicesTab() {
 
                 {MOCK_REVIEWS.length === 0 && (
                   <View style={styles.emptyReviews}>
-                    <MessageSquare color="#8B9DC3" size={48} />
+                    <MessageSquare color={CervColors.tertiaryLabel} size={48} />
                     <Text style={styles.emptyReviewsTitle}>No reviews yet</Text>
                     <Text style={styles.emptyReviewsText}>
                       Share your experience with our technicians
@@ -549,7 +549,7 @@ export default function ServicesTab() {
               <View style={styles.modalHeader}>
                 <Text style={styles.modalTitle}>Write a Review</Text>
                 <TouchableOpacity onPress={() => setShowReviewModal(false)}>
-                  <X color="#8B9DC3" size={24} />
+                  <X color={CervColors.secondaryLabel} size={24} />
                 </TouchableOpacity>
               </View>
 
@@ -590,14 +590,14 @@ export default function ServicesTab() {
                     multiline
                     numberOfLines={4}
                     placeholder="Share your experience with the technician..."
-                    placeholderTextColor="#8B9DC3"
+                    placeholderTextColor={CervColors.tertiaryLabel}
                     value={newReview.reviewText}
                     onChangeText={(text) => setNewReview({...newReview, reviewText: text})}
                   />
                 </View>
 
                 <TouchableOpacity style={styles.photoButton}>
-                  <Camera color="#8B9DC3" size={20} />
+                  <Camera color={CervColors.secondaryLabel} size={20} />
                   <Text style={styles.photoButtonText}>Add Photos (Optional)</Text>
                 </TouchableOpacity>
               </ScrollView>
@@ -638,16 +638,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.xl,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   headerTitle: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
+    ...CervTypography.title2,
+    color: CervColors.label,
   },
   addButton: {
     borderRadius: 20,
@@ -656,45 +654,44 @@ const styles = StyleSheet.create({
   addButtonBackground: {
     width: 40,
     height: 40,
-    backgroundColor: CervColors.accentBackground,
+    backgroundColor: CervColors.systemBlue,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: CervBorderRadius.large,
   },
   tabBar: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
-    margin: 24,
-    borderRadius: 12,
+    backgroundColor: CervColors.systemGray5,
+    margin: CervSpacing.xxl,
+    borderRadius: CervBorderRadius.medium,
     padding: 4,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    borderColor: CervColors.separator,
   },
   tab: {
     flex: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
+    paddingVertical: CervSpacing.md,
+    paddingHorizontal: CervSpacing.lg,
+    borderRadius: CervBorderRadius.small,
     alignItems: 'center',
   },
   activeTab: {
-    backgroundColor: CervColors.accentBackgroundLight,
+    backgroundColor: CervColors.systemBlue,
   },
   tabText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#8B9DC3',
-    letterSpacing: -0.1,
+    ...CervTypography.subheadline,
+    fontWeight: '600',
+    color: CervColors.secondaryLabel,
   },
   activeTabText: {
-    color: CervColors.cervDarkGray,
+    color: CervColors.white,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: CervSpacing.xxl,
   },
   activeServices: {
-    gap: 16,
+    gap: CervSpacing.lg,
   },
   serviceCard: {
     backgroundColor: CervColors.cardBackground,
@@ -707,92 +704,85 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    marginBottom: CervSpacing.lg,
   },
   serviceInfo: {
     flex: 1,
   },
   serviceName: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
     marginBottom: 4,
-    letterSpacing: -0.3,
   },
   serviceFrequency: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   statusBadge: {
-    paddingHorizontal: 12,
+    paddingHorizontal: CervSpacing.md,
     paddingVertical: 4,
-    borderRadius: 12,
+    borderRadius: CervBorderRadius.medium,
   },
   activeBadge: {
-    backgroundColor: 'rgba(0, 212, 170, 0.2)',
+    backgroundColor: CervColors.systemGreenLight,
   },
   pausedBadge: {
-    backgroundColor: 'rgba(255, 184, 0, 0.2)',
+    backgroundColor: CervColors.systemOrangeLight,
   },
   statusText: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption1,
+    fontWeight: '600',
   },
   activeStatusText: {
     color: CervColors.systemGreen,
   },
   pausedStatusText: {
-    color: '#FFB800',
+    color: CervColors.systemOrange,
   },
   serviceDetails: {
-    gap: 8,
-    marginBottom: 20,
+    gap: CervSpacing.sm,
+    marginBottom: CervSpacing.xl,
   },
   detailRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: CervSpacing.sm,
   },
   detailText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#FFFFFF',
+    ...CervTypography.subheadline,
+    color: CervColors.label,
   },
   priceText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.headline,
     color: CervColors.systemGreen,
-    letterSpacing: -0.2,
   },
   technicianText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   serviceActions: {
     flexDirection: 'row',
-    gap: 12,
-    paddingTop: 16,
+    gap: CervSpacing.md,
+    paddingTop: CervSpacing.lg,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(139, 157, 195, 0.1)',
+    borderTopColor: CervColors.separator,
   },
   actionButton: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 12,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    paddingVertical: CervSpacing.md,
+    borderRadius: CervBorderRadius.medium,
+    backgroundColor: CervColors.secondarySystemFill,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
     gap: 6,
   },
   actionButtonText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    fontWeight: '600',
+    color: CervColors.secondaryLabel,
   },
   resumeButtonText: {
     color: CervColors.systemGreen,
@@ -802,21 +792,18 @@ const styles = StyleSheet.create({
     paddingVertical: 60,
   },
   emptyStateTitle: {
-    fontSize: 20,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    marginBottom: 8,
-    letterSpacing: -0.3,
+    ...CervTypography.title3,
+    color: CervColors.label,
+    marginBottom: CervSpacing.sm,
   },
   emptyStateText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    marginBottom: 32,
+    marginBottom: CervSpacing.xxxl,
   },
   addFirstServiceButton: {
-    borderRadius: 16,
+    borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
   gradientButton: {
@@ -830,18 +817,16 @@ const styles = StyleSheet.create({
   },
   addFirstServiceButtonText: {
     ...CervTypography.callout,
-    fontFamily: 'Nunito-Bold',
+    fontWeight: '700',
     color: CervColors.white,
   },
   addonsSection: {
-    gap: 16,
+    gap: CervSpacing.lg,
   },
   sectionSubtitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
-    marginBottom: 8,
-    lineHeight: 24,
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
+    marginBottom: CervSpacing.sm,
   },
   addonCard: {
     backgroundColor: CervColors.cardBackground,
@@ -854,50 +839,44 @@ const styles = StyleSheet.create({
   },
   addonInfo: {
     flex: 1,
-    marginRight: 16,
+    marginRight: CervSpacing.lg,
   },
   addonName: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
     marginBottom: 4,
-    letterSpacing: -0.2,
   },
   addonDescription: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
-    marginBottom: 8,
-    lineHeight: 20,
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
+    marginBottom: CervSpacing.sm,
   },
   addonPrice: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.headline,
     color: CervColors.systemGreen,
-    letterSpacing: -0.2,
   },
   addonButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 12,
+    paddingVertical: CervSpacing.sm,
+    paddingHorizontal: CervSpacing.lg,
+    borderRadius: CervBorderRadius.medium,
     backgroundColor: CervColors.systemBlueLight,
     borderWidth: 1,
     borderColor: CervColors.systemBlue,
     gap: 6,
   },
   addonButtonText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.subheadline,
+    fontWeight: '600',
     color: CervColors.systemBlue,
   },
   bottomSpacing: {
-    height: 20,
+    height: CervSpacing.xl,
   },
   // Reviews Section Styles
   reviewsSection: {
-    gap: 20,
+    gap: CervSpacing.xl,
   },
   reviewsHeader: {
     flexDirection: 'row',
@@ -911,26 +890,24 @@ const styles = StyleSheet.create({
   statsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    marginTop: 8,
+    gap: CervSpacing.md,
+    marginTop: CervSpacing.sm,
   },
   statItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: CervSpacing.sm,
   },
   statNumber: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   statLabel: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   addReviewButton: {
-    borderRadius: 12,
+    borderRadius: CervBorderRadius.medium,
     overflow: 'hidden',
   },
   addReviewBackground: {
@@ -944,7 +921,7 @@ const styles = StyleSheet.create({
   },
   addReviewText: {
     ...CervTypography.subheadline,
-    fontFamily: 'Nunito-SemiBold',
+    fontWeight: '600',
     color: CervColors.white,
   },
   reviewCard: {
@@ -958,37 +935,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 16,
+    marginBottom: CervSpacing.lg,
   },
   reviewerInfo: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    gap: 12,
+    gap: CervSpacing.md,
   },
   technicianAvatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
   },
   technicianDetails: {
     flex: 1,
   },
   technicianName: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
     marginBottom: 2,
   },
   reviewServiceName: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.secondaryLabel,
   },
   reviewMeta: {
     alignItems: 'flex-end',
@@ -1000,27 +975,24 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   ratingNumber: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.subheadline,
+    fontWeight: '600',
     color: '#FFB800',
   },
   reviewDate: {
-    fontSize: 12,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.tertiaryLabel,
   },
   reviewText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#FFFFFF',
-    lineHeight: 20,
-    marginBottom: 16,
+    ...CervTypography.subheadline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.lg,
   },
   categoryRatings: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 16,
-    marginBottom: 16,
+    gap: CervSpacing.lg,
+    marginBottom: CervSpacing.lg,
   },
   categoryRating: {
     alignItems: 'center',
@@ -1028,9 +1000,9 @@ const styles = StyleSheet.create({
     minWidth: '22%',
   },
   categoryLabel: {
-    fontSize: 10,
-    fontFamily: 'Nunito-Medium',
-    color: '#8B9DC3',
+    ...CervTypography.caption2,
+    fontWeight: '500',
+    color: CervColors.tertiaryLabel,
     textAlign: 'center',
   },
   starsContainer: {
@@ -1039,50 +1011,47 @@ const styles = StyleSheet.create({
   },
   reviewPhotos: {
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 12,
+    gap: CervSpacing.sm,
+    marginBottom: CervSpacing.md,
   },
   reviewPhoto: {
     width: 60,
     height: 60,
-    borderRadius: 8,
+    borderRadius: CervBorderRadius.small,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
   },
   verifiedBadge: {
     alignSelf: 'flex-start',
-    paddingHorizontal: 8,
+    paddingHorizontal: CervSpacing.sm,
     paddingVertical: 4,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
-    borderRadius: 8,
+    backgroundColor: CervColors.systemGreenLight,
+    borderRadius: CervBorderRadius.small,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: CervColors.systemGreen,
   },
   verifiedText: {
-    fontSize: 10,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption2,
+    fontWeight: '600',
     color: CervColors.systemGreen,
   },
   emptyReviews: {
     alignItems: 'center',
     paddingVertical: 60,
-    gap: 16,
+    gap: CervSpacing.lg,
   },
   emptyReviewsTitle: {
-    fontSize: 20,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.3,
+    ...CervTypography.title3,
+    color: CervColors.label,
   },
   emptyReviewsText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: CervSpacing.lg,
   },
   firstReviewButton: {
-    borderRadius: 16,
+    borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
   firstReviewBackground: {
@@ -1096,7 +1065,7 @@ const styles = StyleSheet.create({
   },
   firstReviewText: {
     ...CervTypography.callout,
-    fontFamily: 'Nunito-Bold',
+    fontWeight: '700',
     color: CervColors.white,
   },
   // Modal Styles
@@ -1116,71 +1085,66 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingBottom: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingBottom: CervSpacing.xl,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   modalTitle: {
-    fontSize: 20,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.title3,
+    color: CervColors.label,
   },
   modalScroll: {
-    paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingTop: CervSpacing.xl,
   },
   ratingSection: {
     alignItems: 'center',
-    marginBottom: 32,
-    gap: 12,
+    marginBottom: CervSpacing.xxxl,
+    gap: CervSpacing.md,
   },
   ratingLabel: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   categoryRatingsSection: {
-    marginBottom: 32,
+    marginBottom: CervSpacing.xxxl,
   },
   categoryRatingsTitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#FFFFFF',
-    marginBottom: 16,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.lg,
   },
   categoryRatingRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: CervSpacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   categoryRatingLabel: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Medium',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    fontWeight: '500',
+    color: CervColors.secondaryLabel,
     flex: 1,
   },
   reviewTextSection: {
-    marginBottom: 20,
+    marginBottom: CervSpacing.xl,
   },
   reviewTextLabel: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#FFFFFF',
-    marginBottom: 12,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.md,
   },
   reviewTextInput: {
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
-    borderRadius: 12,
-    padding: 16,
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#FFFFFF',
+    backgroundColor: CervColors.cardBackground,
+    borderRadius: CervBorderRadius.medium,
+    padding: CervSpacing.lg,
+    ...CervTypography.subheadline,
+    color: CervColors.label,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
     minHeight: 100,
     textAlignVertical: 'top',
   },
@@ -1188,46 +1152,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
-    borderRadius: 12,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xl,
+    backgroundColor: CervColors.cardBackground,
+    borderRadius: CervBorderRadius.medium,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
-    gap: 8,
-    marginBottom: 32,
+    borderColor: CervColors.separator,
+    gap: CervSpacing.sm,
+    marginBottom: CervSpacing.xxxl,
   },
   photoButtonText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Medium',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    fontWeight: '500',
+    color: CervColors.secondaryLabel,
   },
   modalActions: {
     flexDirection: 'row',
-    paddingHorizontal: 24,
-    paddingVertical: 20,
-    gap: 12,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.xl,
+    gap: CervSpacing.md,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(139, 157, 195, 0.1)',
+    borderTopColor: CervColors.separator,
   },
   cancelButton: {
     flex: 1,
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
-    borderRadius: 12,
+    paddingVertical: CervSpacing.lg,
+    paddingHorizontal: CervSpacing.xl,
+    backgroundColor: CervColors.secondarySystemFill,
+    borderRadius: CervBorderRadius.medium,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
   },
   cancelButtonText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#8B9DC3',
+    ...CervTypography.headline,
+    color: CervColors.secondaryLabel,
   },
   submitButton: {
     flex: 2,
-    borderRadius: 12,
+    borderRadius: CervBorderRadius.medium,
     overflow: 'hidden',
   },
   submitButtonBackground: {
@@ -1239,7 +1202,7 @@ const styles = StyleSheet.create({
   },
   submitButtonText: {
     ...CervTypography.callout,
-    fontFamily: 'Nunito-Bold',
+    fontWeight: '700',
     color: CervColors.white,
   },
 });
