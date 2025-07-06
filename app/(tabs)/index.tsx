@@ -106,11 +106,11 @@ const MOCK_PROPERTY_ISSUES = {
 const MOCK_CAMPAIGNS: Campaign[] = [
   {
     id: 'campaign-1',
-    title: 'Spring Cleaning Special',
-    description: 'Get 20% off all exterior cleaning services this month. Perfect time to refresh your home!',
+    title: '4th of July Special',
+    description: 'Get 25% off all exterior cleaning services this holiday weekend. Perfect time to prep for summer gatherings!',
     imageUrl: 'https://images.pexels.com/photos/4107123/pexels-photo-4107123.jpeg?auto=compress&cs=tinysrgb&w=400',
-    startDate: '2024-03-01T00:00:00Z',
-    endDate: '2024-03-31T23:59:59Z',
+    startDate: '2024-07-01T00:00:00Z',
+    endDate: '2024-07-07T23:59:59Z',
     isActive: true,
     displayConfig: {
       showOnHomeScreen: true,
@@ -129,15 +129,15 @@ const MOCK_CAMPAIGNS: Campaign[] = [
 const MOCK_PROMOTION: Promotion = {
   id: 'promo-1',
   campaignId: 'campaign-1',
-  title: 'Spring Cleaning Special',
-  description: '20% off exterior cleaning',
+  title: '4th of July Special',
+  description: '25% off exterior cleaning',
   discountType: 'percentage',
-  discountValue: 20,
+  discountValue: 25,
   serviceIds: ['exterior-cleaning'],
   usageLimit: 100,
   usageCount: 12,
-  startDate: '2024-03-01T00:00:00Z',
-  endDate: '2024-03-31T23:59:59Z',
+  startDate: '2024-07-01T00:00:00Z',
+  endDate: '2024-07-07T23:59:59Z',
   isActive: true,
 };
 
@@ -211,7 +211,7 @@ export default function HomeTab() {
   };
 
   const handleCampaignPress = () => {
-    Alert.alert('Campaign', 'Spring cleaning promotion details and booking.');
+    Alert.alert('Campaign', '4th of July promotion details and booking.');
   };
 
   const handleInviteUser = async (invitation: any) => {
@@ -234,7 +234,6 @@ export default function HomeTab() {
 
   const currentScore = MOCK_PROPERTY_SCORES[selectedProperty.id as keyof typeof MOCK_PROPERTY_SCORES];
 
-
   const handleViewReport = (appointmentId: string) => {
     router.push(`/service-report/${appointmentId}`);
   };
@@ -252,13 +251,13 @@ export default function HomeTab() {
       case 'scheduled':
         return <Calendar color={CervColors.systemGreen} size={16} />;
       case 'in-progress':
-        return <Clock color="#FFB800" size={16} />;
+        return <Clock color={CervColors.systemOrange} size={16} />;
       case 'completed':
         return <CheckCircle color={CervColors.systemGreen} size={16} />;
       case 'cancelled':
-        return <AlertCircle color="#FF6B6B" size={16} />;
+        return <AlertCircle color={CervColors.systemRed} size={16} />;
       default:
-        return <Calendar color="#8B9DC3" size={16} />;
+        return <Calendar color={CervColors.systemGray} size={16} />;
     }
   };
 
@@ -267,13 +266,13 @@ export default function HomeTab() {
       case 'scheduled':
         return CervColors.systemGreen;
       case 'in-progress':
-        return '#FFB800';
+        return CervColors.systemOrange;
       case 'completed':
         return CervColors.systemGreen;
       case 'cancelled':
-        return '#FF6B6B';
+        return CervColors.systemRed;
       default:
-        return '#8B9DC3';
+        return CervColors.systemGray;
     }
   };
 
@@ -306,14 +305,14 @@ export default function HomeTab() {
                 score={MOCK_LOYALTY_SCORE}
               />
               <TouchableOpacity style={styles.headerButton} onPress={handleNotifications}>
-                <Bell color="#8B9DC3" size={22} />
+                <Bell color={CervColors.secondaryLabel} size={22} />
                 <View style={styles.notificationDot} />
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.headerButton}
                 onPress={handleManageUsers}
               >
-                <Settings color="#8B9DC3" size={22} />
+                <Settings color={CervColors.secondaryLabel} size={22} />
               </TouchableOpacity>
             </View>
           </View>
@@ -380,7 +379,7 @@ export default function HomeTab() {
                 <Text style={styles.sectionTitle}>Service History</Text>
                 <TouchableOpacity style={styles.addButton}>
                   <View style={styles.addButtonBackground}>
-                    <Plus color={CervColors.background} size={18} />
+                    <Plus color={CervColors.white} size={18} />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -476,7 +475,7 @@ export default function HomeTab() {
                       onPress={() => handleViewReport(appointment.id)}
                     >
                       <View style={styles.viewReportBackground}>
-                        <FileText color={CervColors.systemGreen} size={16} />
+                        <FileText color={CervColors.systemBlue} size={16} />
                         <Text style={styles.viewReportText}>View Report</Text>
                       </View>
                     </TouchableOpacity>
@@ -592,13 +591,6 @@ const styles = StyleSheet.create({
     ...CervTypography.caption1,
     color: CervColors.secondaryLabel,
   },
-  nameText: {
-    fontSize: 24,
-    fontFamily: 'System',
-    fontWeight: '700',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
-  },
   headerActions: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -608,11 +600,11 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
     position: 'relative',
   },
   notificationDot: {
@@ -622,7 +614,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: CervColors.systemGreen,
+    backgroundColor: CervColors.systemRed,
   },
   content: {
     flex: 1,
@@ -633,12 +625,9 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontFamily: 'System',
-    fontWeight: '700',
-    color: '#FFFFFF',
+    ...CervTypography.title2,
+    color: CervColors.label,
     marginBottom: 16,
-    letterSpacing: -0.3,
   },
   statusCards: {
     flexDirection: 'row',
@@ -663,30 +652,23 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
   statusCardTitle: {
-    fontSize: 14,
-    fontFamily: 'System',
+    ...CervTypography.subheadline,
     fontWeight: '600',
-    color: '#8B9DC3',
-    letterSpacing: -0.1,
+    color: CervColors.secondaryLabel,
   },
   statusCardValue: {
-    fontSize: 20,
-    fontFamily: 'System',
-    fontWeight: '700',
-    color: '#FFFFFF',
+    ...CervTypography.title3,
+    color: CervColors.label,
     marginBottom: 6,
-    letterSpacing: -0.5,
   },
   statusCardSubtitle: {
-    fontSize: 12,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.tertiaryLabel,
     lineHeight: 16,
   },
   servicesSection: {
@@ -713,12 +695,12 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.systemGray5,
     borderRadius: 12,
     padding: 4,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
+    borderColor: CervColors.separator,
   },
   tab: {
     flex: 1,
@@ -728,17 +710,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeTab: {
-    backgroundColor: 'rgba(0, 212, 170, 0.2)',
+    backgroundColor: CervColors.systemBlue,
   },
   tabText: {
-    fontSize: 14,
-    fontFamily: 'System',
+    ...CervTypography.subheadline,
     fontWeight: '600',
-    color: '#8B9DC3',
-    letterSpacing: -0.1,
+    color: CervColors.secondaryLabel,
   },
   activeTabText: {
-    color: CervColors.systemGreen,
+    color: CervColors.white,
   },
   appointmentsList: {
     gap: 12,
@@ -764,69 +744,45 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   appointmentStatusText: {
-    fontSize: 12,
-    fontFamily: 'System',
+    ...CervTypography.caption1,
     fontWeight: '600',
-    letterSpacing: -0.1,
   },
   appointmentDate: {
-    fontSize: 12,
-    fontFamily: 'System',
+    ...CervTypography.caption1,
     fontWeight: '600',
-    color: '#8B9DC3',
+    color: CervColors.secondaryLabel,
   },
   appointmentService: {
-    fontSize: 16,
-    fontFamily: 'System',
-    fontWeight: '700',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
     marginBottom: 6,
-    letterSpacing: -0.2,
   },
   appointmentTime: {
-    fontSize: 14,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
     marginBottom: 4,
   },
   appointmentTechnician: {
-    fontSize: 12,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.tertiaryLabel,
     marginBottom: 12,
   },
   viewReportButton: {
     borderRadius: 12,
     overflow: 'hidden',
   },
-  viewReportGradient: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
-  },
   viewReportText: {
-    fontSize: 12,
-    fontFamily: 'System',
+    ...CervTypography.caption1,
     fontWeight: '600',
-    color: CervColors.systemGreen,
-    letterSpacing: -0.1,
+    color: CervColors.systemBlue,
   },
   emptyState: {
     alignItems: 'center',
     paddingVertical: 40,
   },
   emptyStateText: {
-    fontSize: 14,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.tertiaryLabel,
   },
   addOnSection: {
     marginBottom: 32,
@@ -840,32 +796,20 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
   },
-  addOnCardGradient: {
-    padding: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.1)',
-    height: 140,
-    justifyContent: 'space-between',
-  },
   addOnName: {
-    fontSize: 14,
-    fontFamily: 'System',
+    ...CervTypography.subheadline,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: CervColors.label,
     marginBottom: 4,
   },
   addOnDescription: {
-    fontSize: 12,
-    fontFamily: 'System',
-    fontWeight: '400',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    color: CervColors.secondaryLabel,
     marginBottom: 8,
     lineHeight: 16,
   },
   addOnPrice: {
-    fontSize: 16,
-    fontFamily: 'System',
-    fontWeight: '700',
+    ...CervTypography.headline,
     color: CervColors.systemGreen,
     marginBottom: 12,
   },
@@ -873,23 +817,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemBlueLight,
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: CervColors.systemBlue,
     gap: 4,
   },
   addOnButtonText: {
-    fontSize: 12,
-    fontFamily: 'System',
+    ...CervTypography.caption1,
     fontWeight: '600',
-    color: CervColors.systemGreen,
+    color: CervColors.systemBlue,
   },
   viewAllText: {
-    fontSize: 14,
-    fontFamily: 'System',
+    ...CervTypography.subheadline,
     fontWeight: '600',
     color: CervColors.systemBlue,
   },
@@ -909,7 +851,7 @@ const styles = StyleSheet.create({
   },
   
   viewReportBackground: {
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.systemBlueLight,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: CervSpacing.md,

@@ -123,8 +123,8 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
             <Text style={styles.sectionLabel}>Your Current Services</Text>
             <View style={styles.servicesList}>
               <View style={styles.serviceItem}>
-                <View style={[styles.serviceIcon, { backgroundColor: CervColors.systemGreenLight }]}>
-                  <Target color={CervColors.systemGreen} size={16} />
+                <View style={[styles.serviceIcon, { backgroundColor: '#e39ac433' }]}>
+                  <View style={[styles.serviceColorDot, { backgroundColor: '#e39ac4' }]} />
                 </View>
                 <View style={styles.serviceInfo}>
                   <Text style={styles.serviceName}>Pool Maintenance</Text>
@@ -134,8 +134,8 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
               </View>
               
               <View style={styles.serviceItem}>
-                <View style={[styles.serviceIcon, { backgroundColor: CervColors.systemGray4 }]}>
-                  <Home color={CervColors.systemGray} size={16} />
+                <View style={[styles.serviceIcon, { backgroundColor: '#63373733' }]}>
+                  <View style={[styles.serviceColorDot, { backgroundColor: '#633737' }]} />
                 </View>
                 <View style={styles.serviceInfo}>
                   <Text style={styles.serviceName}>Exterior Cleaning</Text>
@@ -151,12 +151,12 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
             <Text style={styles.sectionLabel}>Available for Your Home</Text>
             <View style={styles.servicesList}>
               <TouchableOpacity style={styles.availableServiceItem}>
-                <View style={[styles.serviceIcon, { backgroundColor: CervColors.systemGray4 }]}>
-                  <Plus color={CervColors.systemGray} size={14} />
+                <View style={[styles.serviceIcon, { backgroundColor: '#196f6233' }]}>
+                  <View style={[styles.serviceColorDot, { backgroundColor: '#196f62' }]} />
                 </View>
                 <View style={styles.serviceInfo}>
-                  <Text style={styles.availableServiceName}>Pool Service</Text>
-                  <Text style={styles.availableServiceHint}>Do you have a pool?</Text>
+                  <Text style={styles.availableServiceName}>Landscaping</Text>
+                  <Text style={styles.availableServiceHint}>Optimize your yard care</Text>
                 </View>
               </TouchableOpacity>
               
@@ -165,8 +165,8 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
                   <Plus color={CervColors.systemGray} size={14} />
                 </View>
                 <View style={styles.serviceInfo}>
-                  <Text style={styles.availableServiceName}>Landscaping</Text>
-                  <Text style={styles.availableServiceHint}>Optimize your yard care</Text>
+                  <Text style={styles.availableServiceName}>More Services</Text>
+                  <Text style={styles.availableServiceHint}>Coming soon</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -175,7 +175,7 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
 
         <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails}>
           <View style={styles.detailsBackground}>
-            <TrendingUp color={CervColors.systemGreen} size={16} />
+            <TrendingUp color={CervColors.systemBlue} size={16} />
             <Text style={styles.viewDetailsText}>View Detailed Analytics</Text>
           </View>
         </TouchableOpacity>
@@ -193,7 +193,7 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>What is Cerv Score?</Text>
               <TouchableOpacity onPress={() => setShowLearnMoreModal(false)}>
-                <X color="#8B9DC3" size={24} />
+                <X color={CervColors.secondaryLabel} size={24} />
               </TouchableOpacity>
             </View>
 
@@ -209,7 +209,7 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
                 
                 <View style={styles.actionGroup}>
                   <View style={styles.actionHeader}>
-                    <Target color={CervColors.systemGreen} size={18} />
+                    <Target color={CervColors.systemBlue} size={18} />
                     <Text style={styles.actionGroupTitle}>Home Care Services</Text>
                   </View>
                   <View style={styles.actionsList}>
@@ -235,7 +235,7 @@ export default function CervScore({ score, onViewDetails, showLearnMore = true }
                 
                 <View style={styles.actionGroup}>
                   <View style={styles.actionHeader}>
-                    <Users color={CervColors.systemBlue} size={18} />
+                    <Users color={CervColors.systemGreen} size={18} />
                     <Text style={styles.actionGroupTitle}>Smart Optimization</Text>
                   </View>
                   <View style={styles.actionsList}>
@@ -304,7 +304,7 @@ const styles = StyleSheet.create({
   scoreValueLarge: {
     ...CervTypography.largeTitle,
     fontSize: 64,
-    fontWeight: 700,
+    fontWeight: '700',
     color: CervColors.label,
     lineHeight: 68,
     letterSpacing: -3,
@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
   },
   trendValue: {
     ...CervTypography.subheadline,
-    fontWeight: 700,
+    fontWeight: '700',
     letterSpacing: -0.2,
   },
   lastUpdatedSimple: {
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
   },
   scoreGradeStatus: {
     ...CervTypography.subheadline,
-    fontWeight: 600,
+    fontWeight: '600',
     marginBottom: 8,
     textTransform: 'uppercase',
     letterSpacing: 1.2,
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
   },
   actionButtonText: {
     ...CervTypography.subheadline,
-    fontWeight: 600,
+    fontWeight: '600',
     color: CervColors.label,
   },
   homeInsightsBanner: {
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
   insightsText: {
     flex: 1,
     ...CervTypography.subheadline,
-    fontWeight: 600,
+    fontWeight: '600',
     color: CervColors.label,
   },
   insightsButton: {
@@ -440,6 +440,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  serviceColorDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+  },
   serviceInfo: {
     flex: 1,
   },
@@ -450,7 +455,7 @@ const styles = StyleSheet.create({
   },
   serviceScore: {
     ...CervTypography.subheadline,
-    fontWeight: 500,
+    fontWeight: '500',
     color: CervColors.secondaryLabel,
   },
   availableServiceName: {
@@ -471,19 +476,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
   },
-  detailsGradient: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: CervColors.systemGreenLight,
-  },
   viewDetailsText: {
     ...CervTypography.headline,
-    color: CervColors.systemGreen,
+    color: CervColors.systemBlue,
   },
   modalOverlay: {
     flex: 1,
@@ -502,7 +497,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   modalTitle: {
     ...CervTypography.title2,
@@ -522,18 +517,18 @@ const styles = StyleSheet.create({
   },
   cervActionsTitle: {
     ...CervTypography.callout,
-    fontWeight: 600,
-    color: CervColors.systemGreen,
+    fontWeight: '600',
+    color: CervColors.systemBlue,
     marginBottom: 20,
     textAlign: 'center',
   },
   actionGroup: {
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.cardBackground,
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: CervColors.systemGreenLight,
+    borderColor: CervColors.separator,
   },
   actionHeader: {
     flexDirection: 'row',
@@ -543,23 +538,23 @@ const styles = StyleSheet.create({
   },
   actionGroupTitle: {
     ...CervTypography.footnote,
-    fontWeight: 600,
-    color: '#FFFFFF',
+    fontWeight: '600',
+    color: CervColors.label,
   },
   actionsList: {
     gap: 6,
   },
   actionItem: {
     ...CervTypography.caption1,
-    color: '#8B9DC3',
+    color: CervColors.secondaryLabel,
     lineHeight: 18,
   },
   scoreGuarantee: {
-    backgroundColor: CervColors.systemOrangeLight,
+    backgroundColor: CervColors.cardBackground,
     padding: 16,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: CervColors.systemOrangeLight,
+    borderColor: CervColors.separator,
     alignItems: 'center',
   },
   guaranteeHeader: {
@@ -570,12 +565,12 @@ const styles = StyleSheet.create({
   },
   guaranteeTitle: {
     ...CervTypography.footnote,
-    fontWeight: 700,
-    color: CervColors.systemOrange,
+    fontWeight: '700',
+    color: CervColors.systemGreen,
   },
   guaranteeText: {
     ...CervTypography.caption1,
-    color: '#8B9DC3',
+    color: CervColors.secondaryLabel,
     lineHeight: 18,
     textAlign: 'center',
     marginBottom: 12,
@@ -591,13 +586,12 @@ const styles = StyleSheet.create({
   },
   guaranteeBadgeText: {
     ...CervTypography.caption2,
-    fontWeight: 600,
+    fontWeight: '600',
     color: CervColors.systemOrange,
   },
   
-  
   detailsBackground: {
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.systemBlueLight,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

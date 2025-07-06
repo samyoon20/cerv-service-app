@@ -8,12 +8,12 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ArrowLeft, Chrome as Home, Sparkles } from 'lucide-react-native';
+import { ArrowLeft, Home, Sparkles } from 'lucide-react-native';
 import CervServiceCard from '@/components/CervServiceCard';
 import CervLogo from '@/components/CervLogo';
 import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
-const MOCK_SERVICES = [
+const CERV_SERVICES = [
   {
     id: '1',
     name: 'Pool Maintenance',
@@ -151,7 +151,7 @@ export default function ServicesScreen() {
 
           <View style={styles.servicesList}>
             <Text style={styles.sectionTitle}>Recommended Services</Text>
-            {MOCK_SERVICES.filter(service => service.isRecommended).map(service => (
+            {CERV_SERVICES.filter(service => service.isRecommended).map(service => (
               <CervServiceCard
                 key={service.id}
                 service={service}
@@ -162,7 +162,7 @@ export default function ServicesScreen() {
 
           <View style={styles.servicesList}>
             <Text style={styles.sectionTitle}>Additional Services</Text>
-            {MOCK_SERVICES.filter(service => !service.isRecommended).map(service => (
+            {CERV_SERVICES.filter(service => !service.isRecommended).map(service => (
               <CervServiceCard
                 key={service.id}
                 service={service}
@@ -269,13 +269,13 @@ const styles = StyleSheet.create({
   },
   propertyAddress: {
     ...CervTypography.subheadline,
-    fontFamily: 'Nunito-SemiBold',
+    fontWeight: '600',
     color: CervColors.label,
     marginBottom: CervSpacing.xs,
   },
   propertyFeatures: {
     ...CervTypography.footnote,
-    fontFamily: 'Nunito-Medium',
+    fontWeight: '500',
     color: CervColors.secondaryLabel,
   },
   servicesList: {
