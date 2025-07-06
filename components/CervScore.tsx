@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import { TrendingUp, Info, X, Award, Target, Users, Home, Plus, Eye } from 'lucide-react-native';
+import { TrendingUp, Info, X, Award, Target, Users, Chrome as Home, Plus, Eye } from 'lucide-react-native';
 import type { CervScore as CervScoreType } from '@/types';
 import { CervColors, CervShadows, CervSpacing, CervBorderRadius, CervTypography } from '@/themes/appleDesignSystem';
 
