@@ -6,11 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import { 
-  Clock,
-  CheckCircle,
-  AlertCircle
-} from 'lucide-react-native';
+import { Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react-native';
 import { getCervServiceTheme } from '@/themes/cervServiceThemes';
 import CervLogo from '@/components/CervLogo';
 import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
@@ -35,27 +31,6 @@ interface CervServiceCardProps {
   onSelect: (serviceId: string) => void;
 }
 
-// const getServiceIcon = (iconName: string) => {
-//   switch (iconName) {
-//     case 'pool':
-//       return Droplets;
-//     case 'landscaping':
-//       return TreePine;
-//     case 'driveway':
-//       return Car;
-//     case 'pest':
-//       return Bug;
-//     case 'tree':
-//       return Scissors;
-//     case 'janitorial':
-//       return Sparkles;
-//     case 'waste':
-//       return Trash2;
-//     default:
-//       return Droplets;
-//   }
-// };
-
 export default function CervServiceCard({ service, onSelect }: CervServiceCardProps) {
   const theme = getCervServiceTheme(service.serviceKey);
   
@@ -68,22 +43,22 @@ export default function CervServiceCard({ service, onSelect }: CervServiceCardPr
   const getStatusInfo = () => {
     if (!service.isAvailable && service.comingSoon) {
       return {
-        icon: <Clock color="#8B9DC3" size={16} />,
+        icon: <Clock color={CervColors.systemGray} size={16} />,
         text: 'Coming Soon',
-        color: '#8B9DC3'
+        color: CervColors.systemGray
       };
     }
     if (service.isAvailable) {
       return {
-        icon: <CheckCircle color={CervColors.systemGreen} size={16} />,
+        icon: <CheckCircle color={theme.primaryColor} size={16} />,
         text: 'Available',
-        color: CervColors.systemGreen
+        color: theme.primaryColor
       };
     }
     return {
-      icon: <AlertCircle color="#FF6B6B" size={16} />,
+      icon: <AlertCircle color={CervColors.systemRed} size={16} />,
       text: 'Unavailable',
-      color: '#FF6B6B'
+      color: CervColors.systemRed
     };
   };
 
@@ -104,11 +79,7 @@ export default function CervServiceCard({ service, onSelect }: CervServiceCardPr
       ]}>
         <View style={styles.content}>
           <View style={styles.header}>
-            <CervLogo 
-              variant="service" 
-              service={service.serviceKey as any}
-              style={styles.serviceLogo}
-            />
+            <View style={[styles.serviceColorBar, { backgroundColor: theme.primaryColor }]} />
             
             <View style={styles.statusContainer}>
               {statusInfo.icon}
@@ -127,7 +98,7 @@ export default function CervServiceCard({ service, onSelect }: CervServiceCardPr
             </Text>
             <Text style={[
               styles.serviceCategory,
-              { color: service.isAvailable ? CervColors.secondaryLabel : CervColors.quaternaryLabel }
+              { color: service.isAvailable ? theme.primaryColor : CervColors.quaternaryLabel }
             ]}>
               {service.category}
             </Text>
@@ -166,7 +137,7 @@ export default function CervServiceCard({ service, onSelect }: CervServiceCardPr
           </View>
 
           {service.isRecommended && service.isAvailable && (
-            <View style={styles.recommendedBadge}>
+            <View style={[styles.recommendedBadge, { backgroundColor: theme.primaryColor }]}>
               <Text style={styles.recommendedText}>Recommended</Text>
             </View>
           )}
@@ -206,8 +177,10 @@ const styles = StyleSheet.create({
     marginBottom: CervSpacing.lg,
     gap: CervSpacing.md,
   },
-  serviceLogo: {
-    maxWidth: 140,
+  serviceColorBar: {
+    width: 4,
+    height: 40,
+    borderRadius: 2,
   },
   statusContainer: {
     flexDirection: 'row',
@@ -220,7 +193,7 @@ const styles = StyleSheet.create({
   },
   statusText: {
     ...CervTypography.caption1,
-    fontWeight: 600,
+    fontWeight: '600',
   },
   serviceInfo: {
     marginBottom: CervSpacing.lg,
@@ -231,7 +204,7 @@ const styles = StyleSheet.create({
   },
   serviceCategory: {
     ...CervTypography.subheadline,
-    fontWeight: 500,
+    fontWeight: '500',
     marginBottom: CervSpacing.sm,
   },
   serviceDescription: {
@@ -256,13 +229,12 @@ const styles = StyleSheet.create({
   },
   durationText: {
     ...CervTypography.caption1,
-    fontWeight: 500,
+    fontWeight: '500',
   },
   recommendedBadge: {
     position: 'absolute',
     top: -CervSpacing.sm,
     right: -CervSpacing.sm,
-    backgroundColor: CervColors.systemOrange,
     paddingHorizontal: CervSpacing.sm,
     paddingVertical: CervSpacing.xs,
     borderRadius: CervBorderRadius.small,
@@ -270,7 +242,7 @@ const styles = StyleSheet.create({
   },
   recommendedText: {
     ...CervTypography.caption2,
-    fontWeight: 700,
-    color: CervColors.background,
+    fontWeight: '700',
+    color: CervColors.white,
   },
 });

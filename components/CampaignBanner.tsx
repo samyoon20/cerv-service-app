@@ -117,14 +117,14 @@ export default function CampaignBanner({
     if (promotion || isExpiringSoon()) {
       return '#FFFFFF';
     }
-    return '#FFFFFF';
+    return CervColors.label;
   };
 
   const getSecondaryTextColor = () => {
     if (promotion || isExpiringSoon()) {
       return 'rgba(255, 255, 255, 0.8)';
     }
-    return '#8B9DC3';
+    return CervColors.secondaryLabel;
   };
 
   if (compact) {
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     fontSize: 16,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '700',
     letterSpacing: -0.2,
   },
@@ -318,14 +318,14 @@ const styles = StyleSheet.create({
   },
   promotionText: {
     fontSize: 10,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: 0.5,
   },
   description: {
     fontSize: 14,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '400',
     lineHeight: 20,
   },
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
   },
   urgencyText: {
     fontSize: 12,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '600',
   },
   actionIndicator: {
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     fontSize: 12,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '500',
     opacity: 0.8,
   },
@@ -387,13 +387,13 @@ const styles = StyleSheet.create({
   },
   compactTitle: {
     fontSize: 12,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '600',
     letterSpacing: -0.1,
   },
   compactPromotion: {
     fontSize: 10,
-    fontFamily: 'System',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif',
     fontWeight: '700',
     letterSpacing: 0.5,
     opacity: 0.9,

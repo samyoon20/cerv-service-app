@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { router } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Chrome as Home, Shield, Clock, Star } from 'lucide-react-native';
-import { CervColors } from '@/themes/appleDesignSystem';
+import { CervColors, CervTypography, CervBorderRadius, CervSpacing } from '@/themes/appleDesignSystem';
 
 export default function OnboardingScreen() {
   const handleSkip = () => {
@@ -21,21 +20,18 @@ export default function OnboardingScreen() {
         style={styles.backgroundImage}
         imageStyle={styles.backgroundImageStyle}
       >
-        <LinearGradient
-          colors={['rgba(15, 22, 41, 0.7)', 'rgba(26, 35, 50, 0.8)']}
-          style={styles.overlay}
-        />
+        <View style={styles.overlay} />
         
         <View style={styles.content}>
           <View style={styles.logoContainer}>
             <View style={styles.logoCircle}>
-              <Home color="#ffffff" size={40} />
+              <Home color={CervColors.white} size={40} />
             </View>
             <Text style={styles.logoText}>Cerv</Text>
           </View>
 
           <View style={styles.heroSection}>
-            <Text style={styles.title}>Your Home&apos;s Best Friend</Text>
+            <Text style={styles.title}>Your Home's Best Friend</Text>
             <Text style={styles.subtitle}>
               Book, track, and manage all your home maintenance services through one beautiful app
             </Text>
@@ -58,12 +54,9 @@ export default function OnboardingScreen() {
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-              <LinearGradient
-                colors={[CervColors.systemGreen, CervColors.systemGreen]}
-                style={styles.gradientButton}
-              >
+              <View style={styles.continueButtonBackground}>
                 <Text style={styles.continueButtonText}>Get Started</Text>
-              </LinearGradient>
+              </View>
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
@@ -79,7 +72,7 @@ export default function OnboardingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F1629',
+    backgroundColor: CervColors.background,
   },
   backgroundImage: {
     flex: 1,
@@ -90,10 +83,11 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: CervSpacing.xxl,
     paddingTop: 80,
     paddingBottom: 40,
     justifyContent: 'space-between',
@@ -106,87 +100,74 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: CervColors.systemGreenLight,
-    borderWidth: 2,
-    borderColor: CervColors.systemGreen,
+    backgroundColor: CervColors.systemGreen,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: CervSpacing.lg,
   },
   logoText: {
-    fontSize: 32,
-    fontFamily: 'Nunito-Bold',
-    color: '#ffffff',
-    letterSpacing: -1,
+    ...CervTypography.largeTitle,
+    color: CervColors.white,
   },
   heroSection: {
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: CervSpacing.xl,
   },
   title: {
-    fontSize: 36,
-    fontFamily: 'Nunito-Bold',
-    color: '#ffffff',
+    ...CervTypography.largeTitle,
+    color: CervColors.white,
     textAlign: 'center',
-    marginBottom: 16,
-    lineHeight: 42,
-    letterSpacing: -1,
+    marginBottom: CervSpacing.lg,
   },
   subtitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Regular',
-    color: 'rgba(255, 255, 255, 0.9)',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    lineHeight: 26,
     maxWidth: 320,
   },
   featuresContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: CervSpacing.xl,
   },
   feature: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    borderRadius: 12,
+    marginBottom: CervSpacing.xl,
+    backgroundColor: CervColors.cardBackground,
+    paddingHorizontal: CervSpacing.xl,
+    paddingVertical: CervSpacing.lg,
+    borderRadius: CervBorderRadius.large,
     borderWidth: 1,
-    borderColor: CervColors.systemGreenLight,
+    borderColor: CervColors.separator,
   },
   featureText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#ffffff',
-    marginLeft: 12,
-    letterSpacing: -0.2,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginLeft: CervSpacing.md,
   },
   buttonContainer: {
-    gap: 16,
+    gap: CervSpacing.lg,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
-  gradientButton: {
-    paddingVertical: 18,
+  continueButtonBackground: {
+    backgroundColor: CervColors.systemGreen,
+    paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
   },
   continueButtonText: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#ffffff',
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.white,
   },
   skipButton: {
-    paddingVertical: 18,
+    paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
   },
   skipButtonText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Medium',
-    color: 'rgba(255, 255, 255, 0.7)',
+    ...CervTypography.callout,
+    color: CervColors.tertiaryLabel,
   },
 });

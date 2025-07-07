@@ -3,10 +3,10 @@ import {
   View, 
   Text, 
   StyleSheet, 
-  ScrollView, 
   TouchableOpacity,
   Alert,
-  Switch
+  Switch,
+  ScrollView
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { User, CreditCard, MapPin, Bell, CircleHelp as HelpCircle, Shield, LogOut, ChevronRight, CreditCard as Edit3 } from 'lucide-react-native';
@@ -56,7 +56,7 @@ export default function ProfileTab() {
           <View style={styles.header}>
             <Text style={styles.headerTitle}>Profile</Text>
             <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
-              <Edit3 color="#8B9DC3" size={20} />
+              <Edit3 color={CervColors.secondaryLabel} size={20} />
             </TouchableOpacity>
           </View>
 
@@ -83,14 +83,14 @@ export default function ProfileTab() {
                 <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
-                      <CreditCard color="#8B9DC3" size={20} />
+                      <CreditCard color={CervColors.secondaryLabel} size={20} />
                     </View>
                     <View style={styles.menuText}>
                       <Text style={styles.menuTitle}>Payment Methods</Text>
                       <Text style={styles.menuSubtitle}>Manage cards and payment options</Text>
                     </View>
                   </View>
-                  <ChevronRight color="#8B9DC3" size={20} />
+                  <ChevronRight color={CervColors.tertiaryLabel} size={20} />
                 </View>
               </TouchableOpacity>
 
@@ -98,14 +98,14 @@ export default function ProfileTab() {
                 <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
-                      <MapPin color="#8B9DC3" size={20} />
+                      <MapPin color={CervColors.secondaryLabel} size={20} />
                     </View>
                     <View style={styles.menuText}>
                       <Text style={styles.menuTitle}>Service Addresses</Text>
                       <Text style={styles.menuSubtitle}>Manage your property locations</Text>
                     </View>
                   </View>
-                  <ChevronRight color="#8B9DC3" size={20} />
+                  <ChevronRight color={CervColors.tertiaryLabel} size={20} />
                 </View>
               </TouchableOpacity>
             </View>
@@ -118,7 +118,7 @@ export default function ProfileTab() {
                 <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
-                      <Bell color="#8B9DC3" size={20} />
+                      <Bell color={CervColors.secondaryLabel} size={20} />
                     </View>
                     <View style={styles.menuText}>
                       <Text style={styles.menuTitle}>Push Notifications</Text>
@@ -128,8 +128,8 @@ export default function ProfileTab() {
                   <Switch
                     value={notificationsEnabled}
                     onValueChange={setNotificationsEnabled}
-                    trackColor={{ false: 'rgba(139, 157, 195, 0.2)', true: 'rgba(0, 212, 170, 0.3)' }}
-                    thumbColor={notificationsEnabled ? CervColors.systemGreen : '#8B9DC3'}
+                    trackColor={{ false: CervColors.systemGray4, true: CervColors.systemGreenLight }}
+                    thumbColor={notificationsEnabled ? CervColors.systemGreen : CervColors.systemGray}
                   />
                 </View>
               </View>
@@ -138,7 +138,7 @@ export default function ProfileTab() {
                 <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
-                      <MapPin color="#8B9DC3" size={20} />
+                      <MapPin color={CervColors.secondaryLabel} size={20} />
                     </View>
                     <View style={styles.menuText}>
                       <Text style={styles.menuTitle}>Location Services</Text>
@@ -148,8 +148,8 @@ export default function ProfileTab() {
                   <Switch
                     value={locationEnabled}
                     onValueChange={setLocationEnabled}
-                    trackColor={{ false: 'rgba(139, 157, 195, 0.2)', true: 'rgba(0, 212, 170, 0.3)' }}
-                    thumbColor={locationEnabled ? CervColors.systemGreen : '#8B9DC3'}
+                    trackColor={{ false: CervColors.systemGray4, true: CervColors.systemGreenLight }}
+                    thumbColor={locationEnabled ? CervColors.systemGreen : CervColors.systemGray}
                   />
                 </View>
               </View>
@@ -163,14 +163,14 @@ export default function ProfileTab() {
                 <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
-                      <HelpCircle color="#8B9DC3" size={20} />
+                      <HelpCircle color={CervColors.secondaryLabel} size={20} />
                     </View>
                     <View style={styles.menuText}>
                       <Text style={styles.menuTitle}>Help & Support</Text>
                       <Text style={styles.menuSubtitle}>Get help with your services</Text>
                     </View>
                   </View>
-                  <ChevronRight color="#8B9DC3" size={20} />
+                  <ChevronRight color={CervColors.tertiaryLabel} size={20} />
                 </View>
               </TouchableOpacity>
 
@@ -178,14 +178,14 @@ export default function ProfileTab() {
                 <View style={styles.menuItemBackground}>
                   <View style={styles.menuItemLeft}>
                     <View style={styles.menuIcon}>
-                      <Shield color="#8B9DC3" size={20} />
+                      <Shield color={CervColors.secondaryLabel} size={20} />
                     </View>
                     <View style={styles.menuText}>
                       <Text style={styles.menuTitle}>Privacy & Security</Text>
                       <Text style={styles.menuSubtitle}>Data protection and security</Text>
                     </View>
                   </View>
-                  <ChevronRight color="#8B9DC3" size={20} />
+                  <ChevronRight color={CervColors.tertiaryLabel} size={20} />
                 </View>
               </TouchableOpacity>
             </View>
@@ -220,7 +220,7 @@ export default function ProfileTab() {
             {/* Sign Out */}
             <TouchableOpacity style={styles.signOutButton} onPress={handleLogout}>
               <View style={styles.signOutBackground}>
-                <LogOut color="#FF6B6B" size={20} />
+                <LogOut color={CervColors.systemRed} size={20} />
                 <Text style={styles.signOutText}>Sign Out</Text>
               </View>
             </TouchableOpacity>
@@ -248,31 +248,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingVertical: CervSpacing.xl,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   headerTitle: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
+    ...CervTypography.title2,
+    color: CervColors.label,
   },
   editButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingHorizontal: CervSpacing.xxl,
+    paddingTop: CervSpacing.xl,
   },
   profileCard: {
     backgroundColor: CervColors.cardBackground,
@@ -284,54 +282,47 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: CervSpacing.lg,
   },
   avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemBlueLight,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: 'rgba(0, 212, 170, 0.2)',
+    borderColor: CervColors.systemBlue,
   },
   profileInfo: {
     alignItems: 'center',
   },
   profileName: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.title2,
+    color: CervColors.label,
     marginBottom: 4,
-    letterSpacing: -0.5,
   },
   profileEmail: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
-    marginBottom: 8,
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
+    marginBottom: CervSpacing.sm,
   },
   profileAddress: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.tertiaryLabel,
     textAlign: 'center',
-    lineHeight: 20,
   },
   section: {
-    marginBottom: 32,
+    marginBottom: CervSpacing.xxxl,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
-    marginBottom: 16,
-    letterSpacing: -0.3,
+    ...CervTypography.headline,
+    color: CervColors.label,
+    marginBottom: CervSpacing.lg,
   },
   menuItem: {
-    borderRadius: 16,
-    marginBottom: 8,
+    borderRadius: CervBorderRadius.large,
+    marginBottom: CervSpacing.sm,
     overflow: 'hidden',
   },
   menuItemBackground: {
@@ -353,33 +344,30 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: CervSpacing.lg,
   },
   menuText: {
     flex: 1,
   },
   menuTitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    ...CervTypography.headline,
+    color: CervColors.label,
     marginBottom: 2,
-    letterSpacing: -0.2,
   },
   menuSubtitle: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
-    color: '#8B9DC3',
+    ...CervTypography.subheadline,
+    color: CervColors.secondaryLabel,
   },
   statsSection: {
-    marginBottom: 32,
+    marginBottom: CervSpacing.xxxl,
   },
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: CervSpacing.md,
   },
   statCard: {
     backgroundColor: CervColors.cardBackground,
@@ -392,21 +380,19 @@ const styles = StyleSheet.create({
     borderColor: CervColors.separator,
   },
   statValue: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.title2,
     color: CervColors.systemGreen,
     marginBottom: 4,
-    letterSpacing: -0.5,
   },
   statLabel: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
-    color: '#8B9DC3',
+    ...CervTypography.caption1,
+    fontWeight: '600',
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
   },
   signOutButton: {
-    borderRadius: 16,
-    marginBottom: 32,
+    borderRadius: CervBorderRadius.large,
+    marginBottom: CervSpacing.xxxl,
     overflow: 'hidden',
   },
   signOutBackground: {
@@ -417,16 +403,16 @@ const styles = StyleSheet.create({
     paddingVertical: CervSpacing.lg,
     paddingHorizontal: CervSpacing.xxl,
     borderWidth: 0.5,
-    borderColor: CervColors.systemRedLight,
+    borderColor: CervColors.systemRed,
     gap: CervSpacing.sm,
     borderRadius: CervBorderRadius.large,
   },
   signOutText: {
     ...CervTypography.callout,
-    fontFamily: 'Nunito-Bold',
+    fontWeight: '700',
     color: CervColors.systemRed,
   },
   bottomSpacing: {
-    height: 20,
+    height: CervSpacing.xl,
   },
 });

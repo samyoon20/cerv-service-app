@@ -39,13 +39,13 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
       case 'preparing':
         return '#FFB800';
       case 'en_route':
-        return 'CervColors.systemGreen';
+        return CervColors.systemGreen;
       case 'arrived':
-        return 'CervColors.systemGreen';
+        return CervColors.systemGreen;
       case 'working':
-        return 'CervColors.systemGreen';
+        return CervColors.systemGreen;
       case 'completed':
-        return 'CervColors.systemGreen';
+        return CervColors.systemGreen;
       default:
         return '#8B9DC3';
     }
@@ -84,10 +84,10 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
           
           <View style={styles.actions}>
             <TouchableOpacity style={styles.actionButton} onPress={handleTrackLocation}>
-              <Navigation color="CervColors.systemGreen" size={18} />
+              <Navigation color={CervColors.systemGreen} size={18} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionButton} onPress={handleCallTechnician}>
-              <Phone color="CervColors.systemGreen" size={18} />
+              <Phone color={CervColors.systemGreen} size={18} />
             </TouchableOpacity>
           </View>
         </View>
@@ -115,7 +115,7 @@ export default function TechnicianTracker({ status }: TechnicianTrackerProps) {
             </View>
             
             <View style={styles.etaInfo}>
-              <Clock color="CervColors.systemGreen" size={14} />
+              <Clock color={CervColors.systemGreen} size={14} />
               <Text style={styles.etaText}>ETA {status.eta}</Text>
             </View>
           </View>
@@ -159,13 +159,13 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 14,
     fontFamily: 'Nunito-SemiBold',
-    color: 'CervColors.systemGreen',
+    color: CervColors.systemGreen,
     letterSpacing: -0.1,
   },
   serviceName: {
     fontSize: 16,
     fontFamily: 'Nunito-Bold',
-    color: '#FFFFFF',
+    color: CervColors.white,
     letterSpacing: -0.3,
   },
   actions: {
@@ -176,11 +176,11 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: 'CervColors.systemGreenLight',
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'CervColors.systemGreenLight',
+    borderColor: CervColors.systemGreenLight,
   },
   progressSection: {
     gap: 8,
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   technicianName: {
     fontSize: 12,
     fontFamily: 'Nunito-SemiBold',
-    color: '#FFFFFF',
+    color: CervColors.white,
     marginBottom: 4,
     letterSpacing: -0.1,
   },
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'CervColors.systemGreenLight',
+    backgroundColor: CervColors.systemGreenLight,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 10,
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   etaText: {
     fontSize: 11,
     fontFamily: 'Nunito-SemiBold',
-    color: 'CervColors.systemGreen',
+    color: CervColors.systemGreen,
     letterSpacing: -0.1,
   },
   
