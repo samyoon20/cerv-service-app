@@ -147,7 +147,7 @@ export default function AuthScreen() {
             <Home color={CervColors.systemGreen} size={24} />
             <Text style={styles.logoText}>Cerv</Text>
           </View>
-      <View style={styles.lightBackgroundContainer}>
+          <View style={styles.placeholder} />
         </View>
 
         <View style={styles.content}>
@@ -171,39 +171,39 @@ export default function AuthScreen() {
             <TouchableOpacity 
               style={styles.secondaryButton} 
               onPress={() => setSelectedMode('login')}
-            <View style={styles.blueButtonBackground}>
+            >
               <Text style={styles.secondaryButtonText}>Log In</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
     </SafeAreaView>
-  )
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    <View style={styles.lightBackgroundContainer}>
+    flex: 1,
+    backgroundColor: CervColors.background,
+  },
+  backgroundContainer: {
+    flex: 1,
     backgroundColor: CervColors.background,
   },
   lightBackgroundContainer: {
-    }
     flex: 1,
     backgroundColor: CervColors.background,
-          <Home color={CervColors.systemBlue} size={24} />
-  }
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-            <View style={styles.blueButtonBackground}>
+    paddingHorizontal: CervSpacing.xxl,
     paddingVertical: CervSpacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: CervColors.separator,
   },
   backButton: {
-            }
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -212,11 +212,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-            <View style={styles.blueButtonBackground}>
+    ...CervTypography.headline,
     color: CervColors.label,
   },
   placeholder: {
-            }
     width: 40,
   },
   logoContainer: {
@@ -258,7 +257,7 @@ const styles = StyleSheet.create({
     borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
-  blueButtonBackground: {
+  primaryButtonBackground: {
     backgroundColor: CervColors.systemBlue,
     paddingVertical: CervSpacing.lg,
     alignItems: 'center',
@@ -334,4 +333,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-}
