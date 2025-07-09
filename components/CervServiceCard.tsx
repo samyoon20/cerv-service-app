@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     ...CervShadows.card,
   },
   disabledContainer: {
-    opacity: 0.6,
+    opacity: 1,
   },
   cardBackground: {
     backgroundColor: CervColors.cardBackground,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     borderColor: CervColors.separator,
   },
   disabledBackground: {
-    backgroundColor: CervColors.systemGray6,
+    backgroundColor: CervColors.systemGray5,
   },
   content: {
     // No special styling needed
@@ -194,60 +194,5 @@ const styles = StyleSheet.create({
   statusText: {
     ...CervTypography.caption1,
     fontWeight: '600',
-  },
-  serviceInfo: {
-    marginBottom: CervSpacing.lg,
-    alignItems: 'flex-start',
-  },
-  serviceName: {
-    ...CervTypography.title3,
-    marginBottom: CervSpacing.xs,
-    textAlign: 'left',
-  },
-  serviceCategory: {
-    ...CervTypography.subheadline,
-    fontWeight: '500',
-    marginBottom: CervSpacing.sm,
-    textAlign: 'left',
-  },
-  serviceDescription: {
-    ...CervTypography.subheadline,
-    textAlign: 'left',
-    lineHeight: 20,
-  },
-  pricing: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  priceRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: CervSpacing.sm,
-  },
-  originalPrice: {
-    ...CervTypography.subheadline,
-    textDecorationLine: 'line-through',
-  },
-  subscriptionPrice: {
-    ...CervTypography.headline,
-  },
-  durationText: {
-    ...CervTypography.caption1,
-    fontWeight: '500',
-  },
-  recommendedBadge: {
-    position: 'absolute',
-    top: -CervSpacing.sm,
-    right: -CervSpacing.sm,
-    paddingHorizontal: CervSpacing.sm,
-    paddingVertical: CervSpacing.xs,
-    borderRadius: CervBorderRadius.small,
-    ...CervShadows.card,
-  },
-  recommendedText: {
-    ...CervTypography.caption2,
-    fontWeight: '700',
-    color: CervColors.white,
   },
 });

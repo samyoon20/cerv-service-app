@@ -122,7 +122,7 @@ export default function ServicesScreen() {
       <View style={styles.backgroundView}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <ArrowLeft color={CervColors.label} size={24} />
+            <ArrowLeft color={CervColors.white} size={24} />
           </TouchableOpacity>
           <CervLogo variant="horizontal" size="small" />
           <View style={styles.placeholder} />
@@ -200,10 +200,13 @@ const styles = StyleSheet.create({
   backButton: {
     width: 40,
     height: 40,
-    borderRadius: CervBorderRadius.round,
-    backgroundColor: CervColors.secondarySystemFill,
+    borderRadius: 20,
+    backgroundColor: CervColors.systemBlue,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButtonIcon: {
+    color: CervColors.white,
   },
   headerTitle: {
     ...CervTypography.headline,

@@ -1,4 +1,4 @@
-// Apple-inspired dark design system for Cerv
+// Apple-inspired light design system for Cerv
 export const CervColors = {
   // Light Theme Backgrounds (Apple-inspired)
   background: '#F2F2F7',
@@ -12,8 +12,8 @@ export const CervColors = {
   
   // Text Colors (Light Mode)
   label: '#000000',
-  secondaryLabel: '#3C3C4399',
-  tertiaryLabel: '#3C3C434D',
+  secondaryLabel: '#3C3C43CC',
+  tertiaryLabel: '#3C3C4399',
   quaternaryLabel: '#3C3C432E',
   
   // Separator Colors (Light Mode)
@@ -22,33 +22,33 @@ export const CervColors = {
   
   // Fill Colors (Light Mode)
   systemFill: '#78788014',
-  secondarySystemFill: '#78788010',
-  tertiarySystemFill: '#7676800A',
-  quaternarySystemFill: '#76768005',
+  secondarySystemFill: '#78788028',
+  tertiarySystemFill: '#7676801C',
+  quaternarySystemFill: '#76768014',
   
-  // Apple-inspired Grays
+  // Apple-inspired Grays (Lighter for better readability)
   systemGray: '#8E8E93',
-  systemGray2: '#636366',
-  systemGray3: '#48484A',
-  systemGray4: '#3A3A3C',
-  systemGray5: '#2C2C2E',
-  systemGray6: '#1C1C1E',
+  systemGray2: '#AEAEB2',
+  systemGray3: '#C7C7CC',
+  systemGray4: '#D1D1D6',
+  systemGray5: '#E5E5EA',
+  systemGray6: '#F2F2F7',
   
-  // System Colors (Apple-inspired) - Changed from green to blue
+  // System Colors (Apple-inspired) - Blue theme
   systemBlue: '#007AFF',
-  systemBlueLight: '#007AFF33',
+  systemBlueLight: '#007AFF1A',
   
   // Primary Colors (Blue instead of green)
   systemGreen: '#007AFF',
-  systemGreenLight: '#007AFF33',
+  systemGreenLight: '#007AFF1A',
   
   // Destructive Colors
   systemRed: '#FF3B30',
-  systemRedLight: '#FF3B3033',
+  systemRedLight: '#FF3B301A',
   
   // Warning Colors
   systemOrange: '#FF9500',
-  systemOrangeLight: '#FF950033',
+  systemOrangeLight: '#FF95001A',
   
   // Apple White/Light Colors  
   white: '#FFFFFF',

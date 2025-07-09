@@ -71,13 +71,10 @@ export default function ScheduleScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#F8FAFC', '#F1F5F9']}
-        style={styles.backgroundGradient}
-      >
+      <View style={styles.backgroundContainer}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <ArrowLeft color="#475569" size={24} />
+            <ArrowLeft color={CervColors.white} size={24} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Schedule Service</Text>
           <View style={styles.placeholder} />
@@ -149,23 +146,25 @@ export default function ScheduleScreen() {
             onPress={handleContinue}
             disabled={!isComplete}
           >
-            <LinearGradient
-              colors={[CervColors.systemBlue, CervColors.systemBlue]}
-              style={[
+            <View style={[
               styles.blueButtonBackground,
-              !isComplete && { backgroundColor: '#9CA3AF' }
+              !isComplete && styles.disabledButtonBackground
             ]}>
               <Text style={styles.continueButtonText}>Continue to Pricing</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
         </View>
-      </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: CervColors.background,
+  },
+  backgroundContainer: {
     flex: 1,
     backgroundColor: CervColors.background,
   },
@@ -182,7 +181,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: CervColors.systemGray5,
+    backgroundColor: CervColors.systemBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -298,11 +297,15 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 16,
+  },
+  disabledButtonBackground: {
+    backgroundColor: CervColors.systemGray3,
   },
   continueButtonText: {
     fontSize: 18,
     fontFamily: 'System',
     fontWeight: '600',
-    color: CervColors.white,
+    color: '#FFFFFF',
   },
 });
