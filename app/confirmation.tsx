@@ -221,19 +221,15 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   successTitle: {
-    fontSize: 28,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.title1,
     color: '#0F172A',
     textAlign: 'center',
     marginBottom: 12,
-    letterSpacing: -0.5,
   },
   successSubtitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.callout,
     color: '#64748B',
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 280,
   },
   bookingCard: {
@@ -275,10 +271,8 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   cardTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: '#0F172A',
-    letterSpacing: -0.3,
   },
   detailsGrid: {
     gap: 16,
@@ -289,14 +283,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   detailLabel: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.subheadline,
     color: '#64748B',
     flex: 1,
   },
   detailValue: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.subheadline,
+    fontWeight: '600',
     color: '#0F172A',
     flex: 2,
     textAlign: 'right',
@@ -308,18 +301,17 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   totalLabel: {
-    fontSize: 16,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.callout,
+    fontWeight: '600',
     color: '#0F172A',
     flex: 1,
   },
   totalValue: {
-    fontSize: 18,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.headline,
+    fontWeight: '700',
     color: CervColors.systemGreen,
     flex: 2,
     textAlign: 'right',
-    letterSpacing: -0.3,
   },
   nextStepsCard: {
     backgroundColor: '#ffffff',
@@ -330,11 +322,9 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(139, 157, 195, 0.2)',
   },
   nextStepsTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: '#0F172A',
     marginBottom: 20,
-    letterSpacing: -0.3,
   },
   stepsList: {
     gap: 16,
@@ -353,15 +343,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   stepNumberText: {
-    fontSize: 12,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.caption1,
+    fontWeight: '600',
     color: '#ffffff',
   },
   stepText: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.subheadline,
     color: '#374151',
-    lineHeight: 20,
     flex: 1,
     paddingTop: 2,
   },
@@ -386,9 +374,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   dashboardButtonText: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: '#ffffff',
-    letterSpacing: -0.3,
   },
 });

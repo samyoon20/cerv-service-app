@@ -241,8 +241,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: '#0F172A',
   },
   placeholder: {
@@ -267,19 +266,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.title1,
     color: '#0F172A',
     textAlign: 'center',
     marginBottom: 8,
-    letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.body,
     color: '#64748B',
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 300,
   },
   serviceInfo: {
@@ -291,15 +286,12 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(139, 157, 195, 0.2)',
   },
   serviceName: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: '#0F172A',
     marginBottom: 4,
-    letterSpacing: -0.3,
   },
   serviceSchedule: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.subheadline,
     color: '#64748B',
   },
   pricingOptions: {
@@ -344,11 +336,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   cardTitle: {
-    fontSize: 20,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.title3,
     color: '#0F172A',
     marginBottom: 8,
-    letterSpacing: -0.3,
   },
   priceContainer: {
     flexDirection: 'row',
@@ -356,25 +346,21 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   price: {
-    fontSize: 32,
-    fontFamily: 'Nunito-Bold',
+    ...CervTypography.largeTitle,
     color: '#0F172A',
     marginRight: 8,
-    letterSpacing: -1,
   },
   priceFrequency: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.callout,
     color: '#64748B',
   },
   savings: {
-    fontSize: 14,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.subheadline,
+    fontWeight: '600',
     color: CervColors.systemGreen,
   },
   priceNote: {
-    fontSize: 14,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.subheadline,
     color: '#64748B',
   },
   features: {
@@ -386,8 +372,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   featureText: {
-    fontSize: 16,
-    fontFamily: 'Nunito-Regular',
+    ...CervTypography.callout,
     color: '#374151',
   },
   selectedIndicator: {
@@ -423,9 +408,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   continueButtonText: {
-    fontSize: 18,
-    fontFamily: 'Nunito-SemiBold',
+    ...CervTypography.headline,
     color: '#ffffff',
-    letterSpacing: -0.3,
   },
 });
+    ...CervTypography.caption1,
+    fontWeight: '700',

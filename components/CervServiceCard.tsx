@@ -156,19 +156,20 @@ const styles = StyleSheet.create({
     ...CervShadows.card,
   },
   disabledContainer: {
-    opacity: 1,
+    color: CervColors.label,
   },
   cardBackground: {
     backgroundColor: CervColors.cardBackground,
     padding: CervSpacing.xl,
     borderWidth: 0.5,
     borderColor: CervColors.separator,
-  },
+    color: CervColors.secondaryLabel,
   disabledBackground: {
     backgroundColor: CervColors.systemGray5,
   },
   content: {
     // No special styling needed
+    color: CervColors.secondaryLabel,
   },
   header: {
     flexDirection: 'row',
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 2,
   },
+    color: CervColors.tertiaryLabel,
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -194,5 +196,7 @@ const styles = StyleSheet.create({
   statusText: {
     ...CervTypography.caption1,
     fontWeight: '600',
+    color: CervColors.tertiaryLabel,
   },
 });
+    color: CervColors.systemBlue,

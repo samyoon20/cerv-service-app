@@ -797,25 +797,25 @@ const styles = StyleSheet.create({
   addOnCard: {
     width: 160,
     marginRight: 12,
-    borderRadius: 16,
-    overflow: 'hidden',
   },
   addOnName: {
     ...CervTypography.subheadline,
     fontWeight: '600',
     color: CervColors.label,
     marginBottom: 4,
+    textAlign: 'left',
   },
   addOnDescription: {
     ...CervTypography.caption1,
     color: CervColors.secondaryLabel,
     marginBottom: 8,
-    lineHeight: 16,
+    textAlign: 'left',
   },
   addOnPrice: {
     ...CervTypography.headline,
     color: CervColors.systemGreen,
     marginBottom: 12,
+    textAlign: 'left',
   },
   addOnButton: {
     flexDirection: 'row',
@@ -847,11 +847,12 @@ const styles = StyleSheet.create({
   addOnCardBackground: {
     backgroundColor: CervColors.cardBackground,
     padding: CervSpacing.lg,
-    borderRadius: CervBorderRadius.medium,
+    borderRadius: CervBorderRadius.large,
     height: 140,
     justifyContent: 'space-between',
     borderWidth: 0.5,
     borderColor: CervColors.separator,
+    alignItems: 'flex-start',
   },
   
   viewReportBackground: {
