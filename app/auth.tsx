@@ -178,6 +178,7 @@ export default function AuthScreen() {
         </View>
       </View>
     </SafeAreaView>
+  )
   );
 }
 
@@ -186,10 +187,12 @@ const styles = StyleSheet.create({
     <View style={styles.lightBackgroundContainer}>
     backgroundColor: CervColors.background,
   },
-  lightBackgroundContainer: {
+  backgroundContainer: {
+    }
     flex: 1,
     backgroundColor: CervColors.background,
           <Home color={CervColors.systemBlue} size={24} />
+  }
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -200,10 +203,11 @@ const styles = StyleSheet.create({
     borderBottomColor: CervColors.separator,
   },
   backButton: {
+            }
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: CervColors.systemGray5,
+    backgroundColor: CervColors.secondarySystemFill,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -212,6 +216,7 @@ const styles = StyleSheet.create({
     color: CervColors.label,
   },
   placeholder: {
+            }
     width: 40,
   },
   logoContainer: {
@@ -253,8 +258,8 @@ const styles = StyleSheet.create({
     borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
-  blueButtonBackground: {
-    backgroundColor: CervColors.systemBlue,
+  primaryButtonBackground: {
+    backgroundColor: CervColors.systemGreen,
     paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
@@ -287,7 +292,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: CervColors.systemBlueLight,
+    backgroundColor: CervColors.systemGreenLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: CervSpacing.lg,
@@ -315,17 +320,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: CervSpacing.xl,
   },
   loginPrompt: {
-    backgroundColor: CervColors.systemBlueLight,
+    backgroundColor: CervColors.systemGreenLight,
     padding: CervSpacing.xl,
     borderRadius: CervBorderRadius.medium,
     marginBottom: 40,
     borderWidth: 1,
-    borderColor: CervColors.systemBlue,
+    borderColor: CervColors.systemGreen,
   },
   loginPromptText: {
     ...CervTypography.subheadline,
     fontWeight: '500',
-    color: CervColors.systemBlue,
+    color: CervColors.systemGreen,
     textAlign: 'center',
   },
 });
+}
