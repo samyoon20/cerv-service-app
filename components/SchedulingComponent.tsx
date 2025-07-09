@@ -74,7 +74,7 @@ export default function SchedulingComponent({
       {/* Frequency Selection */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Repeat color={CervColors.systemGreen} size={20} />
+          <Repeat color={CervColors.systemBlue} size={20} />
           <Text style={styles.sectionTitle}>How often?</Text>
         </View>
         <View style={styles.frequencyGrid}>
@@ -107,7 +107,7 @@ export default function SchedulingComponent({
       {/* Date Selection */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Calendar color={CervColors.systemGreen} size={20} />
+          <Calendar color={CervColors.systemBlue} size={20} />
           <Text style={styles.sectionTitle}>Choose a date</Text>
         </View>
         <ScrollView 
@@ -144,7 +144,7 @@ export default function SchedulingComponent({
       {/* Time Selection */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Clock color={CervColors.systemGreen} size={20} />
+          <Clock color={CervColors.systemBlue} size={20} />
           <Text style={styles.sectionTitle}>Select time</Text>
         </View>
         <View style={styles.timeGrid}>
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   frequencyOptionSelected: {
-    borderColor: CervColors.systemGreen,
-    backgroundColor: 'rgba(0, 212, 170, 0.05)',
+    borderColor: CervColors.systemBlue,
+    backgroundColor: 'rgba(0, 122, 255, 0.05)',
   },
   frequencyLabel: {
     fontSize: 16,
@@ -219,10 +219,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#0F172A',
     marginBottom: 4,
-    letterSpacing: -0.2,
   },
   frequencyLabelSelected: {
-    color: '#065F46',
+    color: '#0051D5',
   },
   frequencyDescription: {
     fontSize: 12,
@@ -231,7 +230,7 @@ const styles = StyleSheet.create({
     color: '#64748B',
   },
   frequencyDescriptionSelected: {
-    color: '#047857',
+    color: '#0051D5',
   },
   dateScroll: {
     marginHorizontal: -20,
@@ -248,8 +247,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   dateOptionSelected: {
-    borderColor: CervColors.systemGreen,
-    backgroundColor: 'rgba(0, 212, 170, 0.05)',
+    borderColor: CervColors.systemBlue,
+    backgroundColor: 'rgba(0, 122, 255, 0.05)',
   },
   dateText: {
     fontSize: 14,
@@ -257,10 +256,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#0F172A',
     marginBottom: 4,
-    letterSpacing: -0.1,
   },
   dateTextSelected: {
-    color: '#065F46',
+    color: '#0051D5',
   },
   dayText: {
     fontSize: 12,
@@ -269,7 +267,7 @@ const styles = StyleSheet.create({
     color: '#64748B',
   },
   dayTextSelected: {
-    color: '#047857',
+    color: '#0051D5',
   },
   timeGrid: {
     flexDirection: 'row',
@@ -285,17 +283,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   timeOptionSelected: {
-    borderColor: CervColors.systemGreen,
-    backgroundColor: 'rgba(0, 212, 170, 0.05)',
+    borderColor: CervColors.systemBlue,
+    backgroundColor: 'rgba(0, 122, 255, 0.05)',
   },
   timeText: {
     fontSize: 14,
     fontFamily: 'System',
     fontWeight: '600',
     color: '#0F172A',
-    letterSpacing: -0.1,
   },
   timeTextSelected: {
-    color: '#065F46',
+    color: '#0051D5',
   },
 });

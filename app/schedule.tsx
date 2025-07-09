@@ -86,7 +86,7 @@ export default function ScheduleScreen() {
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <Calendar color={CervColors.systemGreen} size={32} />
+              <Calendar color={CervColors.systemBlue} size={32} />
             </View>
             <Text style={styles.title}>Schedule your {service.name}</Text>
             <Text style={styles.subtitle}>
@@ -149,15 +149,15 @@ export default function ScheduleScreen() {
             onPress={handleContinue}
             disabled={!isComplete}
           >
-            <LinearGradient
-              colors={isComplete ? [CervColors.systemGreen, '#28B946'] : ['#9CA3AF', '#9CA3AF']}
-              style={styles.gradientButton}
-            >
+            <View style={[
+              styles.blueButtonBackground,
+              !isComplete && { backgroundColor: '#9CA3AF' }
+            ]}>
               <Text style={styles.continueButtonText}>Continue to Pricing</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
         </View>
-      </LinearGradient>
+      </View>
     </SafeAreaView>
   );
 }
@@ -165,9 +165,7 @@ export default function ScheduleScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  backgroundGradient: {
-    flex: 1,
+    backgroundColor: CervColors.background,
   },
   header: {
     flexDirection: 'row',
@@ -176,21 +174,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(139, 157, 195, 0.1)',
+    borderBottomColor: CervColors.separator,
   },
   backButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 157, 195, 0.1)',
+    backgroundColor: CervColors.systemGray5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerTitle: {
-    fontSize: 18,
-    fontFamily: CervTypography.headline.fontFamily,
-    fontWeight: CervTypography.headline.fontWeight,
-    color: '#0F172A',
+    ...CervTypography.headline,
+    color: CervColors.label,
   },
   placeholder: {
     width: 40,
@@ -208,64 +204,57 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemBlueLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
-    fontFamily: CervTypography.title1.fontFamily,
-    fontWeight: CervTypography.title1.fontWeight,
-    color: '#0F172A',
+    ...CervTypography.title1,
+    color: CervColors.label,
     textAlign: 'center',
     marginBottom: 8,
-    letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: CervTypography.body.fontFamily,
-    fontWeight: CervTypography.body.fontWeight,
-    color: '#64748B',
+    ...CervTypography.body,
+    color: CervColors.secondaryLabel,
     textAlign: 'center',
-    lineHeight: 24,
     maxWidth: 300,
   },
   serviceInfo: {
-    backgroundColor: '#ffffff',
+    backgroundColor: CervColors.cardBackground,
     padding: 20,
     borderRadius: 12,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: 'rgba(139, 157, 195, 0.2)',
+    borderColor: CervColors.separator,
   },
   serviceName: {
     fontSize: 18,
     fontFamily: 'System',
     fontWeight: '600',
-    color: '#0F172A',
+    color: CervColors.label,
     marginBottom: 4,
-    letterSpacing: -0.3,
   },
   serviceDetails: {
     fontSize: 14,
     fontFamily: 'System',
     fontWeight: '400',
-    color: '#64748B',
+    color: CervColors.secondaryLabel,
   },
   summary: {
-    backgroundColor: 'rgba(0, 212, 170, 0.1)',
+    backgroundColor: CervColors.systemBlueLight,
     padding: 20,
     borderRadius: 12,
     marginTop: 24,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 170, 0.3)',
+    borderColor: CervColors.systemBlue,
   },
   summaryTitle: {
     fontSize: 16,
     fontFamily: 'System',
     fontWeight: '600',
-    color: '#065F46',
+    color: CervColors.systemBlue,
     marginBottom: 12,
   },
   summaryRow: {
@@ -278,13 +267,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'System',
     fontWeight: '400',
-    color: '#047857',
+    color: CervColors.systemBlue,
   },
   summaryValue: {
     fontSize: 14,
     fontFamily: 'System',
     fontWeight: '600',
-    color: '#065F46',
+    color: CervColors.systemBlue,
   },
   bottomSpacing: {
     height: 20,
@@ -293,7 +282,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 24,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(139, 157, 195, 0.1)',
+    borderTopColor: CervColors.separator,
   },
   continueButton: {
     borderRadius: 16,
@@ -302,7 +291,8 @@ const styles = StyleSheet.create({
   disabledButton: {
     opacity: 0.5,
   },
-  gradientButton: {
+  blueButtonBackground: {
+    backgroundColor: CervColors.systemBlue,
     paddingVertical: 18,
     alignItems: 'center',
     justifyContent: 'center',
@@ -311,7 +301,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'System',
     fontWeight: '600',
-    color: '#ffffff',
-    letterSpacing: -0.3,
+    color: CervColors.white,
   },
 });

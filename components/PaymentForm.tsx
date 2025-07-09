@@ -183,12 +183,12 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('apple_pay')}
           >
-            <Wallet color={paymentMethod === 'apple_pay' ? CervColors.systemGreen : '#64748B'} size={20} />
+            <Wallet color={paymentMethod === 'apple_pay' ? CervColors.systemBlue : '#64748B'} size={20} />
             <Text style={[
               styles.paymentMethodText,
               paymentMethod === 'apple_pay' && styles.paymentMethodTextSelected
             ]}>
-              Cerv Pay
+              Apple Pay
             </Text>
           </TouchableOpacity>
 
@@ -199,7 +199,7 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('google_pay')}
           >
-            <Smartphone color={paymentMethod === 'google_pay' ? CervColors.systemGreen : '#64748B'} size={20} />
+            <Smartphone color={paymentMethod === 'google_pay' ? CervColors.systemBlue : '#64748B'} size={20} />
             <Text style={[
               styles.paymentMethodText,
               paymentMethod === 'google_pay' && styles.paymentMethodTextSelected
@@ -215,7 +215,7 @@ export default function PaymentForm({ onPaymentSubmit, amount }: PaymentFormProp
             ]}
             onPress={() => setPaymentMethod('ach')}
           >
-            <Building2 color={paymentMethod === 'ach' ? CervColors.systemGreen : '#64748B'} size={20} />
+            <Building2 color={paymentMethod === 'ach' ? CervColors.systemBlue : '#64748B'} size={20} />
             <View style={styles.paymentMethodTextContainer}>
               <Text style={[
                 styles.paymentMethodText,
@@ -441,8 +441,8 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   paymentMethodSelected: {
-    borderColor: CervColors.systemGreen,
-    backgroundColor: 'rgba(0, 212, 170, 0.05)',
+    borderColor: CervColors.systemBlue,
+    backgroundColor: 'rgba(0, 122, 255, 0.05)',
   },
   paymentMethodText: {
     fontSize: 16,
@@ -452,7 +452,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.2,
   },
   paymentMethodTextSelected: {
-    color: '#065F46',
+    color: '#0051D5',
   },
   paymentMethodTextContainer: {
     flex: 1,
@@ -468,7 +468,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'System',
     fontWeight: '500',
-    color: '#059669',
+    color: '#0051D5',
     marginTop: 2,
   },
   pickerButton: {
@@ -496,12 +496,12 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   submitButton: {
-    backgroundColor: CervColors.systemGreen,
+    backgroundColor: CervColors.systemBlue,
     paddingVertical: 18,
     borderRadius: 16,
     alignItems: 'center',
     marginTop: 8,
-    shadowColor: CervColors.systemGreen,
+    shadowColor: CervColors.systemBlue,
     shadowOffset: {
       width: 0,
       height: 4,

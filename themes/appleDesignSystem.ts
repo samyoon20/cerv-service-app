@@ -1,30 +1,30 @@
 // Apple-inspired dark design system for Cerv
 export const CervColors = {
-  // Dark Theme Backgrounds (Apple-inspired)
-  background: '#000000',
-  secondaryBackground: '#1C1C1E',
-  tertiaryBackground: '#2C2C2E',
-  groupedBackground: '#000000',
+  // Light Theme Backgrounds (Apple-inspired)
+  background: '#F2F2F7',
+  secondaryBackground: '#FFFFFF',
+  tertiaryBackground: '#F2F2F7',
+  groupedBackground: '#F2F2F7',
   
   // Card/Surface Colors
-  cardBackground: '#1C1C1E',
-  elevatedBackground: '#2C2C2E',
+  cardBackground: '#FFFFFF',
+  elevatedBackground: '#FFFFFF',
   
-  // Text Colors (Dark Mode)
-  label: '#D1D1D6',
-  secondaryLabel: '#EBEBF599',
-  tertiaryLabel: '#EBEBF54D',
-  quaternaryLabel: '#EBEBF52E',
+  // Text Colors (Light Mode)
+  label: '#000000',
+  secondaryLabel: '#3C3C4399',
+  tertiaryLabel: '#3C3C434D',
+  quaternaryLabel: '#3C3C432E',
   
-  // Separator Colors (Dark Mode)
-  separator: '#38383A',
-  opaqueSeparator: '#38383A',
+  // Separator Colors (Light Mode)
+  separator: '#C6C6C8',
+  opaqueSeparator: '#C6C6C8',
   
-  // Fill Colors (Dark Mode)
-  systemFill: '#7878805C',
-  secondarySystemFill: '#78788052',
-  tertiarySystemFill: '#7676803D',
-  quaternarySystemFill: '#7676802E',
+  // Fill Colors (Light Mode)
+  systemFill: '#78788014',
+  secondarySystemFill: '#78788010',
+  tertiarySystemFill: '#7676800A',
+  quaternarySystemFill: '#76768005',
   
   // Apple-inspired Grays
   systemGray: '#8E8E93',
@@ -34,13 +34,13 @@ export const CervColors = {
   systemGray5: '#2C2C2E',
   systemGray6: '#1C1C1E',
   
-  // System Colors (Apple-inspired)
+  // System Colors (Apple-inspired) - Changed from green to blue
   systemBlue: '#007AFF',
   systemBlueLight: '#007AFF33',
   
-  // Success/Primary Colors
-  systemGreen: '#34C759',
-  systemGreenLight: '#34C75933',
+  // Primary Colors (Blue instead of green)
+  systemGreen: '#007AFF',
+  systemGreenLight: '#007AFF33',
   
   // Destructive Colors
   systemRed: '#FF3B30',
@@ -50,8 +50,8 @@ export const CervColors = {
   systemOrange: '#FF9500',
   systemOrangeLight: '#FF950033',
   
-  // Apple White/Light Colors
-  white: '#D1D1D6',
+  // Apple White/Light Colors  
+  white: '#FFFFFF',
   lightGray: '#F2F2F7',
   mediumGray: '#C7C7CC',
   darkGray: '#8E8E93',
@@ -62,28 +62,28 @@ export const CervColors = {
 };
 
 export const CervShadows = {
-  // Apple-style shadows for dark theme
+  // Apple-style shadows for light theme
   card: {
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     elevation: 3,
   },
   
   elevated: {
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
     elevation: 5,
   },
   
   floating: {
     shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.2,
+    shadowRadius: 16,
     elevation: 8,
   },
 };

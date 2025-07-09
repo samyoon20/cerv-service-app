@@ -301,9 +301,6 @@ export default function HomeTab() {
               <Text style={styles.welcomeText}>Welcome back, John</Text>
             </View>
             <View style={styles.headerActions}>
-              <LoyaltyScore 
-                score={MOCK_LOYALTY_SCORE}
-              />
               <TouchableOpacity style={styles.headerButton} onPress={handleNotifications}>
                 <Bell color={CervColors.secondaryLabel} size={22} />
                 <View style={styles.notificationDot} />

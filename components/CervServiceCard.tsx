@@ -197,18 +197,23 @@ const styles = StyleSheet.create({
   },
   serviceInfo: {
     marginBottom: CervSpacing.lg,
+    alignItems: 'flex-start',
   },
   serviceName: {
     ...CervTypography.title3,
     marginBottom: CervSpacing.xs,
+    textAlign: 'left',
   },
   serviceCategory: {
     ...CervTypography.subheadline,
     fontWeight: '500',
     marginBottom: CervSpacing.sm,
+    textAlign: 'left',
   },
   serviceDescription: {
     ...CervTypography.subheadline,
+    textAlign: 'left',
+    lineHeight: 20,
   },
   pricing: {
     flexDirection: 'row',

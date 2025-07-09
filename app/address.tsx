@@ -63,7 +63,7 @@ export default function AddressScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.backgroundContainer}>
+      <View style={styles.lightBackgroundContainer}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
             <ArrowLeft color={CervColors.label} size={24} />
@@ -75,7 +75,7 @@ export default function AddressScreen() {
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.titleSection}>
             <View style={styles.iconContainer}>
-              <MapPin color={CervColors.systemGreen} size={32} />
+              <MapPin color={CervColors.systemBlue} size={32} />
             </View>
             <Text style={styles.title}>What's your property address?</Text>
             <Text style={styles.subtitle}>
@@ -138,7 +138,7 @@ export default function AddressScreen() {
 
           {isVerified && (
             <View style={styles.verificationSuccess}>
-              <CheckCircle color={CervColors.systemGreen} size={24} />
+              <CheckCircle color={CervColors.systemBlue} size={24} />
               <Text style={styles.verificationText}>Address verified successfully!</Text>
             </View>
           )}
@@ -161,8 +161,8 @@ export default function AddressScreen() {
             disabled={isLoading || isVerified}
           >
             <View style={[
-              styles.verifyButtonBackground,
-              isVerified && { backgroundColor: CervColors.systemGreen }
+              styles.blueButtonBackground,
+              isVerified && { backgroundColor: CervColors.systemBlue }
             ]}>
               {isLoading ? (
                 <ActivityIndicator color={CervColors.white} size="small" />
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: CervColors.background,
   },
-  backgroundContainer: {
+  lightBackgroundContainer: {
     flex: 1,
     backgroundColor: CervColors.background,
   },
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: CervColors.secondarySystemFill,
+    backgroundColor: CervColors.systemGray5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.systemBlueLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: CervSpacing.xxl,
@@ -274,18 +274,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.systemBlueLight,
     paddingVertical: CervSpacing.lg,
     paddingHorizontal: CervSpacing.xl,
     borderRadius: CervBorderRadius.large,
     marginBottom: CervSpacing.xxl,
     gap: CervSpacing.sm,
     borderWidth: 1,
-    borderColor: CervColors.systemGreen,
+    borderColor: CervColors.systemBlue,
   },
   verificationText: {
     ...CervTypography.headline,
-    color: CervColors.systemGreen,
+    color: CervColors.systemBlue,
   },
   infoCard: {
     backgroundColor: CervColors.cardBackground,
@@ -316,8 +316,8 @@ const styles = StyleSheet.create({
   disabledButton: {
     opacity: 0.7,
   },
-  verifyButtonBackground: {
-    backgroundColor: CervColors.systemGreen,
+  blueButtonBackground: {
+    backgroundColor: CervColors.systemBlue,
     paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',

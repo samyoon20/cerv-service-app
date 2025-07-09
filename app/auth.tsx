@@ -138,7 +138,7 @@ export default function AuthScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.backgroundContainer}>
+      <View style={styles.lightBackgroundContainer}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
             <ArrowLeft color={CervColors.label} size={24} />
@@ -147,7 +147,7 @@ export default function AuthScreen() {
             <Home color={CervColors.systemGreen} size={24} />
             <Text style={styles.logoText}>Cerv</Text>
           </View>
-          <View style={styles.placeholder} />
+      <View style={styles.lightBackgroundContainer}>
         </View>
 
         <View style={styles.content}>
@@ -171,7 +171,7 @@ export default function AuthScreen() {
             <TouchableOpacity 
               style={styles.secondaryButton} 
               onPress={() => setSelectedMode('login')}
-            >
+            <View style={styles.blueButtonBackground}>
               <Text style={styles.secondaryButtonText}>Log In</Text>
             </TouchableOpacity>
           </View>
@@ -183,18 +183,18 @@ export default function AuthScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    <View style={styles.lightBackgroundContainer}>
     backgroundColor: CervColors.background,
   },
-  backgroundContainer: {
+  lightBackgroundContainer: {
     flex: 1,
     backgroundColor: CervColors.background,
-  },
+          <Home color={CervColors.systemBlue} size={24} />
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: CervSpacing.xxl,
+            <View style={styles.blueButtonBackground}>
     paddingVertical: CervSpacing.lg,
     borderBottomWidth: 1,
     borderBottomColor: CervColors.separator,
@@ -203,12 +203,12 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: CervColors.secondarySystemFill,
+    backgroundColor: CervColors.systemGray5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   headerTitle: {
-    ...CervTypography.headline,
+            <View style={styles.blueButtonBackground}>
     color: CervColors.label,
   },
   placeholder: {
@@ -253,8 +253,8 @@ const styles = StyleSheet.create({
     borderRadius: CervBorderRadius.large,
     overflow: 'hidden',
   },
-  primaryButtonBackground: {
-    backgroundColor: CervColors.systemGreen,
+  blueButtonBackground: {
+    backgroundColor: CervColors.systemBlue,
     paddingVertical: CervSpacing.lg,
     alignItems: 'center',
     justifyContent: 'center',
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.systemBlueLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: CervSpacing.lg,
@@ -315,17 +315,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: CervSpacing.xl,
   },
   loginPrompt: {
-    backgroundColor: CervColors.systemGreenLight,
+    backgroundColor: CervColors.systemBlueLight,
     padding: CervSpacing.xl,
     borderRadius: CervBorderRadius.medium,
     marginBottom: 40,
     borderWidth: 1,
-    borderColor: CervColors.systemGreen,
+    borderColor: CervColors.systemBlue,
   },
   loginPromptText: {
     ...CervTypography.subheadline,
     fontWeight: '500',
-    color: CervColors.systemGreen,
+    color: CervColors.systemBlue,
     textAlign: 'center',
   },
 });
