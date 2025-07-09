@@ -505,25 +505,27 @@ export default function HomeTab() {
               <ScrollView 
                 horizontal 
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.addOnCarousel}
+                style={styles.addOnScrollView}
               >
-                {[
-                  { id: '1', name: 'Window Cleaning', price: 75, description: 'Interior & exterior' },
-                  { id: '2', name: 'Gutter Cleaning', price: 120, description: 'Cleaning & inspection' },
-                  { id: '3', name: 'Deck Staining', price: 200, description: 'Clean & protective stain' },
-                ].map(addon => (
-                  <TouchableOpacity key={addon.id} style={styles.addOnCard}>
-                    <View style={styles.addOnCardBackground}>
-                      <Text style={styles.addOnName}>{addon.name}</Text>
-                      <Text style={styles.addOnDescription}>{addon.description}</Text>
-                      <Text style={styles.addOnPrice}>${addon.price}</Text>
-                      <View style={styles.addOnButton}>
-                        <Plus color={CervColors.systemBlue} size={16} />
-                        <Text style={styles.addOnButtonText}>Add</Text>
+                <View style={styles.addOnCarousel}>
+                  {[
+                    { id: '1', name: 'Window Cleaning', price: 75, description: 'Interior & exterior' },
+                    { id: '2', name: 'Gutter Cleaning', price: 120, description: 'Cleaning & inspection' },
+                    { id: '3', name: 'Deck Staining', price: 200, description: 'Clean & protective stain' },
+                  ].map(addon => (
+                    <TouchableOpacity key={addon.id} style={styles.addOnCard}>
+                      <View style={styles.addOnCardBackground}>
+                        <Text style={styles.addOnName}>{addon.name}</Text>
+                        <Text style={styles.addOnDescription}>{addon.description}</Text>
+                        <Text style={styles.addOnPrice}>${addon.price}</Text>
+                        <View style={styles.addOnButton}>
+                          <Plus color={CervColors.systemBlue} size={16} />
+                          <Text style={styles.addOnButtonText}>Add</Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                ))}
+                    </TouchableOpacity>
+                  ))}
+                </View>
               </ScrollView>
             </View>
 
@@ -784,7 +786,12 @@ const styles = StyleSheet.create({
   addOnSection: {
     marginBottom: 32,
   },
+  addOnScrollView: {
+    marginHorizontal: -24,
+    paddingHorizontal: 24,
+  },
   addOnCarousel: {
+    flexDirection: 'row',
     paddingRight: 24,
   },
   addOnCard: {
