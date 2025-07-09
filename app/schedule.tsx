@@ -157,9 +157,10 @@ export default function ScheduleScreen() {
             ]}>
               <Text style={styles.continueButtonText}>Continue to Pricing</Text>
             </LinearGradient>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
-      </View>
+      </LinearGradient>
     </SafeAreaView>
   );
 }
