@@ -149,12 +149,14 @@ export default function ScheduleScreen() {
             onPress={handleContinue}
             disabled={!isComplete}
           >
-            <View style={[
+            <LinearGradient
+              colors={[CervColors.systemBlue, CervColors.systemBlue]}
+              style={[
               styles.blueButtonBackground,
               !isComplete && { backgroundColor: '#9CA3AF' }
             ]}>
               <Text style={styles.continueButtonText}>Continue to Pricing</Text>
-            </View>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
       </View>
