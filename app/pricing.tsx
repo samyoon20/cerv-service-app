@@ -412,5 +412,3 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 });
-    ...CervTypography.caption1,
-    fontWeight: '700',
