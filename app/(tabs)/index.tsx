@@ -18,7 +18,6 @@ import LoyaltyScore from '@/components/LoyaltyScore';
 import UserInvitationModal from '@/components/UserInvitation';
 import PropertyUsersManager from '@/components/PropertyUsersManager';
 import type { Property, PropertyPortfolio, CervScore as CervScoreType, Campaign, Promotion, UserRole } from '@/types';
-import CervLogo from '@/components/CervLogo';
 import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 const MOCK_CERV_SCORE: CervScoreType = {
@@ -310,7 +309,6 @@ export default function HomeTab() {
                 onPress={handleManageUsers}
               >
                 <Settings color={CervColors.secondaryLabel} size={22} />
-              </TouchableOpacity>
             </View>
           </View>
 
@@ -373,10 +371,10 @@ export default function HomeTab() {
 
             <View style={styles.servicesSection}>
               <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Service History</Text>
+                    <TouchableOpacity style={styles.addOnButton}>
                 <TouchableOpacity style={styles.addButton}>
                   <View style={styles.addButtonBackground}>
-                    <Plus color={CervColors.white} size={18} />
+                    </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -584,11 +582,12 @@ const styles = StyleSheet.create({
   },
   brandSection: {
     flex: 1,
-    gap: 8,
   },
   welcomeText: {
     ...CervTypography.caption1,
     color: CervColors.secondaryLabel,
+    fontSize: 24,
+    fontWeight: '600',
   },
   headerActions: {
     flexDirection: 'row',

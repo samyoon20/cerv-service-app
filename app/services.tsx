@@ -10,7 +10,6 @@ import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft, Chrome as Home, Sparkles } from 'lucide-react-native';
 import CervServiceCard from '@/components/CervServiceCard';
-import CervLogo from '@/components/CervLogo';
 import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 const CERV_SERVICES = [
@@ -124,7 +123,7 @@ export default function ServicesScreen() {
           <TouchableOpacity style={styles.backButton} onPress={handleBack}>
             <ArrowLeft color={CervColors.white} size={24} />
           </TouchableOpacity>
-          <CervLogo variant="horizontal" size="small" />
+          <Text style={styles.headerTitle}>Services</Text>
           <View style={styles.placeholder} />
         </View>
 
@@ -211,6 +210,8 @@ const styles = StyleSheet.create({
   headerTitle: {
     ...CervTypography.headline,
     color: CervColors.label,
+    fontSize: 18,
+    fontWeight: '600',
   },
   placeholder: {
     width: 40,

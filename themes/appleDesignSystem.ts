@@ -35,12 +35,12 @@ export const CervColors = {
   systemGray6: '#F2F2F7',
   
   // System Colors (Apple-inspired) - Blue theme
-  systemBlue: '#007AFF',
-  systemBlueLight: '#007AFF1A',
+  systemBlue: '#8BB5E8',
+  systemBlueLight: '#8BB5E81A',
   
   // Primary Colors (Blue instead of green)
-  systemGreen: '#007AFF',
-  systemGreenLight: '#007AFF1A',
+  systemGreen: '#8BB5E8',
+  systemGreenLight: '#8BB5E81A',
   
   // Destructive Colors
   systemRed: '#FF3B30',
