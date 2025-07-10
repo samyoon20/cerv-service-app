@@ -296,7 +296,7 @@ export default function HomeTab() {
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.header}>
             <View style={styles.brandSection}>
-              <Text style={styles.brandTitle}>Cerv</Text>
+              <CervLogo variant="horizontal" size="medium" />
               <Text style={styles.welcomeText}>Welcome back, John</Text>
             </View>
             <View style={styles.headerActions}>
@@ -373,11 +373,9 @@ export default function HomeTab() {
             <View style={styles.servicesSection}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>Service History</Text>
-                    <TouchableOpacity style={styles.addOnButton}>
                 <TouchableOpacity style={styles.addButton}>
                   <View style={styles.addButtonBackground}>
                     <Plus color={CervColors.white} size={18} />
-                    </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -519,10 +517,10 @@ export default function HomeTab() {
                         <Text style={styles.addOnName}>{addon.name}</Text>
                         <Text style={styles.addOnDescription}>{addon.description}</Text>
                         <Text style={styles.addOnPrice}>${addon.price}</Text>
-                        <TouchableOpacity style={styles.addOnButton}>
+                        <View style={styles.addOnButton}>
                           <Plus color={CervColors.systemBlue} size={16} />
                           <Text style={styles.addOnButtonText}>Add</Text>
-                        </TouchableOpacity>
+                        </View>
                       </View>
                     </TouchableOpacity>
                   ))}
@@ -585,14 +583,10 @@ const styles = StyleSheet.create({
   },
   brandSection: {
     flex: 1,
-  },
-  brandTitle: {
-    ...CervTypography.title2,
-    color: CervColors.label,
-    marginBottom: 4,
+    gap: 8,
   },
   welcomeText: {
-    ...CervTypography.body,
+    ...CervTypography.caption1,
     color: CervColors.secondaryLabel,
   },
   headerActions: {
