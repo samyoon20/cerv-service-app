@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Calendar, Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle, Plus, Bell, Settings, FileText } from 'lucide-react-native';
+import CervLogo from '@/components/CervLogo';
 import CervScore from '@/components/CervScore';
 import PropertySelector from '@/components/PropertySelector';
 import CampaignBanner from '@/components/CampaignBanner';
