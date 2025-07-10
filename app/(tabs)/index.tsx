@@ -375,8 +375,10 @@ export default function HomeTab() {
                 <Text style={styles.sectionTitle}>Services</Text>
                 <TouchableOpacity style={styles.addButton}>
                   <View style={styles.addButtonBackground}>
+                    <Plus color={CervColors.white} size={20} />
                   </View>
                 </TouchableOpacity>
+              </View>
 
               <View style={styles.tabBar}>
                 <TouchableOpacity
