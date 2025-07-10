@@ -296,7 +296,7 @@ export default function HomeTab() {
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.header}>
             <View style={styles.brandSection}>
-              <CervLogo variant="horizontal" size="medium" />
+              <Text style={styles.brandTitle}>Cerv</Text>
               <Text style={styles.welcomeText}>Welcome back, John</Text>
             </View>
             <View style={styles.headerActions}>
@@ -309,6 +309,7 @@ export default function HomeTab() {
                 onPress={handleManageUsers}
               >
                 <Settings color={CervColors.secondaryLabel} size={22} />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -371,9 +372,11 @@ export default function HomeTab() {
 
             <View style={styles.servicesSection}>
               <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>Service History</Text>
                     <TouchableOpacity style={styles.addOnButton}>
                 <TouchableOpacity style={styles.addButton}>
                   <View style={styles.addButtonBackground}>
+                    <Plus color={CervColors.white} size={18} />
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
@@ -516,10 +519,10 @@ export default function HomeTab() {
                         <Text style={styles.addOnName}>{addon.name}</Text>
                         <Text style={styles.addOnDescription}>{addon.description}</Text>
                         <Text style={styles.addOnPrice}>${addon.price}</Text>
-                        <View style={styles.addOnButton}>
+                        <TouchableOpacity style={styles.addOnButton}>
                           <Plus color={CervColors.systemBlue} size={16} />
                           <Text style={styles.addOnButtonText}>Add</Text>
-                        </View>
+                        </TouchableOpacity>
                       </View>
                     </TouchableOpacity>
                   ))}
@@ -583,11 +586,14 @@ const styles = StyleSheet.create({
   brandSection: {
     flex: 1,
   },
+  brandTitle: {
+    ...CervTypography.title2,
+    color: CervColors.label,
+    marginBottom: 4,
+  },
   welcomeText: {
-    ...CervTypography.caption1,
+    ...CervTypography.body,
     color: CervColors.secondaryLabel,
-    fontSize: 24,
-    fontWeight: '600',
   },
   headerActions: {
     flexDirection: 'row',

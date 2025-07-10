@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Clock, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react-native';
 import { getCervServiceTheme } from '@/themes/cervServiceThemes';
-import CervLogo from '@/components/CervLogo';
 import { CervColors, CervShadows, CervSpacing, CervTypography, CervBorderRadius } from '@/themes/appleDesignSystem';
 
 const { width } = Dimensions.get('window');
