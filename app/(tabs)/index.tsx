@@ -372,10 +372,10 @@ export default function HomeTab() {
 
             <View style={styles.servicesSection}>
               <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Service History</Text>
+                <Text style={styles.sectionTitle}>Services</Text>
                 <TouchableOpacity style={styles.addButton}>
                   <View style={styles.addButtonBackground}>
-                    <Plus color={CervColors.white} size={18} />
+                    <Plus color={CervColors.white} size={20} />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -583,11 +583,12 @@ const styles = StyleSheet.create({
   },
   brandSection: {
     flex: 1,
-    gap: 8,
   },
   welcomeText: {
     ...CervTypography.caption1,
     color: CervColors.secondaryLabel,
+    fontSize: 24,
+    fontWeight: '600',
   },
   headerActions: {
     flexDirection: 'row',
