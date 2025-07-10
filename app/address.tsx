@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   View, 
   Text, 
@@ -23,6 +23,13 @@ export default function AddressScreen() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const handleBack = () => {
     router.back();
@@ -48,16 +55,24 @@ export default function AddressScreen() {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Simulate successful verification
-      setIsVerified(true);
+      if (isMountedRef.current) {
+        setIsVerified(true);
+      }
       
       setTimeout(() => {
-        router.push('/services');
+        if (isMountedRef.current) {
+          router.push('/services');
+        }
       }, 1500);
       
     } catch {
-      Alert.alert('Verification Failed', 'Unable to verify address. Please check and try again.');
+      if (isMountedRef.current) {
+        Alert.alert('Verification Failed', 'Unable to verify address. Please check and try again.');
+      }
     } finally {
-      setIsLoading(false);
+      if (isMountedRef.current) {
+        setIsLoading(false);
+      }
     }
   };
 

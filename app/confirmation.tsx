@@ -10,7 +10,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CircleCheck as CheckCircle, Calendar, CreditCard, Chrome as Home } from 'lucide-react-native';
-import { CervColors } from '@/themes/appleDesignSystem';
+import { CervColors, CervTypography } from '@/themes/appleDesignSystem';
 
 const MOCK_SERVICES = {
   '1': { name: 'Pool Maintenance', duration: 60 },

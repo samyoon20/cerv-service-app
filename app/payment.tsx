@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   View, 
   Text, 
@@ -27,6 +27,13 @@ const MOCK_SERVICES = {
 export default function PaymentScreen() {
   const { serviceId, date, time, frequency, model, price } = useLocalSearchParams();
   const [isProcessing, setIsProcessing] = useState(false);
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const service = MOCK_SERVICES[serviceId as keyof typeof MOCK_SERVICES];
 
@@ -42,22 +49,28 @@ export default function PaymentScreen() {
       await new Promise(resolve => setTimeout(resolve, 3000));
       
       // Navigate to confirmation
-      router.push({
-        pathname: '/confirmation',
-        params: {
-          serviceId,
-          date,
-          time,
-          frequency,
-          model,
-          price,
-          paymentMethod: paymentData.method,
-        },
-      });
+      if (isMountedRef.current) {
+        router.push({
+          pathname: '/confirmation',
+          params: {
+            serviceId,
+            date,
+            time,
+            frequency,
+            model,
+            price,
+            paymentMethod: paymentData.method,
+          },
+        });
+      }
     } catch (error) {
-      console.error('Payment failed:', error);
+      if (isMountedRef.current) {
+        console.error('Payment failed:', error);
+      }
     } finally {
-      setIsProcessing(false);
+      if (isMountedRef.current) {
+        setIsProcessing(false);
+      }
     }
   };
 
