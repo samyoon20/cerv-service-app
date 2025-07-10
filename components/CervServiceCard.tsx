@@ -156,20 +156,19 @@ const styles = StyleSheet.create({
     ...CervShadows.card,
   },
   disabledContainer: {
-    color: CervColors.label,
+    opacity: 0.6,
   },
   cardBackground: {
     backgroundColor: CervColors.cardBackground,
     padding: CervSpacing.xl,
     borderWidth: 0.5,
     borderColor: CervColors.separator,
-    color: CervColors.secondaryLabel,
+  },
   disabledBackground: {
     backgroundColor: CervColors.systemGray5,
   },
   content: {
     // No special styling needed
-    color: CervColors.secondaryLabel,
   },
   header: {
     flexDirection: 'row',
@@ -183,7 +182,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 2,
   },
-    color: CervColors.tertiaryLabel,
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -196,7 +194,54 @@ const styles = StyleSheet.create({
   statusText: {
     ...CervTypography.caption1,
     fontWeight: '600',
-    color: CervColors.tertiaryLabel,
+  },
+  serviceInfo: {
+    marginBottom: CervSpacing.lg,
+  },
+  serviceName: {
+    ...CervTypography.headline,
+    fontWeight: '600',
+    marginBottom: CervSpacing.xs,
+  },
+  serviceCategory: {
+    ...CervTypography.subheadline,
+    fontWeight: '500',
+    marginBottom: CervSpacing.sm,
+  },
+  serviceDescription: {
+    ...CervTypography.body,
+    lineHeight: 20,
+  },
+  pricing: {
+    marginBottom: CervSpacing.md,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: CervSpacing.sm,
+    marginBottom: CervSpacing.xs,
+  },
+  originalPrice: {
+    ...CervTypography.body,
+    textDecorationLine: 'line-through',
+  },
+  subscriptionPrice: {
+    ...CervTypography.title3,
+  },
+  durationText: {
+    ...CervTypography.caption1,
+  },
+  recommendedBadge: {
+    position: 'absolute',
+    top: CervSpacing.md,
+    right: CervSpacing.md,
+    paddingHorizontal: CervSpacing.sm,
+    paddingVertical: CervSpacing.xs,
+    borderRadius: CervBorderRadius.small,
+  },
+  recommendedText: {
+    ...CervTypography.caption2,
+    color: CervColors.white,
+    fontWeight: '600',
   },
 });
-    color: CervColors.systemBlue,
